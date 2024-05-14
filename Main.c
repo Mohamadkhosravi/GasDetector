@@ -1,61 +1,30 @@
 #include <ht67f2432.h>
-
+#include <main.h>
 void SEGMENT_number(unsigned char n);
 
-unsigned char SEG;
 
-unsigned int GAS_ERR = 0;
-unsigned int BAT_ADC = 0;
-unsigned int BAT_ADC_D = 0;
-unsigned int adc_GAS = 0;
 
-unsigned char adc = 0;
-unsigned int t1 = 0;
-unsigned char BAT = 0;
 
-unsigned int disply = 0;
+void *Input;
 
-unsigned long delay = 0;
-
-unsigned char AN = 0;
-
-unsigned int Digit[4];
-
-bit disply_bat;
-bit PB = 0;
-bit fire_gas;
-bit falt_BAT, falt_gas;
-
-#define ADC_PIN _pa1 // A1/AN0
-#define COM0 _pb5	 // PB5
-#define COM1 _pb6	 // PB6
-#define COM2 _pb7	 // PB7
-#define COM3 _pb4	 // PB4
-#define SEGA _pc7	 // PC7
-#define SEGB _pd0	 // PD0
-#define SEGC _pc4	 // PC4
-#define SEGD _pa7	 // PA7
-#define SEGE _pc6	 // PC6
-#define SEGF _pd1	 // PD1
-#define SEGG _pc3	 // PC3
-#define SEGH _pc5	 // PC5
-
-#define AN0 AN = 0;
-#define AN1 AN = 1;
-#define AN2 AN = 2;
-#define AN3 AN = 3;
+int *PtrInt;
+char *PtrChar;
+int a=10;
+char b[]={"a"};
+/*char c = "i" ;*/
+void Seggg(void *PTR);
 
 void main()
 {
-
+	
+Seggg(&a);
+Seggg(b);
 	// Oscillators
 
 	_cks0 = 0; //: System clock selection (fH)
 	_cks1 = 0;
 	_cks2 = 0;
-
 	_fss = 0; //: Low frequency clock selection internal RC
-
 	_fsiden = 1; //: Low frequency oscillator control when CPU is switched of Enable
 
 	_wdtc = 0b10101111; // WDT function software control: Disable
@@ -161,12 +130,13 @@ void main()
 	_sacs2 = 0;
 	_sacs3 = 0;
 
-	_pa4 = 0; // buzz
-	_pc0 = 0; // LED_G
-	_pc1 = 0; // LED_R
-	_pc2 = 0; // LED_Y
-	_pb2 = 1; // relay
-
+	BUZZER_OFF; // buzz
+    LED_GREEN_OFF; // LED_G
+	LED_RED_OFF; // LED_R
+	LED_YELLOW_OFF; // LED_Y
+	RELAY_ON; // relay
+	S_ADC_Init();
+	
 	while (delay < 100000)
 	{
 		delay++;
@@ -178,29 +148,37 @@ void main()
 
 	while (1)
 	{
+		
+		while(1){
+			LED_RED_ON;
+			GCC_DELAY(1000);
+			LED_RED_OFF;
+			GCC_DELAY(1000);
+		};
 
 		PB = !_pb3; // Detect PUSH THE TEST BUTTON
 
 		if (fire_gas == 1 || PB == 1)
 		{			  // Detect FIER
-			_pa4 = 1; // buzz
-			_pc1 = 1; // LED_R
-			_pb2 = 1; // relay
+		
+			BUZZER_ON; // buzz
+			LED_RED_ON; // LED_R
+			RELAY_ON; // relay
 		}
 		else
 		{
-			_pa4 = 0; // buzz
-			_pc1 = 0; // LED_R
-			_pb2 = 0; // relay
+			BUZZER_OFF; // buzz
+			LED_RED_OFF; // LED_R
+			RELAY_OFF; // relay
 		}
 
 		if (falt_BAT == 1 || falt_gas == 1 || PB == 1)
 		{			  //	Detect FALT
-			_pc2 = 1; // LED_Y
+			RELAY_ON; // LED_Y
 		}
 		else
 		{
-			_pc2 = 0; // LED_Y
+			 RELAY_OFF; // LED_Y
 		}
 
 		if (adc_GAS > 250)
@@ -272,11 +250,16 @@ void main()
 		}
 
 		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-		if (_tb0f == 1) // Comparator A Match CTMAF Interrupt
+        
+        
+         
+         
+         
+         
+		if (TIMER_CUNTER_INTRUPT == 1) // Comparator A Match CTMAF Interrupt
 		{
 
-			_tb0f = 0;
+			TIMER_CUNTER_INTRUPT = 0;
 
 			switch (SEG)
 			{
@@ -628,4 +611,10 @@ void SEGMENT_number(unsigned char n)
 		SEGG = 0;
 		break;
 	}
+}
+
+
+void Seggg(void *PTR)
+{
+	
 }
