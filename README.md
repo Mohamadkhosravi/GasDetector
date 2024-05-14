@@ -1,2 +1,0 @@
-# GasDetector
-Natural Gas Detector
