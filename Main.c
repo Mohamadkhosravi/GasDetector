@@ -13,6 +13,21 @@ int a=10;
 char b[]={"a"};
 /*char c = "i" ;*/
 void Seggg(void *PTR);
+int length(int number);
+char i;
+
+
+
+int Numbr=123;
+char lenNumber=0;
+char len=0;
+char powNumber=1;
+int indexDigit=0;
+int digNumber=0;
+
+
+
+
 
 void main()
 {
@@ -149,11 +164,74 @@ Seggg(b);
 	while (1)
 	{
 		
-		while(1){
-			LED_RED_ON;
-			GCC_DELAY(1000);
+		while(1)
+		{
+			LED_GREEN_ON;
 			LED_RED_OFF;
-			GCC_DELAY(1000);
+			LED_YELLOW_OFF;
+			Numbr=123;
+			powNumber=100;
+			lenNumber=length(Numbr);
+			
+			for( indexDigit=lenNumber; indexDigit>=0 ; indexDigit--)
+			{
+				i=0;
+		      while(1)
+		      {
+		      	i++;
+		      	if(i>1000)
+		      	break;
+		      }
+		
+				digNumber =  Numbr % powNumber;
+				Numbr=Numbr-(digNumber*powNumber);
+				SEGMENT_number(indexDigit);
+				COM0 = 1;
+				COM1 = 0;
+				COM2 = 0;
+				COM3 = 0;
+			/*	switch(indexDigit) 
+				{			
+					case 1:
+						COM0 = 1;
+						COM1 = 0;
+						COM2 = 0;
+						COM3 = 0;
+					break;		
+					case 2:
+						COM0 = 0;
+						COM1 = 1;
+						COM2 = 0;
+						COM3 = 0;
+					break;
+					case 3:
+						COM0 = 0;
+						COM1 = 0;
+						COM2 = 1;
+						COM3 = 0;
+					break;	
+						case 4:
+						COM0 = 0;
+						COM1 = 0;
+						COM2 = 0;
+						COM3 = 1;
+					break;	
+				};*/
+				powNumber=powNumber/10;
+
+
+
+
+
+
+
+
+
+
+
+
+			}
+		 }
 		};
 
 		PB = !_pb3; // Detect PUSH THE TEST BUTTON
@@ -467,7 +545,7 @@ Seggg(b);
 			t1 = 0;
 		}
 	}
-}
+
 
 void SEGMENT_number(unsigned char n)
 {
@@ -613,7 +691,16 @@ void SEGMENT_number(unsigned char n)
 	}
 }
 
+int length(int number){
+	int cunter=0;
+	while(number!=0){
+		
+		number = number/10;
+		cunter++;
+	}
+	return cunter;
 
+}
 void Seggg(void *PTR)
 {
 	

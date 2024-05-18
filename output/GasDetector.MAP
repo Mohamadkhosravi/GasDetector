@@ -11,100 +11,98 @@ Input Library File: C:\Program Files\Holtek MCU Development Tools\HT-IDE3000V8.x
      Bank    Start     End      Length     Class    AvgIns    Name
      00h     0000h     0000h    0001h      CODE               @code (c:\users\tech\desktop\gasdetector\output\MAIN.OBJ)
      00h     0001h     0021h    0021h      CODE               @start (c:\users\tech\desktop\gasdetector\output\MAIN.OBJ)
-     00h     0022h     0030h    000fh      CODE               @ROMDATA_BASE (c:\users\tech\desktop\gasdetector\output\STARTUP1_L.OBJ)
-     00h     0031h     00a9h    0079h      CODE               _main (c:\users\tech\desktop\gasdetector\output\MAIN.OBJ)
-     00h     00aah     00afh    0006h      CODE               _S_ADC_Init (c:\users\tech\desktop\gasdetector\output\ADC.OBJ)
-     00h     00b0h     00b9h    000ah      CODE               __DELAYX (C:\Program Files\Holtek MCU Development Tools\HT-IDE3000V8.x\LIB\LIBHOLTEKGCC.LIB)
+     00h     0022h     0034h    0013h      CODE               @ROMDATA_BASE (c:\users\tech\desktop\gasdetector\output\STARTUP1_L.OBJ)
+     00h     0035h     00b5h    0081h      CODE               _main (c:\users\tech\desktop\gasdetector\output\MAIN.OBJ)
+     00h     00b6h     00bbh    0006h      CODE               _S_ADC_Init (c:\users\tech\desktop\gasdetector\output\ADC.OBJ)
      00h     0080h     0080h    0001h      DATA     0         @BITDATASEC (c:\users\tech\desktop\gasdetector\output\STARTUP1_L.OBJ)
-     00h     0081h     0097h    0017h      DATA     0.3478    @HCCINIT (c:\users\tech\desktop\gasdetector\output\MAIN.OBJ)
-     00h     0098h     00a6h    000fh      DATA     0         @HCCINIT0 (c:\users\tech\desktop\gasdetector\output\MAIN.OBJ)
-     00h     00a7h     00a7h    0001h      DATA     20        @data_ra (C:\Program Files\Holtek MCU Development Tools\HT-IDE3000V8.x\LIB\LIBHOLTEKGCC.LIB)
-     00h     00a8h     00a8h    0001h      DATA     7         @data_rd (C:\Program Files\Holtek MCU Development Tools\HT-IDE3000V8.x\LIB\LIBHOLTEKGCC.LIB)
-     00h     00a9h     00a9h    0001h      DATA     7         @data_re (C:\Program Files\Holtek MCU Development Tools\HT-IDE3000V8.x\LIB\LIBHOLTEKGCC.LIB)
-     00h     00aah     00aah    0001h      DATA     5         @data_rf (C:\Program Files\Holtek MCU Development Tools\HT-IDE3000V8.x\LIB\LIBHOLTEKGCC.LIB)
-     00h     00abh     00abh    0001h      DATA     5         @data_rg (C:\Program Files\Holtek MCU Development Tools\HT-IDE3000V8.x\LIB\LIBHOLTEKGCC.LIB)
+     00h     0081h     00a0h    0020h      DATA     0.4375    @HCCINIT (c:\users\tech\desktop\gasdetector\output\MAIN.OBJ)
+     00h     00a1h     00b0h    0010h      DATA     0.0625    @HCCINIT0 (c:\users\tech\desktop\gasdetector\output\MAIN.OBJ)
+     00h     00b1h     00b1h    0001h      DATA     22        @data_ra (C:\Program Files\Holtek MCU Development Tools\HT-IDE3000V8.x\LIB\LIBHOLTEKGCC.LIB)
+     00h     00b2h     00b2h    0001h      DATA     7         @data_rd (C:\Program Files\Holtek MCU Development Tools\HT-IDE3000V8.x\LIB\LIBHOLTEKGCC.LIB)
+     00h     00b3h     00b3h    0001h      DATA     7         @data_re (C:\Program Files\Holtek MCU Development Tools\HT-IDE3000V8.x\LIB\LIBHOLTEKGCC.LIB)
+     00h     00b4h     00b4h    0001h      DATA     5         @data_rf (C:\Program Files\Holtek MCU Development Tools\HT-IDE3000V8.x\LIB\LIBHOLTEKGCC.LIB)
+     00h     00b5h     00b5h    0001h      DATA     5         @data_rg (C:\Program Files\Holtek MCU Development Tools\HT-IDE3000V8.x\LIB\LIBHOLTEKGCC.LIB)
 
      Local Sections
 
      Bank    Start     End      Length     Class    AvgIns    Name
-     00h     00ach     00ach    0000h      LOCAL    0         @dummy (c:\users\tech\desktop\gasdetector\output\MAIN.OBJ)
-     00h     00ach     00ach    0000h      LOCAL    0         _main (c:\users\tech\desktop\gasdetector\output\MAIN.OBJ)
-     00h     00ach     00ach    0000h      LOCAL    0         _S_ADC_Init (c:\users\tech\desktop\gasdetector\output\ADC.OBJ)
-     00h     00ach     00ach    0000h      LOCAL    0         __DELAYX (C:\Program Files\Holtek MCU Development Tools\HT-IDE3000V8.x\LIB\LIBHOLTEKGCC.LIB)
+     00h     00b6h     00b6h    0000h      LOCAL    0         @dummy (c:\users\tech\desktop\gasdetector\output\MAIN.OBJ)
+     00h     00b6h     00b6h    0000h      LOCAL    0         _main (c:\users\tech\desktop\gasdetector\output\MAIN.OBJ)
+     00h     00b6h     00b6h    0000h      LOCAL    0         _S_ADC_Init (c:\users\tech\desktop\gasdetector\output\ADC.OBJ)
 
      Public Symbols Information
      Address            Public by Name
-     0085h              _AN
-     008ch              _BAT
-     0094h              _BAT_ADC
-     0092h              _BAT_ADC_D
-     009eh              _Digit
-     0096h              _GAS_ERR
-     009ch              _Input
+     008eh              _AN
+     0095h              _BAT
+     009dh              _BAT_ADC
+     009bh              _BAT_ADC_D
+     00a8h              _Digit
+     009fh              _GAS_ERR
+     00a6h              _Input
+     0088h              _Numbr
      0080h[3]           _PB
-     0098h              _PtrChar
-     009ah              _PtrInt
-     00a6h              _SEG
-     00aah              _S_ADC_Init
-     00b6h              __DELAYX0
-     00b5h              __DELAYX1
-     00b4h              __DELAYX2
-     00b3h              __DELAYX3
-     00b2h              __DELAYX4
-     00b1h              __DELAYX5
-     00b0h              __DELAYX6
-     0083h              _a
-     008fh              _adc
-     0090h              _adc_GAS
-     0081h              _b
-     0086h              _delay
-     008ah              _disply
+     00a2h              _PtrChar
+     00a4h              _PtrInt
+     00b0h              _SEG
+     00b6h              _S_ADC_Init
+     008ch              _a
+     0098h              _adc
+     0099h              _adc_GAS
+     008ah              _b
+     008fh              _delay
+     0081h              _digNumber
+     0093h              _disply
      0080h[4]           _disply_bat
      0080h[1]           _falt_BAT
      0080h[0]           _falt_gas
      0080h[2]           _fire_gas
-     0031h              _main
-     008dh              _t1
-     00a7h              ra
-     00a8h              rd
-     00a9h              re
-     00aah              rf
-     00abh              rg
+     00a1h              _i
+     0083h              _indexDigit
+     0086h              _len
+     0087h              _lenNumber
+     0035h              _main
+     0085h              _powNumber
+     0096h              _t1
+     00b1h              ra
+     00b2h              rd
+     00b3h              re
+     00b4h              rf
+     00b5h              rg
      0021h              startup_value_1
 
      Address            Public by Value
      0021h              startup_value_1
-     0031h              _main
-     0081h              _b
-     0083h              _a
-     0085h              _AN
-     0086h              _delay
-     008ah              _disply
-     008ch              _BAT
-     008dh              _t1
-     008fh              _adc
-     0090h              _adc_GAS
-     0092h              _BAT_ADC_D
-     0094h              _BAT_ADC
-     0096h              _GAS_ERR
-     0098h              _PtrChar
-     009ah              _PtrInt
-     009ch              _Input
-     009eh              _Digit
-     00a6h              _SEG
-     00a7h              ra
-     00a8h              rd
-     00a9h              re
-     00aah              rf
-     00aah              _S_ADC_Init
-     00abh              rg
-     00b0h              __DELAYX6
-     00b1h              __DELAYX5
-     00b2h              __DELAYX4
-     00b3h              __DELAYX3
-     00b4h              __DELAYX2
-     00b5h              __DELAYX1
-     00b6h              __DELAYX0
+     0035h              _main
+     0081h              _digNumber
+     0083h              _indexDigit
+     0085h              _powNumber
+     0086h              _len
+     0087h              _lenNumber
+     0088h              _Numbr
+     008ah              _b
+     008ch              _a
+     008eh              _AN
+     008fh              _delay
+     0093h              _disply
+     0095h              _BAT
+     0096h              _t1
+     0098h              _adc
+     0099h              _adc_GAS
+     009bh              _BAT_ADC_D
+     009dh              _BAT_ADC
+     009fh              _GAS_ERR
+     00a1h              _i
+     00a2h              _PtrChar
+     00a4h              _PtrInt
+     00a6h              _Input
+     00a8h              _Digit
+     00b0h              _SEG
+     00b1h              ra
+     00b2h              rd
+     00b3h              re
+     00b4h              rf
+     00b5h              rg
+     00b6h              _S_ADC_Init
      0080h[0]           _falt_gas
      0080h[1]           _falt_BAT
      0080h[2]           _fire_gas
@@ -114,22 +112,24 @@ Input Library File: C:\Program Files\Holtek MCU Development Tools\HT-IDE3000V8.x
 
 ROM Usage Statistics
      Size      Used     Percentage
-     0800h     00bah    9%
+     0800h     00bch    9%
 
 RAM Usage Statistics
     Bank      Size      Used     Percentage
-     00h       0080h     002ch    34%
-     Total     0080h     002ch    34%
+     00h       0080h     0036h    42%
+     Total     0080h     0036h    42%
 
 Use Stack Count
 _main: 1
+_length: 1
 _S_READ_ADC: 1
 
 Call Tree
     @dummy
         _main (0)
             _S_ADC_Init (1)
-            __DELAYX (1)
+    _length
+        _builtin_holtek_divmodhi4_isr00 (0)
     _S_READ_ADC
         __DELAYX (0)
 
