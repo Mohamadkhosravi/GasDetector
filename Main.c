@@ -1,39 +1,21 @@
 #include <ht67f2432.h>
 #include <main.h>
-void SEGMENT_number(unsigned char n);
+void segmentNumbers(unsigned char n);
 
 
 
 
-void *Input;
-
-int *PtrInt;
-char *PtrChar;
-int a=10;
-char b[]={"a"};
-/*char c = "i" ;*/
-void Seggg(void *PTR);
 int length(int number);
-char i;
+void Display(int number, char letter);
+int Numbr=0;
 
-
-
-int Numbr=123;
-char lenNumber=0;
-char len=0;
-char powNumber=1;
-int indexDigit=0;
-int digNumber=0;
-
-
+int i;
 
 
 
 void main()
 {
-	
-Seggg(&a);
-Seggg(b);
+
 	// Oscillators
 
 	_cks0 = 0; //: System clock selection (fH)
@@ -150,7 +132,7 @@ Seggg(b);
 	LED_RED_OFF; // LED_R
 	LED_YELLOW_OFF; // LED_Y
 	RELAY_ON; // relay
-	S_ADC_Init();
+//	S_ADC_Init();
 	
 	while (delay < 100000)
 	{
@@ -169,70 +151,11 @@ Seggg(b);
 			LED_GREEN_ON;
 			LED_RED_OFF;
 			LED_YELLOW_OFF;
-			Numbr=123;
-			powNumber=100;
-			lenNumber=length(Numbr);
-			
-			for( indexDigit=lenNumber; indexDigit>=0 ; indexDigit--)
-			{
-				i=0;
-		      while(1)
-		      {
-		      	i++;
-		      	if(i>1000)
-		      	break;
-		      }
-		
-				digNumber =  Numbr % powNumber;
-				Numbr=Numbr-(digNumber*powNumber);
-				SEGMENT_number(indexDigit);
-				COM0 = 1;
-				COM1 = 0;
-				COM2 = 0;
-				COM3 = 0;
-			/*	switch(indexDigit) 
-				{			
-					case 1:
-						COM0 = 1;
-						COM1 = 0;
-						COM2 = 0;
-						COM3 = 0;
-					break;		
-					case 2:
-						COM0 = 0;
-						COM1 = 1;
-						COM2 = 0;
-						COM3 = 0;
-					break;
-					case 3:
-						COM0 = 0;
-						COM1 = 0;
-						COM2 = 1;
-						COM3 = 0;
-					break;	
-						case 4:
-						COM0 = 0;
-						COM1 = 0;
-						COM2 = 0;
-						COM3 = 1;
-					break;	
-				};*/
-				powNumber=powNumber/10;
 
-
-
-
-
-
-
-
-
-
-
-
-			}
-		 }
-		};
+		//	Numbr=123;
+		 Display(123,'o');
+	
+		}
 
 		PB = !_pb3; // Detect PUSH THE TEST BUTTON
 
@@ -363,12 +286,12 @@ Seggg(b);
 				if (disply_bat == 0)
 				{
 					Digit[3] = disply / 1000;
-					SEGMENT_number(Digit[3]);
+					segmentNumbers(Digit[3]);
 				}
 				else
 				{
 					Digit[3] = 'b';
-					SEGMENT_number(Digit[3]);
+					segmentNumbers(Digit[3]);
 				}
 				COM0 = 1;
 				COM1 = 0;
@@ -381,17 +304,17 @@ Seggg(b);
 				if ((BAT == 101 || BAT == 3) && disply_bat == 1)
 				{
 					Digit[2] = '-';
-					SEGMENT_number(Digit[2]);
+					segmentNumbers(Digit[2]);
 				}
 				else if (disply_bat == 0)
 				{
 					Digit[2] = disply / 100 - Digit[3] * 10;
-					SEGMENT_number(Digit[2]);
+					segmentNumbers(Digit[2]);
 				}
 				else
 				{
 					Digit[2] = disply / 100;
-					SEGMENT_number(Digit[2]);
+					segmentNumbers(Digit[2]);
 				}
 
 				COM0 = 0;
@@ -404,22 +327,22 @@ Seggg(b);
 				if (BAT == 3 && disply_bat == 1)
 				{
 					Digit[1] = 'l';
-					SEGMENT_number(Digit[1]);
+					segmentNumbers(Digit[1]);
 				}
 				else if (BAT == 101 && disply_bat == 1)
 				{
 					Digit[1] = 'n';
-					SEGMENT_number(Digit[1]);
+					segmentNumbers(Digit[1]);
 				}
 				else if (disply_bat == 0)
 				{
 					Digit[1] = disply / 10 - Digit[3] * 100 - Digit[2] * 10;
-					SEGMENT_number(Digit[1]);
+					segmentNumbers(Digit[1]);
 				}
 				else
 				{
 					Digit[1] = disply / 10 - Digit[2] * 10;
-					SEGMENT_number(Digit[1]);
+					segmentNumbers(Digit[1]);
 				}
 
 				COM0 = 0;
@@ -432,12 +355,12 @@ Seggg(b);
 				if ((BAT == 101 || BAT == 3) && disply_bat == 1)
 				{
 					Digit[0] = 'o';
-					SEGMENT_number(Digit[0]);
+					segmentNumbers(Digit[0]);
 				}
 				else
 				{
 					Digit[0] = disply % 10;
-					SEGMENT_number(Digit[0]);
+					segmentNumbers(Digit[0]);
 				}
 
 				COM0 = 0;
@@ -545,9 +468,9 @@ Seggg(b);
 			t1 = 0;
 		}
 	}
+}
 
-
-void SEGMENT_number(unsigned char n)
+void segmentNumbers(unsigned char n)
 {
 
 	switch (n)
@@ -690,7 +613,59 @@ void SEGMENT_number(unsigned char n)
 		break;
 	}
 }
+void segmentCharters(unsigned char n)
+{
 
+	switch (n)
+	{
+
+		case 'b':
+			SEGA = 1;
+			SEGB = 1;
+			SEGC = 0;
+			SEGD = 0;
+			SEGE = 0;
+			SEGF = 0;
+			SEGG = 0;
+			break;
+		case 'l':
+			SEGA = 1;
+			SEGB = 1;
+			SEGC = 1;
+			SEGD = 0;
+			SEGE = 0;
+			SEGF = 0;
+			SEGG = 1;
+			break;
+		case 'n':
+			SEGA = 1;
+			SEGB = 1;
+			SEGC = 0;
+			SEGD = 1;
+			SEGE = 0;
+			SEGF = 1;
+			SEGG = 0;
+			break;
+		case 'o':
+			SEGA = 1;
+			SEGB = 1;
+			SEGC = 0;
+			SEGD = 0;
+			SEGE = 0;
+			SEGF = 1;
+			SEGG = 0;
+			break;
+		case '-':
+			SEGA = 1;
+			SEGB = 1;
+			SEGC = 1;
+			SEGD = 1;
+			SEGE = 1;
+			SEGF = 1;
+			SEGG = 0;
+			break;
+	}
+}
 int length(int number){
 	int cunter=0;
 	while(number!=0){
@@ -701,7 +676,83 @@ int length(int number){
 	return cunter;
 
 }
-void Seggg(void *PTR)
+
+
+void Display(int number, char letter)
 {
+	char indexDigit=0;
+	char displayBuffer[4]={0,0,0,0};
+	char cunterCome=0;
+	char startIndexDigit=3;
 	
-}
+/*	if((letter!='0')&&((number/1000)<0))*/
+    if(letter!='0')
+	{
+		startIndexDigit=2;
+		displayBuffer[3]=letter;	
+	}
+	while(number!=0)
+	{
+	      
+		displayBuffer[(startIndexDigit-indexDigit)]=number%10;
+		number=(number-displayBuffer[(startIndexDigit-indexDigit)])/10;
+		indexDigit++;
+		
+	}
+  
+
+   /* if(letter=!0)
+    {
+     lenght=1;
+    }*/
+	
+	
+	for(i=0;i<=3;i++)
+	{
+
+	  
+		switch(i) 
+		{			
+			case 0:
+			    segmentNumbers(displayBuffer[0]);
+				COM0 = 1;
+				COM1 = 0;
+				COM2 = 0;
+				COM3 = 0;
+			
+			break;		
+			case 1:
+		        segmentNumbers(displayBuffer[1]);
+				COM0 = 0;
+				COM1 = 1;
+				COM2 = 0;
+				COM3 = 0;
+			
+			break;
+			case 2:
+			     segmentNumbers(displayBuffer[2]);
+				COM0 = 0;
+				COM1 = 0;
+				COM2 = 1;
+				COM3 = 0;
+			
+			break;	
+			case 3:
+			  
+			    segmentNumbers(displayBuffer[3]);
+				COM0 = 0;
+				COM1 = 0;
+				COM2 = 0;
+				COM3 = 1;
+		
+			break;	
+		};	
+	  GCC_DELAY(1000);
+	}
+
+}	
+	
+	
+
+		
+	
