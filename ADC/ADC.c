@@ -74,13 +74,16 @@ unsigned int  S_READ_ADC(unsigned char CH)
    // Read the high byte of the ADC result.
    //   /*temp=(temp)&(0x0fff);
 
- 
+ //temp=(temp + ((_sadoh << 8) | (_sadol))) / 2;
  
     if(_adrfs == 1)
     {   
      temp =((_sadol))|((_sadoh<<8));
     }
-    else {temp =((_sadol>>4))|((_sadoh<<4));}
+    else
+    {
+     temp =((_sadol>>6)|(_sadoh<<2));
+    }
    
   // Ptr=&temp;
 

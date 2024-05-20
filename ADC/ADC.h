@@ -1,6 +1,8 @@
 #ifndef ADC_H__
 #define ADC_H__
-#include "BA45F5240.h"
+//#include "BA45F5240.h"
+#include <ht67f2432.h>
+
 
 //The macro definition cannot be changed
 #define AN0			0x00
@@ -13,13 +15,13 @@
 #define LINEV		0X07
 
 
-#define _RD_ADC_SET_AN0		{ _sadc1 = 0b00000011; _sadc0 = 0b00000000; }
+#define _RD_ADC_SET_AN0		{ _sadc1 = 0b00001011; _sadc0 = 0b00000000; }
 
-#define	_RD_ADC_SET_AN1     { _sadc1 = 0b00001001;_sadc0 = 0b00000001; }
+#define	_RD_ADC_SET_AN1     { _sadc1 = 0b00001011;_sadc0 = 0b00000001; }
 
-#define _RD_ADC_SET_AN2		{ _sadc1 = 0b00000011; _sadc0 = 0b00000010; }
+#define _RD_ADC_SET_AN2		{ _sadc1 = 0b00001011; _sadc0 = 0b00000010; }
 
-#define _RD_ADC_SET_AN3		{ _sadc1 = 0b00000011; _sadc0 = 0b00000011; }
+#define _RD_ADC_SET_AN3		{ _sadc1 = 0b00001011; _sadc0 = 0b00000011; }
 
 #define _RD_ADC_SET_VBGREF	{ _sadc1 = 0b00101011; _sadc0 = 0b00010111; }
 
