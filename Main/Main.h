@@ -2,7 +2,7 @@
 #ifndef _MAIN_H_
 #define _MAIN_H_
 #include <ht67f2432.h>
-
+#include <Display.h>
 unsigned char SEG;
 unsigned int GAS_ERR = 0;
 unsigned int BAT_ADC = 0;
@@ -39,6 +39,8 @@ bit falt_BAT;
 #define	BUZZER_ON       _pa4= 1
 #define	BUZZER_OFF      _pa4= 0	
 
+#define	LED_GREEN      _pc0
+
 #define	LED_GREEN_ON    _pc0= 1	
 #define	LED_GREEN_OFF   _pc0= 0	
 
@@ -52,12 +54,39 @@ bit falt_BAT;
 #define RELAY_OFF   	_pb2= 0	
 
 #define TIMER_CUNTER_INTRUPT _tb0f
-
-unsigned int VoltageBattery=0;
-
+#define TRESHOLD_DETECT_GAS 250
+#define PRESEED_PUSHBUTUN _pb3==0
+#define  MINIMUM_VOLTAGE_VALID 3
+void DisplayLooding(char cunterDigit );
 int Numbr=0;
+int digcunt=0;
+unsigned int i=0;
 
-unsigned int i;
+typedef union parameter{
+ unsigned int VoltageBattery;
+ unsigned int GasValue;
+ unsigned int GasErroreValue;
+ 
+} Parametrs;
+Parametrs Parametr;
+
+	
+//	typedef enum
+//	{
+//		NORMAL,
+//		BATTERY,
+//		TEST,
+//		DETECT,
+//		LOW_BATTERY,
+//		ERORE
+//	}mode;
+//	mode Mode
+
+	bit pushButtonState=0;
+	unsigned long pushButtonCunter=0;
+
+//
 
 
+/*Parametrs Parametr;*/
 #endif

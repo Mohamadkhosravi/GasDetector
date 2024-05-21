@@ -1,7 +1,23 @@
 #include<Main.h>
 #include <ADC.h>
+
+
+
 void main()
 {
+	
+	typedef enum
+	{
+		NORMAL,
+		BATTERY,
+		TEST,
+		DETECT,
+		LOW_BATTERY,
+		ERORE
+	}mode;
+		mode Mode;
+
+
 	// Oscillators
 
 	_cks0 = 0; //: System clock selection (fH)
@@ -108,12 +124,46 @@ void main()
 	LED_YELLOW_OFF; // LED_Y
 	RELAY_ON; // relay
 	S_ADC_Init();
-
+/*
 	while (delay < 100000)
 	{
 		delay++;
-	}
+		i++;
+		if(i<1000)
+		{
+			LED_GREEN_ON;
+			LED_YELLOW_ON;
+			LED_RED_ON;
+		}
+		else
+		{
+			LED_GREEN_OFF;
+			LED_YELLOW_OFF;
+			LED_RED_OFF;
+		}
+		if(i>2000)
+		{
+		
+		i=0;
+		digcunt++;
+		}
+		DisplayLooding(digcunt-4);
+		DisplayLooding(digcunt-3);
+		DisplayLooding(digcunt-2);
+		DisplayLooding(digcunt-1);
+		DisplayLooding(digcunt);
+		//		DisplayLooding(digcunt+1);
+		//		DisplayLooding(digcunt+2);
+		//		DisplayLooding(digcunt+3);
+		//		DisplayLooding(digcunt+4);
+		//		DisplayLooding(digcunt);
+		
+		
+		if(digcunt>4){i=0;digcunt=0;}
+		
 
+	}
+*/
 	delay = 0;
 
 	_pc0 = 1; // LED_G
@@ -121,27 +171,153 @@ void main()
 	while (1)
 	{i=0;
 		
-		while(1)
-		{
-			LED_GREEN_ON;
-			LED_RED_OFF;
-			LED_YELLOW_OFF;
-            i++;
-			if((i>1)&&(i<=1000)){
-				VoltageBattery=S_READ_ADC(0);
-				Display( VoltageBattery,'b');
-			}
-            if((i>1000)&&(i<=2000))
+		
+
+		
+	
+        Parametr.GasValue=S_READ_ADC(0);
+        	
+        if(Parametr.GasValue>TRESHOLD_DETECT_GAS)
+        {
+        	 Mode=DETECT;
+        }
+         else
+        {
+    
+            if(PRESEED_PUSHBUTUN)
             {
-			   	Numbr=S_READ_ADC(1);
-		 		Display( Numbr,'o');
+             pushButtonState=1;
+             pushButtonCunter++;
+      	
             }
-			if((i>2000)&&(i<=3000)){
-			Numbr=S_READ_ADC(2);
-			Display( Numbr,'0');
-			}
-            if(i>3000)i=0;
+            else
+            {
+            
+            	if((pushButtonState==1)&&(pushButtonCunter>500))
+            	{
+            		Mode=TEST;	
+            	}
+            	else if((pushButtonState==1)&&(pushButtonCunter<500)&&(pushButtonCunter>10))
+            	{
+            	  Mode=BATTERY;		
+	
+            	}
+            	
+            }
+            Parametr.VoltageBattery=S_READ_ADC(1);
+            if(Parametr.VoltageBattery < MINIMUM_VOLTAGE_VALID)
+            {
+            	Mode=LOW_BATTERY;
+            }
+			
+	
+        }
+		
+		switch(Mode)
+		{
+			case NORMAL:
+			    BUZZER_OFF;
+				LED_RED_OFF;
+				LED_YELLOW_OFF;
+				LED_GREEN_ON;
+			    Parametr.GasValue=S_READ_ADC(0);
+				Display(Parametr.GasValue,'o');
+			break;
+			
+			case TEST:
+				delay++;
+				BUZZER_ON;
+				RELAY_ON;
+				LED_RED_ON;
+				LED_GREEN_ON;
+				LED_YELLOW_ON;
+				Display(8888,'0');
+				if(delay>1000)Mode=NORMAL;
+			break;
+			
+			case BATTERY:
+			
+			    BUZZER_OFF;
+				LED_RED_OFF;
+				LED_YELLOW_OFF;
+				LED_GREEN_ON;
+				Parametr.VoltageBattery=S_READ_ADC(1);
+				Display(Parametr.VoltageBattery,'b');
+			
+					
+			break;
+			
+			
+			case DETECT:
+				while(1)
+				{
+					BUZZER_ON;
+					LED_RED_ON;
+					RELAY_ON;
+					Display(Parametr.GasValue,'o');
+					if(PRESEED_PUSHBUTUN)
+					{
+					BUZZER_OFF;
+					LED_RED_OFF;
+					break;	
+					}
+					
+				}
+			break;
+			
+		/*	default :
+			Mode=NORMAL;
+			break;*/
+			
 		}
+		
+	
+		
+		
+	
+		
+		
+		
+		
+		
+		
+	
+	
+            
+        	
+        	
+        	
+       
+	
+    
+      /*  if((i>1)&&(i<=1000)){*/
+			
+	/*		Parametr.GasValue=S_READ_ADC(0);
+			Display(Parametr.GasValue,'o');
+		*/
+	/*	
+		}
+		if
+		
+        if((i>1000)&&(i<=2000))
+        {
+		   Parametr.VoltageBattery=S_READ_ADC(1);
+	 		Display(Parametr.VoltageBattery,'b');
+	 	
+        }
+		if((i>2000)&&(i<=3000)){
+		Parametr.GasErroreValue=S_READ_ADC(2);
+		Display( Parametr.GasErroreValue,'0');
+		
+		}
+        if(i>3000)i=0;*/
+        
+            
+            
+            
+            
+            
+	
 	}
 }
 //		PB = !_pb3; // Detect PUSH THE TEST BUTTON

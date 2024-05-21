@@ -159,7 +159,7 @@ void segmentNumbers(unsigned char n)
 		break;
 	}
 }
-void segmentCharters(unsigned char n)
+void segmentCharacters(unsigned char n)
 {
 
 	switch (n)
@@ -207,7 +207,7 @@ void segmentCharters(unsigned char n)
 			SEGC = 1;
 	}
 }	
-void Display(int number, char letter)
+void Display(int number, char character)
 {
 	char indexDigit=0;
 	char displayBuffer[4]={0,0,0,0};
@@ -215,11 +215,11 @@ void Display(int number, char letter)
 	char startIndexDigit=3;
 	char digitNumber=0;
 	
-/*	if((letter!='0')&&((number/1000)<0))*/
-    if(letter!='0')
+/*	if((character!='0')&&((number/1000)<0))*/
+    if(character!='0')
 	{
 		startIndexDigit=2;
-		displayBuffer[3]=letter;	
+		displayBuffer[3]=character;	
 	}
 	while(number!=0)
 	{
@@ -231,7 +231,7 @@ void Display(int number, char letter)
 	}
   
 
-   /* if(letter=!0)
+   /* if(character=!0)
     {
      lenght=1;
     }*/
@@ -283,6 +283,47 @@ void Display(int number, char letter)
 }	
 	
 	
-
+void DisplayLooding(char cunterDigit )
+{
+///*	static cunterDigit=0
+//	cunterDigit++;
+	
+	switch(cunterDigit) 
+	{			
+		case 0:
+		 segmentCharacters('o');
+			COM0 = 1;
+			COM1 = 0;
+			COM2 = 0;
+			COM3 = 0;
+		
+		break;		
+		case 1:
+	      
+			COM0 = 0;
+			COM1 = 1;
+			COM2 = 0;
+			COM3 = 0;
+		
+		break;
+		case 2:
+		 
+			COM0 = 0;
+			COM1 = 0;
+			COM2 = 1;
+			COM3 = 0;
+		
+		break;	
+		case 3:
+		  
+		  
+			COM0 = 0;
+			COM1 = 0;
+			COM2 = 0;
+			COM3 = 1;
+	
+		break;	
+	};	
+}
 		
 	
