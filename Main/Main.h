@@ -56,7 +56,7 @@ bit falt_BAT;
 #define TIMER_CUNTER_INTRUPT _tb0f
 #define TRESHOLD_DETECT_GAS 250
 #define PRESEED_PUSHBUTUN _pb3==0
-#define  MINIMUM_VOLTAGE_VALID 3
+#define  MINIMUM_VOLTAGE_VALID 5
 void DisplayLooding(char cunterDigit );
 int Numbr=0;
 int digcunt=0;
@@ -70,6 +70,21 @@ typedef union parameter{
 } Parametrs;
 Parametrs Parametr;
 
+
+#define minVoltageBattery 1
+#define maxVoltageBattery 33
+#define percentageAccuracy 10
+#define voltageRange maxVoltageBattery-minVoltageBattery
+#define batteryPercentage(voltageBattery)(((voltageBattery - minVoltageBattery) / voltageRange) * 100)
+
+
+typedef struct{
+ unsigned int test;
+ unsigned int lowBattry;
+ unsigned int checkBattery;
+ 
+} Cunters;
+Cunters Cunter;
 	
 //	typedef enum
 //	{

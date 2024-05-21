@@ -1,19 +1,18 @@
 #include<Main.h>
 #include <ADC.h>
 
-
-
 void main()
 {
 	
 	typedef enum
 	{
 		NORMAL,
-		BATTERY,
+		CHECK_BATTERY,
 		TEST,
 		DETECT,
 		LOW_BATTERY,
 		ERORE
+		
 	}mode;
 		mode Mode;
 
@@ -124,7 +123,7 @@ void main()
 	LED_YELLOW_OFF; // LED_Y
 	RELAY_ON; // relay
 	S_ADC_Init();
-/*
+
 	while (delay < 100000)
 	{
 		delay++;
@@ -163,17 +162,21 @@ void main()
 		
 
 	}
-*/
+
 	delay = 0;
 
 	_pc0 = 1; // LED_G
-
+    Mode=NORMAL;
 	while (1)
 	{i=0;
 		
 		
-
-		
+//		if (TIMER_CUNTER_INTRUPT == 1) // Comparator A Match CTMAF Interrupt
+//		{
+//			TIMER_CUNTER_INTRUPT = 0;
+//			delay++;
+//		
+//		}
 	
         Parametr.GasValue=S_READ_ADC(0);
         	
@@ -199,19 +202,23 @@ void main()
             	}
             	else if((pushButtonState==1)&&(pushButtonCunter<500)&&(pushButtonCunter>10))
             	{
-            	  Mode=BATTERY;		
+            		Mode=CHECK_BATTERY;		
 	
             	}
+            
             	
             }
-            Parametr.VoltageBattery=S_READ_ADC(1);
-            if(Parametr.VoltageBattery < MINIMUM_VOLTAGE_VALID)
-            {
-            	Mode=LOW_BATTERY;
-            }
+            //Parametr.VoltageBattery=S_READ_ADC(1);
+            
 			
 	
         }
+		
+		Parametr.VoltageBattery =3;
+		if((Parametr.VoltageBattery < MINIMUM_VOLTAGE_VALID)&&(Mode == NORMAL))
+		{
+		 	Mode=LOW_BATTERY;
+		}
 		
 		switch(Mode)
 		{
@@ -225,25 +232,39 @@ void main()
 			break;
 			
 			case TEST:
-				delay++;
+				Cunter.test++;
 				BUZZER_ON;
 				RELAY_ON;
 				LED_RED_ON;
 				LED_GREEN_ON;
 				LED_YELLOW_ON;
 				Display(8888,'0');
-				if(delay>1000)Mode=NORMAL;
+				pushButtonState=0;
+				pushButtonCunter=0;
+				if(Cunter.test>1000)
+				{
+					Cunter.test=0;
+					Mode=NORMAL;
+					
+				}
 			break;
 			
-			case BATTERY:
-			
+			case CHECK_BATTERY:
+			   	Cunter.checkBattery++;
 			    BUZZER_OFF;
 				LED_RED_OFF;
 				LED_YELLOW_OFF;
 				LED_GREEN_ON;
 				Parametr.VoltageBattery=S_READ_ADC(1);
 				Display(Parametr.VoltageBattery,'b');
-			
+				pushButtonState=0;
+				pushButtonCunter=0;
+			    if(Cunter.checkBattery>500)
+				{
+					Mode=NORMAL;
+					Cunter.checkBattery=0;
+
+				}
 					
 			break;
 			
@@ -254,17 +275,61 @@ void main()
 					BUZZER_ON;
 					LED_RED_ON;
 					RELAY_ON;
-					Display(Parametr.GasValue,'o');
+					Display(250,'o');
 					if(PRESEED_PUSHBUTUN)
 					{
-					BUZZER_OFF;
-					LED_RED_OFF;
-					break;	
+						BUZZER_OFF;
+						LED_RED_OFF;
+						pushButtonState=0;
+						pushButtonCunter=0;
+						Mode=NORMAL;
+						
+						break;
 					}
 					
 				}
 			break;
 			
+			case LOW_BATTERY:
+			
+			    Cunter.lowBattry++;
+			    if(Cunter.lowBattry<30)
+			    {
+			      BUZZER_ON;
+			    }
+			    else if((Cunter.lowBattry>30)&&(Cunter.lowBattry<50))
+			    {
+			      BUZZER_OFF;
+			    }
+			    else if((Cunter.lowBattry>50)&&(Cunter.lowBattry<80))
+			    {
+			     BUZZER_ON;	
+			    }
+			    else
+			    {
+			     BUZZER_OFF;	
+			    }
+			    if(Cunter.lowBattry<1000)
+			    {
+					Parametr.GasValue=S_READ_ADC(0);
+					Display(Parametr.GasValue,'o');
+			    }
+			    else
+			    {
+			    	Parametr.VoltageBattery=S_READ_ADC(1);
+			    	Parametr.VoltageBattery=(char)batteryPercentage(10);
+					Display(Parametr.VoltageBattery,'0');
+					
+			    }
+			    
+			   if(Cunter.lowBattry>2000)Cunter.lowBattry=0;
+				LED_RED_OFF;
+				LED_YELLOW_ON;
+				LED_GREEN_OFF;
+				
+				
+			
+			break;
 		/*	default :
 			Mode=NORMAL;
 			break;*/
@@ -272,16 +337,33 @@ void main()
 		}
 		
 	
-		
-		
 	
-		
-		
-		
-		
-		
-		
 	
+
+		
+		
+		
+//		unsigned char BatteryPercentage(unsigned char voltageBattery) {
+//
+//
+//		    unsigned char voltageRange = 0;
+//		    voltageRange=maxVoltageBattery - minVoltageBattery;
+//		    
+//		    float batteryPercentage = 0;
+//		    batteryPercentage=((voltageBattery - minVoltageBattery) / voltageRange) * 100;
+//		/*
+//		    int roundedPercentage = ((int)(batteryPercentage / percentageAccuracy + 0.5)) * percentageAccuracy;
+//		
+//		    if (roundedPercentage > 100) {
+//		        roundedPercentage = 100;
+//		    } else if (roundedPercentage < 0) {
+//		        roundedPercentage = 0;
+//		    }*/
+//
+//    		return batteryPercentage;
+//		}
+//		
+//	
 	
             
         	
