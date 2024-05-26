@@ -57,6 +57,11 @@ bit falt_BAT;
 #define TRESHOLD_DETECT_GAS 250
 #define PRESEED_PUSHBUTUN _pb3==0
 #define  MINIMUM_VOLTAGE_VALID 5
+#define  VOLTAGE_LOWBATTERY  3
+#define POWER_SUPLY_CONNECT _pa6==1 
+#define POWER_SUPLY_DISCONNECT _pa6==0 
+
+
 void DisplayLooding(char cunterDigit );
 int Numbr=0;
 int digcunt=0;
@@ -71,14 +76,13 @@ typedef union parameter{
 Parametrs Parametr;
 
 
-#define minVoltageBattery 1
-#define maxVoltageBattery 33
+#define minVoltageBattery 590
+#define maxVoltageBattery 890
 #define percentageAccuracy 10
 #define voltageRange maxVoltageBattery-minVoltageBattery
-#define batteryPercentage(voltageBattery)(((voltageBattery - minVoltageBattery) / voltageRange) * 100)
-
-
-typedef struct{
+#define batteryPercentage(voltageBattery)((voltageBattery - minVoltageBattery)*100)/voltageRange
+typedef struct
+{
  unsigned int test;
  unsigned int lowBattry;
  unsigned int checkBattery;

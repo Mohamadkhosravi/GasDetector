@@ -10,12 +10,19 @@ void main()
 		CHECK_BATTERY,
 		TEST,
 		DETECT,
-		LOW_BATTERY,
 		ERORE
 		
 	}mode;
 		mode Mode;
-
+	
+	typedef enum
+	{
+		LOW_BATTERY,
+		BATTRY_ERROR,
+		SUPPLY_ERROR
+		
+	}Suplymode;
+     Suplymode Suply;
 
 	// Oscillators
 
@@ -213,12 +220,39 @@ void main()
 			
 	
         }
+        
+        
+        
+        
+        /*
+        Suply |battery | Mode
+        -----------------------------
+         1    |   1    | normal
+        -----------------------------
+         1    |   0    | Battry Error
+        -----------------------------
+         0    |   1    | Suply Error 
+        -----------------------------
+         0    | <limit | Low Battry 
+        ----------------------------- 
+        */
+        
+     
+       if((POWER_SUPLY_CONNECT)&&(Parametr.VoltageBattery <= MINIMUM_VOLTAGE_VALID))
+       {
+        	Suply=BATTRY_ERROR;
+       }
+       else if((POWER_SUPLY_DISCONNECT)&&(Parametr.VoltageBattery > VOLTAGE_LOWBATTERY))
+       {
+       	    Suply=SUPPLY_ERROR;
+   
+       }
+       else if((POWER_SUPLY_DISCONNECT)&&(Parametr.VoltageBattery < VOLTAGE_LOWBATTERY))
+       {
+       	   Suply=LOW_BATTERY;
+       }
 		
-		Parametr.VoltageBattery =3;
-		if((Parametr.VoltageBattery < MINIMUM_VOLTAGE_VALID)&&(Mode == NORMAL))
-		{
-		 	Mode=LOW_BATTERY;
-		}
+	
 		
 		switch(Mode)
 		{
@@ -255,8 +289,9 @@ void main()
 				LED_RED_OFF;
 				LED_YELLOW_OFF;
 				LED_GREEN_ON;
-				Parametr.VoltageBattery=S_READ_ADC(1);
-				Display(Parametr.VoltageBattery,'b');
+				Parametr.VoltageBattery=batteryPercentage(S_READ_ADC(2));
+				Display(Parametr.VoltageBattery,'0');
+				
 				pushButtonState=0;
 				pushButtonCunter=0;
 			    if(Cunter.checkBattery>500)
@@ -275,7 +310,7 @@ void main()
 					BUZZER_ON;
 					LED_RED_ON;
 					RELAY_ON;
-					Display(250,'o');
+					Display(250,'0');
 					if(PRESEED_PUSHBUTUN)
 					{
 						BUZZER_OFF;
@@ -290,7 +325,7 @@ void main()
 				}
 			break;
 			
-			case LOW_BATTERY:
+		 /* case LOW_BATTERY:
 			
 			    Cunter.lowBattry++;
 			    if(Cunter.lowBattry<30)
@@ -330,13 +365,29 @@ void main()
 				
 			
 			break;
+			*/
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
 		/*	default :
 			Mode=NORMAL;
 			break;*/
 			
 		}
 		
-	
+
 	
 	
 
