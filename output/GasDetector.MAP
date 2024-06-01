@@ -11,158 +11,230 @@ Input Library File: C:\Program Files\Holtek MCU Development Tools\HT-IDE3000V8.x
 
      Bank    Start     End      Length     Class    AvgIns    Name
      00h     0000h     0000h    0001h      CODE               @code (c:\users\tech\desktop\gasdetector\output\MAIN.OBJ)
-     00h     0001h     0021h    0021h      CODE               @start (c:\users\tech\desktop\gasdetector\output\MAIN.OBJ)
-     00h     0022h     0033h    0012h      CODE               @ROMDATA_BASE (c:\users\tech\desktop\gasdetector\output\STARTUP1_L.OBJ)
-     00h     0034h     0039h    0006h      CODE               _S_ADC_Init (c:\users\tech\desktop\gasdetector\output\ADC.OBJ)
-     00h     003ah     00abh    0072h      CODE               _S_READ_ADC (c:\users\tech\desktop\gasdetector\output\ADC.OBJ)
-     00h     00ach     012eh    0083h      CODE               _segmentNumbers (c:\users\tech\desktop\gasdetector\output\DISPLAY.OBJ)
-     00h     012fh     0162h    0034h      CODE               _segmentCharacters (c:\users\tech\desktop\gasdetector\output\DISPLAY.OBJ)
-     00h     0163h     01e9h    0087h      CODE               _Display (c:\users\tech\desktop\gasdetector\output\DISPLAY.OBJ)
-     00h     01eah     020dh    0024h      CODE               _DisplayLooding (c:\users\tech\desktop\gasdetector\output\DISPLAY.OBJ)
-     00h     020eh     039eh    0191h      CODE               _main (c:\users\tech\desktop\gasdetector\output\MAIN.OBJ)
-     00h     039fh     03a8h    000ah      CODE               __DELAYX (C:\Program Files\Holtek MCU Development Tools\HT-IDE3000V8.x\LIB\LIBHOLTEKGCC.LIB)
-     00h     03a9h     03dfh    0037h      CODE               _builtin_holtek_divmodhi4_isr00 (C:\Program Files\Holtek MCU Development Tools\HT-IDE3000V8.x\LIB\LIBHOLTEKGCC.LIB)
-     00h     03e0h     03f2h    0013h      CODE               _builtin_holtek_mulhi3_isr00 (C:\Program Files\Holtek MCU Development Tools\HT-IDE3000V8.x\LIB\LIBHOLTEKGCC.LIB)
+     00h     0001h     0015h    0015h      CODE               @ROMDATA_BASE (c:\users\tech\desktop\gasdetector\output\STARTUP1_L.OBJ)
+     00h     0016h     0036h    0021h      CODE               @start (c:\users\tech\desktop\gasdetector\output\MAIN.OBJ)
+     00h     0037h     003bh    0005h      CODE               itodaz (C:\Program Files\Holtek MCU Development Tools\HT-IDE3000V8.x\LIB\LIBHOLTEKGCC.LIB)
+     00h     003ch     007bh    0040h      CODE               _builtin_holtek_dtmul (C:\Program Files\Holtek MCU Development Tools\HT-IDE3000V8.x\LIB\LIBHOLTEKGCC.LIB)
+     00h     007ch     00b7h    003ch      CODE               _builtin_holtek_dtdiv (C:\Program Files\Holtek MCU Development Tools\HT-IDE3000V8.x\LIB\LIBHOLTEKGCC.LIB)
+     00h     00b8h     00e2h    002bh      CODE               @builtin_holtek_ftol (C:\Program Files\Holtek MCU Development Tools\HT-IDE3000V8.x\LIB\LIBHOLTEKGCC.LIB)
+     00h     00e3h     0116h    0034h      CODE               _builtin_holtek_dtnorm (C:\Program Files\Holtek MCU Development Tools\HT-IDE3000V8.x\LIB\LIBHOLTEKGCC.LIB)
+     00h     0117h     012eh    0018h      CODE               @builtin_holtek_dtdecode (C:\Program Files\Holtek MCU Development Tools\HT-IDE3000V8.x\LIB\LIBHOLTEKGCC.LIB)
+     00h     012fh     013ah    000ch      CODE               @builtin_holtek_ftdecode (C:\Program Files\Holtek MCU Development Tools\HT-IDE3000V8.x\LIB\LIBHOLTEKGCC.LIB)
+     00h     013bh     0141h    0007h      CODE               _builtin_holtek_dtinf (C:\Program Files\Holtek MCU Development Tools\HT-IDE3000V8.x\LIB\LIBHOLTEKGCC.LIB)
+     00h     0142h     0147h    0006h      CODE               _S_ADC_Init (c:\users\tech\desktop\gasdetector\output\ADC.OBJ)
+     00h     0148h     01bah    0073h      CODE               _S_READ_ADC (c:\users\tech\desktop\gasdetector\output\ADC.OBJ)
+     00h     01bbh     01c6h    000ch      CODE               _DisplayInit (c:\users\tech\desktop\gasdetector\output\DISPLAY.OBJ)
+     00h     01c7h     0249h    0083h      CODE               _segmentNumbers (c:\users\tech\desktop\gasdetector\output\DISPLAY.OBJ)
+     00h     024ah     027dh    0034h      CODE               _segmentCharacters (c:\users\tech\desktop\gasdetector\output\DISPLAY.OBJ)
+     00h     027eh     0302h    0085h      CODE               _Display (c:\users\tech\desktop\gasdetector\output\DISPLAY.OBJ)
+     00h     0303h     0326h    0024h      CODE               _DisplayLooding (c:\users\tech\desktop\gasdetector\output\DISPLAY.OBJ)
+     00h     0327h     050dh    01e7h      CODE               _main (c:\users\tech\desktop\gasdetector\output\MAIN.OBJ)
+     00h     050eh     0517h    000ah      CODE               __DELAYX (C:\Program Files\Holtek MCU Development Tools\HT-IDE3000V8.x\LIB\LIBHOLTEKGCC.LIB)
+     00h     0518h     054eh    0037h      CODE               _builtin_holtek_divmodhi4_isr00 (C:\Program Files\Holtek MCU Development Tools\HT-IDE3000V8.x\LIB\LIBHOLTEKGCC.LIB)
      00h     0080h     0080h    0001h      DATA     0         @BITDATASEC (c:\users\tech\desktop\gasdetector\output\STARTUP1_L.OBJ)
-     00h     0081h     009dh    001dh      DATA     1.8276    @HCCINIT (c:\users\tech\desktop\gasdetector\output\MAIN.OBJ)
-     00h     009eh     00aeh    0011h      DATA     1.0588    @HCCINIT0 (c:\users\tech\desktop\gasdetector\output\MAIN.OBJ)
-     00h     00afh     00afh    0001h      DATA     51        @data_ra (C:\Program Files\Holtek MCU Development Tools\HT-IDE3000V8.x\LIB\LIBHOLTEKGCC.LIB)
-     00h     00b0h     00b0h    0001h      DATA     37        @data_rb (C:\Program Files\Holtek MCU Development Tools\HT-IDE3000V8.x\LIB\LIBHOLTEKGCC.LIB)
-     00h     00b1h     00b1h    0001h      DATA     27        @data_rc (C:\Program Files\Holtek MCU Development Tools\HT-IDE3000V8.x\LIB\LIBHOLTEKGCC.LIB)
-     00h     00b2h     00b2h    0001h      DATA     13        @data_rd (C:\Program Files\Holtek MCU Development Tools\HT-IDE3000V8.x\LIB\LIBHOLTEKGCC.LIB)
-     00h     00b3h     00b3h    0001h      DATA     15        @data_re (C:\Program Files\Holtek MCU Development Tools\HT-IDE3000V8.x\LIB\LIBHOLTEKGCC.LIB)
-     00h     00b4h     00b4h    0001h      DATA     9         @data_rf (C:\Program Files\Holtek MCU Development Tools\HT-IDE3000V8.x\LIB\LIBHOLTEKGCC.LIB)
-     00h     00b5h     00b5h    0001h      DATA     9         @data_rg (C:\Program Files\Holtek MCU Development Tools\HT-IDE3000V8.x\LIB\LIBHOLTEKGCC.LIB)
+     00h     0081h     0081h    0001h      DATA     1         @HCCINIT (c:\users\tech\desktop\gasdetector\output\DISPLAY.OBJ)
+     00h     0082h     00a3h    0022h      DATA     1.9118    @HCCINIT (c:\users\tech\desktop\gasdetector\output\MAIN.OBJ)
+     00h     00a4h     00b4h    0011h      DATA     0.8235    @HCCINIT0 (c:\users\tech\desktop\gasdetector\output\MAIN.OBJ)
+     00h     00b5h     00b5h    0001h      DATA     42        @data_ra (C:\Program Files\Holtek MCU Development Tools\HT-IDE3000V8.x\LIB\LIBHOLTEKGCC.LIB)
+     00h     00b6h     00b6h    0001h      DATA     33        @data_rb (C:\Program Files\Holtek MCU Development Tools\HT-IDE3000V8.x\LIB\LIBHOLTEKGCC.LIB)
+     00h     00b7h     00b7h    0001h      DATA     25        @data_rc (C:\Program Files\Holtek MCU Development Tools\HT-IDE3000V8.x\LIB\LIBHOLTEKGCC.LIB)
+     00h     00b8h     00b8h    0001h      DATA     20        @data_rd (C:\Program Files\Holtek MCU Development Tools\HT-IDE3000V8.x\LIB\LIBHOLTEKGCC.LIB)
+     00h     00b9h     00b9h    0001h      DATA     21        @data_re (C:\Program Files\Holtek MCU Development Tools\HT-IDE3000V8.x\LIB\LIBHOLTEKGCC.LIB)
+     00h     00bah     00bah    0001h      DATA     18        @data_rf (C:\Program Files\Holtek MCU Development Tools\HT-IDE3000V8.x\LIB\LIBHOLTEKGCC.LIB)
+     00h     00bbh     00bbh    0001h      DATA     18        @data_rg (C:\Program Files\Holtek MCU Development Tools\HT-IDE3000V8.x\LIB\LIBHOLTEKGCC.LIB)
+     00h     00bch     00c1h    0006h      DATA     22.333    ftdata1 (C:\Program Files\Holtek MCU Development Tools\HT-IDE3000V8.x\LIB\LIBHOLTEKGCC.LIB)
+     00h     00c2h     00c4h    0003h      DATA     16.667    dtdata (C:\Program Files\Holtek MCU Development Tools\HT-IDE3000V8.x\LIB\LIBHOLTEKGCC.LIB)
+     00h     00c5h     00cbh    0007h      DATA     8.1429    ftdata2 (C:\Program Files\Holtek MCU Development Tools\HT-IDE3000V8.x\LIB\LIBHOLTEKGCC.LIB)
 
      Local Sections
 
      Bank    Start     End      Length     Class    AvgIns    Name
-     00h     00cbh     00cbh    0000h      LOCAL    0         @dummy (c:\users\tech\desktop\gasdetector\output\MAIN.OBJ)
-     00h     00c9h     00cah    0002h      LOCAL    7         _main (c:\users\tech\desktop\gasdetector\output\MAIN.OBJ)
-     00h     00b6h     00b6h    0000h      LOCAL    0         _S_ADC_Init (c:\users\tech\desktop\gasdetector\output\ADC.OBJ)
-     00h     00b7h     00b7h    0001h      LOCAL    1         _DisplayLooding (c:\users\tech\desktop\gasdetector\output\DISPLAY.OBJ)
-     00h     00b6h     00b6h    0001h      LOCAL    1         _segmentCharacters (c:\users\tech\desktop\gasdetector\output\DISPLAY.OBJ)
-     00h     00b6h     00b6h    0001h      LOCAL    1         _S_READ_ADC (c:\users\tech\desktop\gasdetector\output\ADC.OBJ)
-     00h     00b6h     00b6h    0000h      LOCAL    0         __DELAYX (C:\Program Files\Holtek MCU Development Tools\HT-IDE3000V8.x\LIB\LIBHOLTEKGCC.LIB)
-     00h     00beh     00c8h    000bh      LOCAL    4.0909    _Display (c:\users\tech\desktop\gasdetector\output\DISPLAY.OBJ)
-     00h     00b6h     00bdh    0008h      LOCAL    7.5       _builtin_holtek_divmodhi4_isr00 (C:\Program Files\Holtek MCU Development Tools\HT-IDE3000V8.x\LIB\LIBHOLTEKGCC.LIB)
-     00h     00b6h     00b6h    0001h      LOCAL    1         _segmentNumbers (c:\users\tech\desktop\gasdetector\output\DISPLAY.OBJ)
-     00h     00b6h     00bbh    0006h      LOCAL    3.1667    _builtin_holtek_mulhi3_isr00 (C:\Program Files\Holtek MCU Development Tools\HT-IDE3000V8.x\LIB\LIBHOLTEKGCC.LIB)
+     00h     00dah     00dah    0000h      LOCAL    0         @dummy (c:\users\tech\desktop\gasdetector\output\MAIN.OBJ)
+     00h     00d8h     00d9h    0002h      LOCAL    7         _main (c:\users\tech\desktop\gasdetector\output\MAIN.OBJ)
+     00h     00cch     00cch    0000h      LOCAL    0         _S_ADC_Init (c:\users\tech\desktop\gasdetector\output\ADC.OBJ)
+     00h     00cdh     00cdh    0001h      LOCAL    1         _DisplayLooding (c:\users\tech\desktop\gasdetector\output\DISPLAY.OBJ)
+     00h     00cch     00cch    0001h      LOCAL    1         _segmentCharacters (c:\users\tech\desktop\gasdetector\output\DISPLAY.OBJ)
+     00h     00cch     00cch    0001h      LOCAL    1         _S_READ_ADC (c:\users\tech\desktop\gasdetector\output\ADC.OBJ)
+     00h     00cch     00cch    0000h      LOCAL    0         __DELAYX (C:\Program Files\Holtek MCU Development Tools\HT-IDE3000V8.x\LIB\LIBHOLTEKGCC.LIB)
+     00h     00cch     00cch    0000h      LOCAL    0         _builtin_holtek_uitod (C:\Program Files\Holtek MCU Development Tools\HT-IDE3000V8.x\LIB\LIBHOLTEKGCC.LIB)
+     00h     00cch     00cch    0000h      LOCAL    0         _builtin_holtek_dtmul (C:\Program Files\Holtek MCU Development Tools\HT-IDE3000V8.x\LIB\LIBHOLTEKGCC.LIB)
+     00h     00cch     00cch    0000h      LOCAL    0         _builtin_holtek_dtdecode (C:\Program Files\Holtek MCU Development Tools\HT-IDE3000V8.x\LIB\LIBHOLTEKGCC.LIB)
+     00h     00cch     00cch    0000h      LOCAL    0         _builtin_holtek_dtdiv (C:\Program Files\Holtek MCU Development Tools\HT-IDE3000V8.x\LIB\LIBHOLTEKGCC.LIB)
+     00h     00d4h     00d7h    0004h      LOCAL    7         _Display (c:\users\tech\desktop\gasdetector\output\DISPLAY.OBJ)
+     00h     00cch     00d3h    0008h      LOCAL    10.375    _builtin_holtek_divmodhi4_isr00 (C:\Program Files\Holtek MCU Development Tools\HT-IDE3000V8.x\LIB\LIBHOLTEKGCC.LIB)
+     00h     00cch     00cch    0001h      LOCAL    1         _segmentNumbers (c:\users\tech\desktop\gasdetector\output\DISPLAY.OBJ)
+     00h     00cch     00cch    0000h      LOCAL    0         _builtin_holtek_ftol (C:\Program Files\Holtek MCU Development Tools\HT-IDE3000V8.x\LIB\LIBHOLTEKGCC.LIB)
+     00h     00cch     00cch    0000h      LOCAL    0         _builtin_holtek_ftdecode (C:\Program Files\Holtek MCU Development Tools\HT-IDE3000V8.x\LIB\LIBHOLTEKGCC.LIB)
+
+     Indepentent Local Sections
+
+     Bank    Start     End      Length     Class    AvgIns    Name
+     00h     00cch     00cch    0000h      ILOCAL   0         _DisplayInit (c:\users\tech\desktop\gasdetector\output\DISPLAY.OBJ)
+     00h     00cch     00cch    0000h      ILOCAL   0         _builtin_holtek_dtnorm (C:\Program Files\Holtek MCU Development Tools\HT-IDE3000V8.x\LIB\LIBHOLTEKGCC.LIB)
+     00h     00cch     00cch    0000h      ILOCAL   0         _builtin_holtek_dtinf (C:\Program Files\Holtek MCU Development Tools\HT-IDE3000V8.x\LIB\LIBHOLTEKGCC.LIB)
 
      Public Symbols Information
      Address            Public by Name
-     008bh              _AN
-     0092h              _BAT
-     009ah              _BAT_ADC
-     0098h              _BAT_ADC_D
-     009eh              _Cunter
-     00a6h              _Digit
-     0163h              _Display
-     01eah              _DisplayLooding
-     00beh              _Display_2
-     009ch              _GAS_ERR
-     0089h              _Numbr
+     0091h              _AN
+     0087h              _AVDD
+     0098h              _BAT
+     00a0h              _BAT_ADC
+     009eh              _BAT_ADC_D
+     00a4h              _Cunter
+     00ach              _Digit
+     027eh              _Display
+     01bbh              _DisplayInit
+     0303h              _DisplayLooding
+     00d4h              _Display_2
+     00a2h              _GAS_ERR
+     008fh              _Numbr
      0080h[3]           _PB
-     00a4h              _Parametr
-     00aeh              _SEG
-     0034h              _S_ADC_Init
-     003ah              _S_READ_ADC
-     03a5h              __DELAYX0
-     03a4h              __DELAYX1
-     03a3h              __DELAYX2
-     03a2h              __DELAYX3
-     03a1h              __DELAYX4
-     03a0h              __DELAYX5
-     039fh              __DELAYX6
-     0095h              _adc
-     0096h              _adc_GAS
-     03a9h              _builtin_holtek_divmodhi4_isr00
-     03e0h              _builtin_holtek_mulhi3_isr00
-     03bbh              _builtin_holtek_udivmodhi4_isr00
-     00b8h              _builtin_holtek_udivmodhi4_isr00_2
-     008ch              _delay
-     0087h              _digcunt
-     0090h              _disply
+     00aah              _Parametr
+     00b4h              _SEG
+     0142h              _S_ADC_Init
+     0148h              _S_READ_ADC
+     0514h              __DELAYX0
+     0513h              __DELAYX1
+     0512h              __DELAYX2
+     0511h              __DELAYX3
+     0510h              __DELAYX4
+     050fh              __DELAYX5
+     050eh              __DELAYX6
+     009bh              _adc
+     009ch              _adc_GAS
+     008ah              _buffer
+     0518h              _builtin_holtek_divmodhi4_isr00
+     0122h              _builtin_holtek_dtdecode1
+     0117h              _builtin_holtek_dtdecode2
+     007ch              _builtin_holtek_dtdiv
+     013bh              _builtin_holtek_dtinf
+     003ch              _builtin_holtek_dtmul
+     00e3h              _builtin_holtek_dtnorm
+     012ah              _builtin_holtek_dtzero
+     012dh              _builtin_holtek_dtzero1
+     00bfh              _builtin_holtek_exp1
+     00c8h              _builtin_holtek_exp2
+     00c1h              _builtin_holtek_floatflag
+     012fh              _builtin_holtek_ftdecode1
+     00b8h              _builtin_holtek_ftol
+     0137h              _builtin_holtek_ftzero
+     0139h              _builtin_holtek_ftzero1
+     00bch              _builtin_holtek_mant1
+     00c2h              _builtin_holtek_mant12p
+     00c5h              _builtin_holtek_mant2
+     00c9h              _builtin_holtek_prod
+     00c0h              _builtin_holtek_signs
+     052ah              _builtin_holtek_udivmodhi4_isr00
+     00ceh              _builtin_holtek_udivmodhi4_isr00_2
+     0037h              _builtin_holtek_uitod
+     0092h              _delay
+     008dh              _digcunt
+     0086h              _displayClock
+     0096h              _disply
      0080h[4]           _disply_bat
      0080h[1]           _falt_BAT
      0080h[2]           _fire_gas
-     0085h              _i
-     020eh              _main
-     0081h              _pushButtonCunter
+     008bh              _i
+     0327h              _main
+     0082h              _pushButtonCunter
      0080h[0]           _pushButtonState
-     012fh              _segmentCharacters
-     00ach              _segmentNumbers
-     0093h              _t1
-     00afh              ra
-     00b0h              rb
-     00b1h              rc
-     00b2h              rd
-     00b3h              re
-     00b4h              rf
-     00b5h              rg
-     0021h              startup_value_1
+     024ah              _segmentCharacters
+     01c7h              _segmentNumbers
+     0099h              _t1
+     00b5h              ra
+     00b6h              rb
+     00b7h              rc
+     00b8h              rd
+     00b9h              re
+     00bah              rf
+     00bbh              rg
+     0000h              startup_value_1
 
      Address            Public by Value
-     0021h              startup_value_1
-     0034h              _S_ADC_Init
-     003ah              _S_READ_ADC
-     0081h              _pushButtonCunter
-     0085h              _i
-     0087h              _digcunt
-     0089h              _Numbr
-     008bh              _AN
-     008ch              _delay
-     0090h              _disply
-     0092h              _BAT
-     0093h              _t1
-     0095h              _adc
-     0096h              _adc_GAS
-     0098h              _BAT_ADC_D
-     009ah              _BAT_ADC
-     009ch              _GAS_ERR
-     009eh              _Cunter
-     00a4h              _Parametr
-     00a6h              _Digit
-     00ach              _segmentNumbers
-     00aeh              _SEG
-     00afh              ra
-     00b0h              rb
-     00b1h              rc
-     00b2h              rd
-     00b3h              re
-     00b4h              rf
-     00b5h              rg
-     00b8h              _builtin_holtek_udivmodhi4_isr00_2
-     00beh              _Display_2
-     012fh              _segmentCharacters
-     0163h              _Display
-     01eah              _DisplayLooding
-     020eh              _main
-     039fh              __DELAYX6
-     03a0h              __DELAYX5
-     03a1h              __DELAYX4
-     03a2h              __DELAYX3
-     03a3h              __DELAYX2
-     03a4h              __DELAYX1
-     03a5h              __DELAYX0
-     03a9h              _builtin_holtek_divmodhi4_isr00
-     03bbh              _builtin_holtek_udivmodhi4_isr00
-     03e0h              _builtin_holtek_mulhi3_isr00
+     0000h              startup_value_1
+     0037h              _builtin_holtek_uitod
+     003ch              _builtin_holtek_dtmul
+     007ch              _builtin_holtek_dtdiv
+     0082h              _pushButtonCunter
+     0086h              _displayClock
+     0087h              _AVDD
+     008ah              _buffer
+     008bh              _i
+     008dh              _digcunt
+     008fh              _Numbr
+     0091h              _AN
+     0092h              _delay
+     0096h              _disply
+     0098h              _BAT
+     0099h              _t1
+     009bh              _adc
+     009ch              _adc_GAS
+     009eh              _BAT_ADC_D
+     00a0h              _BAT_ADC
+     00a2h              _GAS_ERR
+     00a4h              _Cunter
+     00aah              _Parametr
+     00ach              _Digit
+     00b4h              _SEG
+     00b5h              ra
+     00b6h              rb
+     00b7h              rc
+     00b8h              rd
+     00b8h              _builtin_holtek_ftol
+     00b9h              re
+     00bah              rf
+     00bbh              rg
+     00bch              _builtin_holtek_mant1
+     00bfh              _builtin_holtek_exp1
+     00c0h              _builtin_holtek_signs
+     00c1h              _builtin_holtek_floatflag
+     00c2h              _builtin_holtek_mant12p
+     00c5h              _builtin_holtek_mant2
+     00c8h              _builtin_holtek_exp2
+     00c9h              _builtin_holtek_prod
+     00ceh              _builtin_holtek_udivmodhi4_isr00_2
+     00d4h              _Display_2
+     00e3h              _builtin_holtek_dtnorm
+     0117h              _builtin_holtek_dtdecode2
+     0122h              _builtin_holtek_dtdecode1
+     012ah              _builtin_holtek_dtzero
+     012dh              _builtin_holtek_dtzero1
+     012fh              _builtin_holtek_ftdecode1
+     0137h              _builtin_holtek_ftzero
+     0139h              _builtin_holtek_ftzero1
+     013bh              _builtin_holtek_dtinf
+     0142h              _S_ADC_Init
+     0148h              _S_READ_ADC
+     01bbh              _DisplayInit
+     01c7h              _segmentNumbers
+     024ah              _segmentCharacters
+     027eh              _Display
+     0303h              _DisplayLooding
+     0327h              _main
      0080h[0]           _pushButtonState
      0080h[1]           _falt_BAT
      0080h[2]           _fire_gas
      0080h[3]           _PB
      0080h[4]           _disply_bat
+     050eh              __DELAYX6
+     050fh              __DELAYX5
+     0510h              __DELAYX4
+     0511h              __DELAYX3
+     0512h              __DELAYX2
+     0513h              __DELAYX1
+     0514h              __DELAYX0
+     0518h              _builtin_holtek_divmodhi4_isr00
+     052ah              _builtin_holtek_udivmodhi4_isr00
 
 
 ROM Usage Statistics
      Size      Used     Percentage
-     0800h     03f3h    49%
+     0800h     054fh    66%
 
 RAM Usage Statistics
     Bank      Size      Used     Percentage
-     00h       0080h     004bh    58%
-     Total     0080h     004bh    58%
+     00h       0080h     005ah    70%
+     Total     0080h     005ah    70%
 
 Use Stack Count
 _main: 2
@@ -175,12 +247,16 @@ Call Tree
                 _segmentCharacters (2)
             _S_READ_ADC (1)
                 __DELAYX (2)
+            _builtin_holtek_uitod (1)
+            _builtin_holtek_dtmul (1)
+                _builtin_holtek_dtdecode (2)
+            _builtin_holtek_dtdiv (1)
+                _builtin_holtek_dtdecode (2)
             _Display (1)
                 _builtin_holtek_divmodhi4_isr00 (2)
                 _segmentNumbers (2)
-                __DELAYX (2)
-            _builtin_holtek_mulhi3_isr00 (1)
-            _builtin_holtek_divmodhi4_isr00 (1)
+            _builtin_holtek_ftol (1)
+                _builtin_holtek_ftdecode (2)
 
 HLINK: Program entry point at section '@code' (address 0) of file 'c:\users\tech\desktop\gasdetector\output\MAIN.OBJ'
 

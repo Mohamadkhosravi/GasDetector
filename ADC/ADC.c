@@ -52,6 +52,7 @@ unsigned int  S_READ_ADC(unsigned char CH)
             _RD_ADC_SET_OPA1O // Set ADC channel to OPA1O.
             break;
         case 7:
+             _vbgen=1;
             _RD_ADC_SET_LINEV // Set ADC channel to LINEV.
             break;
         default:

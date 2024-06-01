@@ -15,21 +15,21 @@
 #define LINEV		0X07
 
 
-#define _RD_ADC_SET_AN0		{ _sadc1 = 0b00001011; _sadc0 = 0b00000000; }
+#define _RD_ADC_SET_AN0		{ _sadc1 = 0b00001111; _sadc0 = 0b00000000; }
 
-#define	_RD_ADC_SET_AN1     { _sadc1 = 0b00001011;_sadc0 = 0b00000001; }
+#define	_RD_ADC_SET_AN1     { _sadc1 = 0b00001111; _sadc0 = 0b00000001; }
 
-#define _RD_ADC_SET_AN2		{ _sadc1 = 0b00001011; _sadc0 = 0b00000010; }
+#define _RD_ADC_SET_AN2		{ _sadc1 = 0b00001111; _sadc0 = 0b00000010; }
 
-#define _RD_ADC_SET_AN3		{ _sadc1 = 0b00001011; _sadc0 = 0b00000011; }
+#define _RD_ADC_SET_AN3		{ _sadc1 = 0b00001111; _sadc0 = 0b00000011; }
 
-#define _RD_ADC_SET_VBGREF	{ _sadc1 = 0b00101011; _sadc0 = 0b00010111; }
+#define _RD_ADC_SET_VBGREF	{ _sadc1 = 0b00101111; _sadc0 = 0b00010111; }
 
-#define _RD_ADC_SET_OPA0O	{ _sadc1 = 0b01001011; _sadc0 = 0b00000111; }
+#define _RD_ADC_SET_OPA0O	{ _sadc1 = 0b01001111; _sadc0 = 0b00000111; }
 
-#define _RD_ADC_SET_OPA1O	{ _sadc1 = 0b01101011; _sadc0 = 0b00000111; }
+#define _RD_ADC_SET_OPA1O	{ _sadc1 = 0b01101111; _sadc0 = 0b00000111; }
 
-#define _RD_ADC_SET_LINEV	{ _sadc1 = 0b10000011; _sadc0 = 0b00000111; }
+#define _RD_ADC_SET_LINEV	{ _sadc1 = 0b10010111; _sadc0 = 0b00000111; }
 
 //The function name is defined by the user tag
 #define		ADC_ON		{_adcen=1;}

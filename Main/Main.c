@@ -131,7 +131,7 @@ void main()
 	RELAY_ON; // relay
 	S_ADC_Init();
 
-	while (delay < 100000)
+	while (delay < 5000)
 	{
 		delay++;
 		i++;
@@ -158,17 +158,18 @@ void main()
 		DisplayLooding(digcunt-2);
 		DisplayLooding(digcunt-1);
 		DisplayLooding(digcunt);
-		//		DisplayLooding(digcunt+1);
-		//		DisplayLooding(digcunt+2);
-		//		DisplayLooding(digcunt+3);
-		//		DisplayLooding(digcunt+4);
-		//		DisplayLooding(digcunt);
+	/*			DisplayLooding(digcunt+1);
+				DisplayLooding(digcunt+2);
+				DisplayLooding(digcunt+3);
+				DisplayLooding(digcunt+4);
+				DisplayLooding(digcunt);*/
 		
 		
 		if(digcunt>4){i=0;digcunt=0;}
 		
 
 	}
+	AVDD=4*(1.6*S_READ_ADC(7)/1023);
 
 	delay = 0;
 
@@ -184,7 +185,12 @@ void main()
 //			delay++;
 //		
 //		}
-	
+       
+     /*  if (TIMER_CUNTER_INTRUPT == 1) 
+       {*/
+       	 displayClock++;
+    /*   }*/
+	   if(displayClock>=4)displayClock=0;
         Parametr.GasValue=S_READ_ADC(0);
         	
         if(Parametr.GasValue>TRESHOLD_DETECT_GAS)
@@ -257,12 +263,39 @@ void main()
 		switch(Mode)
 		{
 			case NORMAL:
-			    BUZZER_OFF;
+//			    BUZZER_OFF;
+//				LED_RED_OFF;
+//				LED_YELLOW_OFF;
+			LED_RED_ON;
+			LED_GREEN_ON;
+				
+//				if(buffer>20)
+//				{
+//					AVDD=4*(1.6*S_READ_ADC(7)/1023);
+//					AVDD=(S_READ_ADC(2)*AVDD/1023);
+//					AVDD=(0.133 * AVDD*1000 -368.481);
+//					if(AVDD>95)
+//					{
+//						AVDD=100;
+//					}
+//					if(AVDD<=20)
+//					{
+//						AVDD=0;
+//						
+//					}
+//				//	AVDD=batteryPercentage(AVDD);
+//					buffer=0;
+//				}
+//				else
+//				{
+//				 	buffer++;	
+//				}
+// 			
+//
+//			    Parametr.GasValue=S_READ_ADC(0);
+				Display(5959,'0',displayClock);
 				LED_RED_OFF;
-				LED_YELLOW_OFF;
-				LED_GREEN_ON;
-			    Parametr.GasValue=S_READ_ADC(0);
-				Display(Parametr.GasValue,'o');
+				LED_GREEN_OFF;
 			break;
 			
 			case TEST:
@@ -272,26 +305,50 @@ void main()
 				LED_RED_ON;
 				LED_GREEN_ON;
 				LED_YELLOW_ON;
-				Display(8888,'0');
+				Display(8888,'0',0);
 				pushButtonState=0;
 				pushButtonCunter=0;
 				if(Cunter.test>1000)
 				{
 					Cunter.test=0;
 					Mode=NORMAL;
-					
 				}
 			break;
 			
 			case CHECK_BATTERY:
+			
 			   	Cunter.checkBattery++;
 			    BUZZER_OFF;
 				LED_RED_OFF;
 				LED_YELLOW_OFF;
 				LED_GREEN_ON;
-				Parametr.VoltageBattery=batteryPercentage(S_READ_ADC(2));
-				Display(Parametr.VoltageBattery,'0');
 				
+			
+			 /*  if(buffer>20)
+				{
+					AVDD=4*(1.6*S_READ_ADC(7)/1023);
+					AVDD=(S_READ_ADC(2)*AVDD/1023);
+					AVDD=(0.133 * AVDD*1000 -368.481);
+					if(AVDD>95)
+					{
+						AVDD=100;
+					}
+					if(AVDD<=20)
+					{
+						AVDD=0;
+						
+					}
+				//	AVDD=batteryPercentage(AVDD);
+					buffer=0;
+				}
+				else
+				{
+				 	buffer++;	
+				}*/
+ 			
+				 
+			    Display(AVDD,'0',displayClock);
+		
 				pushButtonState=0;
 				pushButtonCunter=0;
 			    if(Cunter.checkBattery>500)
@@ -310,7 +367,7 @@ void main()
 					BUZZER_ON;
 					LED_RED_ON;
 					RELAY_ON;
-					Display(250,'0');
+					Display(250,'0',displayClock);
 					if(PRESEED_PUSHBUTUN)
 					{
 						BUZZER_OFF;
@@ -325,6 +382,8 @@ void main()
 				}
 			break;
 			
+			
+				
 		 /* case LOW_BATTERY:
 			
 			    Cunter.lowBattry++;

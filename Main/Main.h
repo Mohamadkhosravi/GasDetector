@@ -54,7 +54,7 @@ bit falt_BAT;
 #define RELAY_OFF   	_pb2= 0	
 
 #define TIMER_CUNTER_INTRUPT _tb0f
-#define TRESHOLD_DETECT_GAS 250
+#define TRESHOLD_DETECT_GAS 2500
 #define PRESEED_PUSHBUTUN _pb3==0
 #define  MINIMUM_VOLTAGE_VALID 5
 #define  VOLTAGE_LOWBATTERY  3
@@ -63,6 +63,7 @@ bit falt_BAT;
 
 
 void DisplayLooding(char cunterDigit );
+float ReadVDD(void);
 int Numbr=0;
 int digcunt=0;
 unsigned int i=0;
@@ -76,11 +77,24 @@ typedef union parameter{
 Parametrs Parametr;
 
 
-#define minVoltageBattery 590
-#define maxVoltageBattery 890
+//#define minVoltageBattery 590
+//#define maxVoltageBattery 890
+
+#define minVoltageBattery 3437//59
+#define maxVoltageBattery 4100//89
 #define percentageAccuracy 10
-#define voltageRange maxVoltageBattery-minVoltageBattery
-#define batteryPercentage(voltageBattery)((voltageBattery - minVoltageBattery)*100)/voltageRange
+#define voltageRange maxVoltageBattery-minVoltageBattery//30
+//#define batteryPercentage(voltageBattery)((voltageBattery - minVoltageBattery)*100)/(maxVoltageBattery-minVoltageBattery)
+
+#define batteryPercentage(voltageBattery)(0.133*voltageBattery-368.481)
+
+//float a = 66.67;
+//float b = -183.33;
+//
+//  
+//  float soc = 66.67 * voltage + -183.33;
+
+
 typedef struct
 {
  unsigned int test;
@@ -89,7 +103,9 @@ typedef struct
  
 } Cunters;
 Cunters Cunter;
-	
+ char buffer=0;
+float AVDD=0.0;	
+char displayClock=0;	
 //	typedef enum
 //	{
 //		NORMAL,
@@ -104,7 +120,6 @@ Cunters Cunter;
 	bit pushButtonState=0;
 	unsigned long pushButtonCunter=0;
 
-//
 
 
 /*Parametrs Parametr;*/

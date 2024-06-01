@@ -207,29 +207,70 @@ void segmentCharacters(unsigned char n)
 			SEGC = 1;
 	}
 }	
-void Display(int number, char character)
+void Display(int number, char character,char clock)
 {
-	char indexDigit=0;
+	static char indexDigit=0;
+	indexDigit=clock;
 	char displayBuffer[4]={0,0,0,0};
-
+int pow =1;
 	char startIndexDigit=3;
 	char digitNumber=0;
-	
+	int i=0;
 /*	if((character!='0')&&((number/1000)<0))*/
     if(character!='0')
 	{
 		startIndexDigit=2;
 		displayBuffer[3]=character;	
 	}
+	/*while(number!=0)
+	{
+	      
+		displayBuffer[indexDigit]=number%10;
+		number=(number-displayBuffer[indexDigit])/10;
+		indexDigit++;
+		
+	}*/
+	
+
+  /*	if((character!='0')&&((number/1000)<0))*/
+ /*   if(character!='0')
+	{
+		startIndexDigit=2;
+		displayBuffer[3]=character;	
+	}
+	
+	int temp = number; // ??? ???? ?? ?? ????? ???? ????? ????
+	displayBuffer[0] = temp / 1000;
+	temp %= 1000; // ???? ?? ????? ?????? ??????? ????
+	displayBuffer[1] = temp / 100;
+	temp %= 100;
+	displayBuffer[2] = temp / 10;
+	displayBuffer[3] = temp % 10;
+	
+	
 	while(number!=0)
 	{
 	      
-		displayBuffer[(startIndexDigit-indexDigit)]=number%10;
+	displayBuffer[(startIndexDigit-indexDigit)]=number%10;
 		number=(number-displayBuffer[(startIndexDigit-indexDigit)])/10;
-		indexDigit++;
+		indexDigit++;*/
+//		displayBuffer[0]=number/1000;
+//		displayBuffer[1]=(number-displayBuffer[0]*1000)/100;
+//		displayBuffer[2]=(number-((displayBuffer[0]*1000)+(displayBuffer[1]*100)))/10;
+//		displayBuffer[3]=(number-((displayBuffer[0]*1000)+(displayBuffer[1]*100)+(displayBuffer[2]*10)));
+//		
+//		
+		/*for(indexDigit=0;indexDigit<=3;indexDigit++){*/
+		/*	displayBuffer[indexDigit]=(number/pow)%10;
+			pow=pow*10;
+			if(pow==10000)pow=1;*/
+	/*	}*/
 		
-	}
-  
+	/*	displayBuffer[3]=number/1%10;
+		displayBuffer[2]=(number/10*)%10;
+		displayBuffer[1]=(number/100)%10;
+		displayBuffer[0]=(number/1000)%10;	*/
+//	}
 
    /* if(character=!0)
     {
@@ -237,14 +278,14 @@ void Display(int number, char character)
     }*/
 	
 	
-	for(digitNumber=0;digitNumber<=3;digitNumber++)
-	{
+//	for(digitNumber=0;digitNumber<=3;digitNumber++)
+//	{
 
 	  
-		switch(digitNumber) 
+		switch(clock) 
 		{			
 			case 0:
-			    segmentNumbers(displayBuffer[0]);
+			    segmentNumbers((number/1000)%10);
 				COM0 = 1;
 				COM1 = 0;
 				COM2 = 0;
@@ -252,7 +293,7 @@ void Display(int number, char character)
 			
 			break;		
 			case 1:
-		        segmentNumbers(displayBuffer[1]);
+		        segmentNumbers((number/100)%10);
 				COM0 = 0;
 				COM1 = 1;
 				COM2 = 0;
@@ -260,7 +301,7 @@ void Display(int number, char character)
 			
 			break;
 			case 2:
-			     segmentNumbers(displayBuffer[2]);
+			     segmentNumbers((number/10)%10);
 				COM0 = 0;
 				COM1 = 0;
 				COM2 = 1;
@@ -269,7 +310,7 @@ void Display(int number, char character)
 			break;	
 			case 3:
 			  
-			    segmentNumbers(displayBuffer[3]);
+			    segmentNumbers((number)%10);
 				COM0 = 0;
 				COM1 = 0;
 				COM2 = 0;
@@ -277,8 +318,8 @@ void Display(int number, char character)
 		
 			break;	
 		};	
-	  GCC_DELAY(1000);
-	}
+
+/*	}*/
 
 }	
 	
