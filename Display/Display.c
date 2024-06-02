@@ -212,7 +212,7 @@ void Display(int number, char character,char clock)
 	static char indexDigit=0;
 	indexDigit=clock;
 	char displayBuffer[4]={0,0,0,0};
-int pow =1;
+	static int pow =1;
 	char startIndexDigit=3;
 	char digitNumber=0;
 	int i=0;
@@ -261,9 +261,9 @@ int pow =1;
 //		
 //		
 		/*for(indexDigit=0;indexDigit<=3;indexDigit++){*/
-		/*	displayBuffer[indexDigit]=(number/pow)%10;
+			displayBuffer[indexDigit]=(number/pow)%10;
 			pow=pow*10;
-			if(pow==10000)pow=1;*/
+			if(pow==10000)pow=1;
 	/*	}*/
 		
 	/*	displayBuffer[3]=number/1%10;
@@ -285,7 +285,7 @@ int pow =1;
 		switch(clock) 
 		{			
 			case 0:
-			    segmentNumbers((number/1000)%10);
+			    segmentNumbers(displayBuffer[0]);
 				COM0 = 1;
 				COM1 = 0;
 				COM2 = 0;
@@ -293,7 +293,7 @@ int pow =1;
 			
 			break;		
 			case 1:
-		        segmentNumbers((number/100)%10);
+		        segmentNumbers(displayBuffer[1]);
 				COM0 = 0;
 				COM1 = 1;
 				COM2 = 0;
@@ -301,7 +301,7 @@ int pow =1;
 			
 			break;
 			case 2:
-			     segmentNumbers((number/10)%10);
+			     segmentNumbers(displayBuffer[2]);
 				COM0 = 0;
 				COM1 = 0;
 				COM2 = 1;
@@ -310,7 +310,7 @@ int pow =1;
 			break;	
 			case 3:
 			  
-			    segmentNumbers((number)%10);
+			    segmentNumbers(displayBuffer[3]);
 				COM0 = 0;
 				COM1 = 0;
 				COM2 = 0;
