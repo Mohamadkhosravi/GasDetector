@@ -17,7 +17,7 @@
 #define SEGH _pc5	 // PC5
 
 void DisplayInit(void);
-void Display(int number, char character,char clock);
+void Display(int number, char character,char *clock);
 void segmentNumbers(unsigned char n);
 void segmentCharacters(unsigned char n);
 void DisplayLooding(char cunterDigit );

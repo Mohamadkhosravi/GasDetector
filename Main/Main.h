@@ -2,6 +2,7 @@
 #ifndef _MAIN_H_
 #define _MAIN_H_
 #include <ht67f2432.h>
+#include "HT8_it.h"
 #include <Display.h>
 unsigned char SEG;
 unsigned int GAS_ERR = 0;
@@ -54,10 +55,10 @@ bit falt_BAT;
 #define RELAY_OFF   	_pb2= 0	
 
 #define TIMER_CUNTER_INTRUPT _tb0f
-#define TRESHOLD_DETECT_GAS 2500
+#define TRESHOLD_DETECT_GAS 250
 #define PRESEED_PUSHBUTUN _pb3==0
-#define  MINIMUM_VOLTAGE_VALID 5
-#define  VOLTAGE_LOWBATTERY  3
+#define MINIMUM_VOLTAGE_VALID 5
+#define VOLTAGE_LOWBATTERY  3
 #define POWER_SUPLY_CONNECT _pa6==1 
 #define POWER_SUPLY_DISCONNECT _pa6==0 
 
@@ -72,21 +73,27 @@ typedef union parameter{
  unsigned int VoltageBattery;
  unsigned int GasValue;
  unsigned int GasErroreValue;
+ unsigned int PersentOfBattery;
+ unsigned int VDD
  
 } Parametrs;
 Parametrs Parametr;
 
-
+char bufferVdd=10;
 //#define minVoltageBattery 590
 //#define maxVoltageBattery 890
 
-#define minVoltageBattery 3437//59
-#define maxVoltageBattery 4100//89
-#define percentageAccuracy 10
-#define voltageRange maxVoltageBattery-minVoltageBattery//30
+//#define minVoltageBattery 3437//59
+//#define maxVoltageBattery 4100//89
+//#define percentageAccuracy 10
+//#define voltageRange maxVoltageBattery-minVoltageBattery//30
 //#define batteryPercentage(voltageBattery)((voltageBattery - minVoltageBattery)*100)/(maxVoltageBattery-minVoltageBattery)
 
-#define batteryPercentage(voltageBattery)(0.133*voltageBattery-368.481)
+/*#define batteryPercentage(voltageBattery)(0.133*voltageBattery-368.481)*/
+#define VDD(ADC_VDD)(4*(1.6*ADC_VDD/1023))
+#define batteryPercentage(ADCVoltageBattery,VDD)(0.133 *((ADCVoltageBattery*VDD)/1023)*1000 -368.481)
+
+
 
 //float a = 66.67;
 //float b = -183.33;
@@ -103,7 +110,7 @@ typedef struct
  
 } Cunters;
 Cunters Cunter;
- char buffer=0;
+ unsigned short buffer=0;
 float AVDD=0.0;	
 char displayClock=0;	
 //	typedef enum
@@ -118,9 +125,27 @@ char displayClock=0;
 //	mode Mode
 
 	bit pushButtonState=0;
-	unsigned long pushButtonCunter=0;
+	unsigned int pushButtonCunter=0;
 
+	typedef enum
+	{
+		NORMAL,
+		CHECK_BATTERY,
+		TEST,
+		DETECT,
+		ERORE
+		
+	}mode;
+		mode Mode;
 
-
-/*Parametrs Parametr;*/
+	
+	typedef enum
+	{
+		LOW_BATTERY,
+		BATTRY_ERROR,
+		SUPPLY_ERROR
+		
+	}Suplymode;
+     Suplymode Suply;
+	char tick;
 #endif

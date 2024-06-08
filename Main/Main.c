@@ -1,28 +1,32 @@
 #include<Main.h>
 #include <ADC.h>
 
+//	void __attribute((interrupt(0x0))) ISR_tmr0 (void)
+//	{
+//		tick=2;
+//	};
+//	
+__attribute__((interrupt(0x1c)))
+void isr_timer (void)
+{
+	tick=2;	
+}
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 void main()
 {
 	
-	typedef enum
-	{
-		NORMAL,
-		CHECK_BATTERY,
-		TEST,
-		DETECT,
-		ERORE
-		
-	}mode;
-		mode Mode;
-	
-	typedef enum
-	{
-		LOW_BATTERY,
-		BATTRY_ERROR,
-		SUPPLY_ERROR
-		
-	}Suplymode;
-     Suplymode Suply;
+
 
 	// Oscillators
 
@@ -86,43 +90,7 @@ void main()
 
 	_tb1e = 1;
 
-	// Set ADC configuration
-
-	// // 1
-	// _sacks2 = 0; // Set ADC clock to 1/8 of system clock
-	// _sacks1 = 1;
-	// _sacks0 = 1;
-
-	// // 2
-	// _adcen = 1; // A/D converter function enable control
-
-	// _adrfs = 1; // A/D converter data format selection
-
-	// // 4
-	// _sains0 = 0; //  A/D converter input signal selection  000: External input External analog channel input
-	// _sains1 = 0;
-	// _sains2 = 0;
-
-	// // 6
-	// _savrs0 = 1; // A/D converter reference voltage selection
-	// _savrs1 = 0;
-	// //_pas0=0b00001000;
-
-	// // 7
-	// _adcen = 1; // A/D converter function enable control
-
-	// // 8
-	// _sacs0 = 0; // A/D converter external analog channel input selection
-	// _sacs1 = 0;
-	// _sacs2 = 0;
-	// _sacs3 = 0;
-
-// /* DisplayInit();*/
-
-// 	_sacs0 = 0; // A/D converter external analog channel 0 selection
-// 	_sacs1 = 0;
-// 	_sacs2 = 0;
-// 	_sacs3 = 0;
+	
 
 	BUZZER_OFF; // buzz
     LED_GREEN_OFF; // LED_G
@@ -131,7 +99,7 @@ void main()
 	RELAY_ON; // relay
 	S_ADC_Init();
 
-	while (delay < 5000)
+	while (delay < 15000)
 	{
 		delay++;
 		i++;
@@ -153,30 +121,29 @@ void main()
 		i=0;
 		digcunt++;
 		}
+		DisplayLooding(digcunt-8);
+		DisplayLooding(digcunt-7);
+		DisplayLooding(digcunt-6);
+		DisplayLooding(digcunt-5);
 		DisplayLooding(digcunt-4);
 		DisplayLooding(digcunt-3);
 		DisplayLooding(digcunt-2);
 		DisplayLooding(digcunt-1);
 		DisplayLooding(digcunt);
-	/*			DisplayLooding(digcunt+1);
-				DisplayLooding(digcunt+2);
-				DisplayLooding(digcunt+3);
-				DisplayLooding(digcunt+4);
-				DisplayLooding(digcunt);*/
-		
-		
-		if(digcunt>4){i=0;digcunt=0;}
+		if(digcunt>7){i=0;digcunt=0;}
 		
 
 	}
-	AVDD=4*(1.6*S_READ_ADC(7)/1023);
-
 	delay = 0;
 
 	_pc0 = 1; // LED_G
     Mode=NORMAL;
+    buffer=S_READ_ADC(0);
+     Display(0,'C',0);
 	while (1)
-	{i=0;
+	{
+
+		i=0;
 		
 		
 //		if (TIMER_CUNTER_INTRUPT == 1) // Comparator A Match CTMAF Interrupt
@@ -188,11 +155,16 @@ void main()
        
      /*  if (TIMER_CUNTER_INTRUPT == 1) 
        {*/
-       	 displayClock++;
+       	 
     /*   }*/
-	   if(displayClock>=4)displayClock=0;
-        Parametr.GasValue=S_READ_ADC(0);
-        	
+    
+    
+        i++;
+       
+ 
+        displayClock++;
+	    if(displayClock>=4)displayClock=0;
+        Parametr.GasValue=S_READ_ADC(0);	
         if(Parametr.GasValue>TRESHOLD_DETECT_GAS)
         {
         	 Mode=DETECT;
@@ -202,6 +174,7 @@ void main()
     
             if(PRESEED_PUSHBUTUN)
             {
+           
              pushButtonState=1;
              pushButtonCunter++;
       	
@@ -210,12 +183,14 @@ void main()
             {
             
             	if((pushButtonState==1)&&(pushButtonCunter>500))
-            	{
-            		Mode=TEST;	
+            	{ 
+            		Mode=TEST;
             	}
             	else if((pushButtonState==1)&&(pushButtonCunter<500)&&(pushButtonCunter>10))
             	{
-            		Mode=CHECK_BATTERY;		
+   	
+            		Mode=CHECK_BATTERY;	
+            		
 	
             	}
             
@@ -263,37 +238,51 @@ void main()
 		switch(Mode)
 		{
 			case NORMAL:
-//			    BUZZER_OFF;
-//				LED_RED_OFF;
-//				LED_YELLOW_OFF;
-			LED_RED_ON;
-			LED_GREEN_ON;
+			    BUZZER_OFF;
+				LED_RED_OFF;
+				LED_YELLOW_OFF;
+		    	LED_GREEN_ON;
+		    	RELAY_ON;
 				
-//				if(buffer>20)
-//				{
-//					AVDD=4*(1.6*S_READ_ADC(7)/1023);
-//					AVDD=(S_READ_ADC(2)*AVDD/1023);
-//					AVDD=(0.133 * AVDD*1000 -368.481);
-//					if(AVDD>95)
-//					{
-//						AVDD=100;
-//					}
-//					if(AVDD<=20)
-//					{
-//						AVDD=0;
-//						
-//					}
-//				//	AVDD=batteryPercentage(AVDD);
-//					buffer=0;
-//				}
-//				else
-//				{
-//				 	buffer++;	
-//				}
-// 			
-//
-//			    Parametr.GasValue=S_READ_ADC(0);
-				Display(5959,'0',displayClock);
+			 /*   if(buffer>5)
+				{
+					Parametr.VDD=4*(1.6*S_READ_ADC(7)/1023);
+			    	Parametr.VoltageBattery=(S_READ_ADC(2)*Parametr.VDD/1023);
+					Parametr.PersentOfBattery=(0.133 * Parametr.VoltageBattery*1000 -368.481);
+					if(Parametr.PersentOfBattery>95)
+					{
+						Parametr.PersentOfBattery=100;
+    				}
+					if(Parametr.PersentOfBattery<=20)
+					{
+     					Parametr.PersentOfBattery=0;
+					
+					}
+				//	AVDD=batteryPercentage(AVDD);
+					buffer=0;
+            	}
+				else
+				{
+				 	buffer++;	
+				}
+ 			*/
+ 		
+              /*   if(S_READ_ADC(0)>buffer){
+                  buffer=((S_READ_ADC(0)-buffer)>2)?(buffer):(S_READ_ADC(0));
+                 }
+                 else if(S_READ_ADC(0)<buffer){
+				  buffer=((buffer-S_READ_ADC(0))>2)?(buffer):(S_READ_ADC(0));
+				 }
+				 */
+				//buffer=((S_READ_ADC(0)-buffer)>2)?(S_READ_ADC(0)):(buffer);
+				
+				
+		    	if(abs((S_READ_ADC(0)-buffer))>=2)
+				{
+			    	buffer=S_READ_ADC(0);	
+				}
+			
+				Display(buffer,'b',&displayClock);
 				LED_RED_OFF;
 				LED_GREEN_OFF;
 			break;
@@ -305,7 +294,7 @@ void main()
 				LED_RED_ON;
 				LED_GREEN_ON;
 				LED_YELLOW_ON;
-				Display(8888,'0',0);
+				Display(8888,'0',&displayClock);
 				pushButtonState=0;
 				pushButtonCunter=0;
 				if(Cunter.test>1000)
@@ -316,39 +305,24 @@ void main()
 			break;
 			
 			case CHECK_BATTERY:
-			
+				
 			   	Cunter.checkBattery++;
 			    BUZZER_OFF;
 				LED_RED_OFF;
 				LED_YELLOW_OFF;
 				LED_GREEN_ON;
-				
-			
-			 /*  if(buffer>20)
+		    	bufferVdd=batteryPercentage(S_READ_ADC(2), VDD(S_READ_ADC(7)));	
+		       if(bufferVdd>95)
 				{
-					AVDD=4*(1.6*S_READ_ADC(7)/1023);
-					AVDD=(S_READ_ADC(2)*AVDD/1023);
-					AVDD=(0.133 * AVDD*1000 -368.481);
-					if(AVDD>95)
-					{
-						AVDD=100;
-					}
-					if(AVDD<=20)
-					{
-						AVDD=0;
-						
-					}
-				//	AVDD=batteryPercentage(AVDD);
-					buffer=0;
+					bufferVdd=100;
 				}
-				else
+				if(bufferVdd<=20)
 				{
-				 	buffer++;	
-				}*/
- 			
-				 
-			    Display(AVDD,'0',displayClock);
-		
+ 					bufferVdd=0;
+				
+				}
+			    Display(bufferVdd,'b',&displayClock);
+		    
 				pushButtonState=0;
 				pushButtonCunter=0;
 			    if(Cunter.checkBattery>500)
@@ -362,24 +336,14 @@ void main()
 			
 			
 			case DETECT:
-				while(1)
-				{
-					BUZZER_ON;
-					LED_RED_ON;
-					RELAY_ON;
-					Display(250,'0',displayClock);
-					if(PRESEED_PUSHBUTUN)
-					{
-						BUZZER_OFF;
-						LED_RED_OFF;
-						pushButtonState=0;
-						pushButtonCunter=0;
-						Mode=NORMAL;
-						
-						break;
-					}
-					
-				}
+		        BUZZER_ON;
+				RELAY_ON;
+				LED_RED_ON;
+				LED_GREEN_ON;
+				LED_YELLOW_ON;
+				Display(250,'0',&displayClock);
+		
+		
 			break;
 			
 			
@@ -446,12 +410,18 @@ void main()
 			
 		}
 		
-
-	
 	
 
-		
-		
+
+        /*   unsigned int Avarage( unsigned int value,char numberOfSample,char sampleClock)
+           {
+           	if(sampleClock==numberOfSample)
+           	{
+           	  value=+value;
+           	}
+            
+             
+           }*/
 		
 //		unsigned char BatteryPercentage(unsigned char voltageBattery) {
 //
@@ -476,11 +446,39 @@ void main()
 //	
 	
             
-        	
-        	
-        	
-       
+	/*	unsigned char BatteryPercentage(void) {
+		
+			 VDD=4*(1.6*S_READ_ADC(7)/1023);
+			 VoltageBattery=(S_READ_ADC(2)*VDD/1023);
+		    PersentOfBattery=(0.133 * oltageBattery*1000 -368.481);
+			if(PersentOfBattery>95)
+			{
+			  PersentOfBattery=100;
+			}
+			if(PersentOfBattery<=20)
+			{
+		       PersentOfBattery=0;
+			
+			}
+			return PersentOfBattery;
+		
+		}*/
 	
+    /*
+    	Parametr.VDD=4*(1.6*S_READ_ADC(7)/1023);
+			Parametr.VoltageBattery=(S_READ_ADC(2)*Parametr.VDD/1023);
+			Parametr.PersentOfBattery=(0.133 * Parametr.VoltageBattery*1000 -368.481);
+			if(Parametr.PersentOfBattery>95)
+			{
+			Parametr.PersentOfBattery=100;
+			}
+			if(Parametr.PersentOfBattery<=20)
+			{
+			Parametr.PersentOfBattery=0;
+			
+			}
+    */
+    
     
       /*  if((i>1)&&(i<=1000)){*/
 			
