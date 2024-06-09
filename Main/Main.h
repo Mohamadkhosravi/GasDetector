@@ -69,6 +69,19 @@ int Numbr=0;
 int digcunt=0;
 unsigned int i=0;
 
+
+#define SCALE_FACTOR_NUM 64 // 4 * (1.6 * 10) as an integer
+#define SCALE_FACTOR_DEN 1023
+#define COEFF_NUM 133 // 0.133 * 1000 as an integer
+#define COEFF_DEN 1000
+#define OFFSET -368481 // -368.481 * 1000 as an integer
+int vdd=0;
+float voltage_battery=0;
+int percent_of_battery=0; 
+int adc_value_7 =0;
+int adc_value_2 = 0;
+
+
 typedef union parameter{
  unsigned int VoltageBattery;
  unsigned int GasValue;

@@ -90,7 +90,7 @@ void main()
 
 	_tb1e = 1;
 
-	
+	 _vbgen=1;
 
 	BUZZER_OFF; // buzz
     LED_GREEN_OFF; // LED_G
@@ -140,10 +140,11 @@ void main()
     Mode=NORMAL;
     buffer=S_READ_ADC(0);
      Display(0,'C',0);
+     i=0;
 	while (1)
 	{
 
-		i=0;
+	
 		
 		
 //		if (TIMER_CUNTER_INTRUPT == 1) // Comparator A Match CTMAF Interrupt
@@ -159,7 +160,16 @@ void main()
     /*   }*/
     
     
-        i++;
+       /*i++;
+       if(i>500){
+		vdd=VDD(S_READ_ADC(7)*1000);
+		adc_value_2 = S_READ_ADC(2);
+    	i=0;
+       
+       }
+       */
+       
+       
        
  
         displayClock++;
@@ -233,7 +243,7 @@ void main()
        	   Suply=LOW_BATTERY;
        }
 		
-	
+	   AVDD=VDD(S_READ_ADC(7));
 		
 		switch(Mode)
 		{
@@ -277,14 +287,88 @@ void main()
 				//buffer=((S_READ_ADC(0)-buffer)>2)?(S_READ_ADC(0)):(buffer);
 				
 				
-		    	if(abs((S_READ_ADC(0)-buffer))>=2)
+				//bufferVdd=batteryPercentage(S_READ_ADC(2),AVDD );	
+		 /*      if(bufferVdd>95)
+				{
+					bufferVdd=100;
+				}
+				if(bufferVdd<=20)
+				{
+ 					bufferVdd=0;
+				
+				}*/
+				
+				
+			/*		Parametr.VDD = scale_factor * adc_value_7;
+					Parametr.VoltageBattery = (adc_value_2 * Parametr.VDD) / 1023.0;
+					Parametr.PersentOfBattery = (coefficient * Parametr.VoltageBattery * 1000) + offset;
+					
+				 if(Parametr.PersentOfBattery > 95)
+				    {
+				        Parametr.PersentOfBattery = 100;
+				    }
+				    else if(Parametr.PersentOfBattery <= 20)
+				    {
+				        Parametr.PersentOfBattery = 0;
+				    }
+				*/
+					//adc_value_7 = S_READ_ADC(7);
+		           // adc_value_2 = S_READ_ADC(2);
+		            
+				     /* vdd = (int)(6400/ 1024)*100;
+				      vdd=vdd* adc_value_7;
+				      */
+				      
+				    // Calculate Battery Voltage (as integer)
+				    
+					// Calculate Battery Percentage (as integer)
+				   // percent_of_battery = 0.133*(voltage_battery/1000.0)-368.481;
+				    
+				   
+				   /* percent_of_battery =percent_of_battery /30;*/
+
+				    /* percent_of_battery = (COEFF_NUM * voltage_battery*100) / COEFF_DEN + OFFSET;
+				
+				    // Adjust Battery Percentage based on conditions
+				    if (percent_of_battery > 95000) { // 95 * 1000 as an integer
+				        Parametr.PersentOfBattery = 100;
+				    } else if (percent_of_battery <= 20000) { // 20 * 1000 as an integer
+				        Parametr.PersentOfBattery = 0;
+				    } else {
+				        Parametr.PersentOfBattery = percent_of_battery / 1000; // Convert to integer percentage
+				    }*/
+				     // voltage_battery =(vdd*adc_value_2);// /1023
+					//Display(percent_of_battery/100,'b',&displayClock);
+			
+			
+						
+					 vdd=VDD(S_READ_ADC(7)*1000);
+					 adc_value_2 = S_READ_ADC(2);
+				     voltage_battery =(vdd/1023.0)*adc_value_2;
+				     percent_of_battery =0.105263*voltage_battery-338.421;
+				     percent_of_battery=percent_of_battery/5;
+				     percent_of_battery=percent_of_battery*5;
+				   	
+				   	 
+				     if( percent_of_battery > 95)
+				    {
+				         percent_of_battery = 100;
+				    }
+				    else if( percent_of_battery <= 20)
+				    {
+				        percent_of_battery = 0;
+				    }
+					
+					 Display( percent_of_battery,'b',&displayClock);
+					
+		  	  /* if(abs((S_READ_ADC(0)-buffer))>=2)
 				{
 			    	buffer=S_READ_ADC(0);	
 				}
 			
 				Display(buffer,'b',&displayClock);
 				LED_RED_OFF;
-				LED_GREEN_OFF;
+				LED_GREEN_OFF;*/
 			break;
 			
 			case TEST:
@@ -311,17 +395,7 @@ void main()
 				LED_RED_OFF;
 				LED_YELLOW_OFF;
 				LED_GREEN_ON;
-		    	bufferVdd=batteryPercentage(S_READ_ADC(2), VDD(S_READ_ADC(7)));	
-		       if(bufferVdd>95)
-				{
-					bufferVdd=100;
-				}
-				if(bufferVdd<=20)
-				{
- 					bufferVdd=0;
-				
-				}
-			    Display(bufferVdd,'b',&displayClock);
+		    
 		    
 				pushButtonState=0;
 				pushButtonCunter=0;
