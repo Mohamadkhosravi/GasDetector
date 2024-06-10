@@ -9,7 +9,7 @@
 __attribute__((interrupt(0x1c)))
 void isr_timer (void)
 {
-	tick=2;	
+
 }
 
 	
@@ -119,68 +119,54 @@ void main()
 		{
 		
 		i=0;
-		digcunt++;
+		 displayClock++;
 		}
-		DisplayLooding(digcunt-8);
-		DisplayLooding(digcunt-7);
-		DisplayLooding(digcunt-6);
-		DisplayLooding(digcunt-5);
-		DisplayLooding(digcunt-4);
-		DisplayLooding(digcunt-3);
-		DisplayLooding(digcunt-2);
-		DisplayLooding(digcunt-1);
-		DisplayLooding(digcunt);
-		if(digcunt>7){i=0;digcunt=0;}
+		DisplayLooding(displayClock-8);
+		DisplayLooding(displayClock-7);
+		DisplayLooding(displayClock-6);
+		DisplayLooding(displayClock-5);
+		DisplayLooding(displayClock-4);
+		DisplayLooding(displayClock-3);
+		DisplayLooding(displayClock-2);
+		DisplayLooding(displayClock-1);
+		DisplayLooding(displayClock);
+		if(displayClock>7){i=0;displayClock=0;}
 		
 
 	}
 	delay = 0;
-
-	_pc0 = 1; // LED_G
+	i=0;
+    displayClock=0;
     Mode=NORMAL;
-    buffer=S_READ_ADC(0);
-     Display(0,'C',0);
-     i=0;
-	while (1)
-	{
 
-	
-		
-		
+  
+     
+     		
 //		if (TIMER_CUNTER_INTRUPT == 1) // Comparator A Match CTMAF Interrupt
 //		{
 //			TIMER_CUNTER_INTRUPT = 0;
 //			delay++;
 //		
 //		}
-       
-     /*  if (TIMER_CUNTER_INTRUPT == 1) 
-       {*/
-       	 
-    /*   }*/
     
-  
-       i++;
-       if((i>=5000)&&(i<5001)){
-	//	vdd=VDD(S_READ_ADC(7)*1000);
-    
-       }
-       else if(i>=10000)
-       {
-       	
-       		adc_value_2 = S_READ_ADC(2);
-			voltage_battery =(vdd/1023.0)*adc_value_2;
-         	i=0;
-       }
+     
+     
+     
+	while (1)
+	{
+
+     #if READ_VDD
+     	vdd=VDD(S_READ_ADC(7)*1000);
+     #endif	
+
        
        
-       
-    
-		/*	adc_value_2 = S_READ_ADC(2);
-		voltage_battery =(vdd/1023.0)*adc_value_2;*/
+    	voltage_battery =(vdd/1023.0)*S_READ_ADC(2);
+
 		
         displayClock++;
 	    if(displayClock>=4)displayClock=0;
+	    
         Parametr.GasValue=S_READ_ADC(0);	
         if(Parametr.GasValue>TRESHOLD_DETECT_GAS)
         {
@@ -205,23 +191,22 @@ void main()
             	}
             	else if((pushButtonState==1)&&(pushButtonCunter<500)&&(pushButtonCunter>10))
             	{
-   	               	    vdd1=VDD(S_READ_ADC(7)*1000);
-						adc_value_2 = S_READ_ADC(2);
-						voltage_battery1 =(vdd1/1023.0)*adc_value_2;
-					/*	percent_of_battery =0.105263*voltage_battery-338.421;
+				    	percent_of_battery=batteryPercentage(voltage_battery);
+				    	
 						if( percent_of_battery > 95)
 						{
 							percent_of_battery = 100;
 						}
-						else if( percent_of_battery <= 20)
+						else if( percent_of_battery <= 19)
 						{
 							percent_of_battery = 0;
 						}  
-						 if(abs(percent_of_battery-bufferVdd)>=5)
+							bufferVdd=percent_of_battery;
+						if(abs(percent_of_battery-bufferVdd)>=3)
 						{
 					    	bufferVdd=percent_of_battery;	
-						}*/
-								
+						}
+							
 						
 						 
             		Mode=CHECK_BATTERY;	
@@ -254,16 +239,16 @@ void main()
         */
         
      
-       if((POWER_SUPLY_CONNECT)&&(Parametr.VoltageBattery <= MINIMUM_VOLTAGE_VALID))
+       if((POWER_SUPLY_CONNECT)&&(voltage_battery <= MINIMUM_VOLTAGE_VALID))
        {
         	Suply=BATTRY_ERROR;
        }
-       else if((POWER_SUPLY_DISCONNECT)&&(Parametr.VoltageBattery > VOLTAGE_LOWBATTERY))
+       else if((POWER_SUPLY_DISCONNECT)&&(voltage_battery> VOLTAGE_LOWBATTERY))
        {
        	    Suply=SUPPLY_ERROR;
    
        }
-       else if((POWER_SUPLY_DISCONNECT)&&(Parametr.VoltageBattery < VOLTAGE_LOWBATTERY))
+       else if((POWER_SUPLY_DISCONNECT)&&(voltage_battery < VOLTAGE_LOWBATTERY))
        {
        	   Suply=LOW_BATTERY;
        }
@@ -274,19 +259,31 @@ void main()
 		{
 			case NORMAL:
 			    BUZZER_OFF;
-				LED_RED_OFF;
+				/*LED_RED_OFF;*/
 				LED_YELLOW_OFF;
 		    	LED_GREEN_ON;
 		    	RELAY_ON;
-			   Display(voltage_battery,'b',&displayClock);	
-		  	   /* if(abs((S_READ_ADC(0)-buffer))>=2)
+		    
+		       if(POWER_SUPLY_CONNECT)
+		       {
+		       		LED_RED_OFF;
+		       }
+		       else
+		       {
+		       		LED_RED_ON;
+		          
+		       }
+		    
+		    
+				/*Display( voltage_battery,'0',&displayClock);*/
+		  	    if(abs((S_READ_ADC(0)-buffer))>=2)
 				{
 			    	buffer=S_READ_ADC(0);	
 				}
 			
-				Display(buffer,'b',&displayClock);
-				LED_RED_OFF;
-				LED_GREEN_OFF;*/
+				Display(voltage_battery,'0',&displayClock);
+			/*	LED_RED_OFF;*/
+			
 			break;
 			
 			case TEST:
@@ -313,15 +310,15 @@ void main()
 				LED_RED_OFF;
 				LED_YELLOW_OFF;
 				LED_GREEN_ON;
-		    
-			
-					Display( voltage_battery1,'b',&displayClock);
-			/*	Display( bufferVdd,'b',&displayClock);*/
-		    
-		    
-		    
-		  
-		    
+				if(bufferVdd<=19)
+				{
+				  DisplayBatteryLOW(displayClock);
+				}
+				else
+				{
+		    	   Display(bufferVdd,'b',&displayClock);
+				}
+				
 				pushButtonState=0;
 				pushButtonCunter=0;
 			    if(Cunter.checkBattery>500)
@@ -341,7 +338,6 @@ void main()
 				LED_GREEN_ON;
 				LED_YELLOW_ON;
 				Display(250,'0',&displayClock);
-		
 		
 			break;
 			
@@ -509,316 +505,3 @@ void main()
 	
 	}
 }
-//		PB = !_pb3; // Detect PUSH THE TEST BUTTON
-//
-//		if (fire_gas == 1 || PB == 1)
-//		{			  // Detect FIER
-//		
-//			BUZZER_ON; // buzz
-//			LED_RED_ON; // LED_R
-//			RELAY_ON; // relay
-//		}
-//		else
-//		{
-//			BUZZER_OFF; // buzz
-//			LED_RED_OFF; // LED_R
-//			RELAY_OFF; // relay
-//		}
-//
-//		if (falt_BAT == 1 || falt_gas == 1 || PB == 1)
-//		{			  //	Detect FALT
-//			RELAY_ON; // LED_Y
-//		}
-//		else
-//		{
-//			 RELAY_OFF; // LED_Y
-//		}
-//
-//		if (adc_GAS > 250)
-//		{ // GAS OVER THRESHOLD
-//			fire_gas = 1;
-//		}
-//		else
-//		{
-//			fire_gas = 0;
-//		}
-//
-//		if (GAS_ERR < 10)
-//		{ // remove GAS SENSORE DetectSHEN
-//			falt_gas = 1;
-//		}
-//		else
-//		{
-//			falt_gas = 0;
-//		}
-//
-//		if (598 > BAT_ADC || BAT_ADC > 953)
-//		{ // no battry ditected 2.7,4.3
-//			falt_BAT = 1;
-//			BAT = 101; // disply "no";
-//			BAT_ADC_D = 0;
-//		}
-//		else
-//		{
-//			falt_BAT = 0;
-//		}
-//
-//		if (BAT_ADC < 614 && BAT_ADC > 570)
-//		{			 // <7% low battry 2.8-3
-//			BAT = 3; // disply "lo";
-//			falt_BAT = 1;
-//		}
-//		else if (BAT_ADC < 676)
-//		{ // 7-20% battry 3.300
-//			BAT = 1;
-//			BAT_ADC_D = 20;
-//		}
-//		else if (BAT_ADC < 737)
-//		{ // 20-40% battry 3.600
-//			BAT = 1;
-//			BAT_ADC_D = 40;
-//		}
-//		else if (BAT_ADC < 758)
-//		{ // 40-60% battry 3.700
-//			BAT = 1;
-//			BAT_ADC_D = 60;
-//		}
-//		else if (BAT_ADC < 809)
-//		{ // 60-80% battry 3.950
-//			BAT = 1;
-//			BAT_ADC_D = 80;
-//		}
-//		else if (BAT_ADC < 940)
-//		{ // 80-100% battry 4.250
-//			BAT = 1;
-//			BAT_ADC_D = 100;
-//		}
-//
-//		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-//
-//		if (_tb1f == 1) // Comparator B Match CTMAF Interrupt
-//		{
-//
-//			_tb1f = 0;
-//		}
-//
-//		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-//        
-//        
-//         
-//         
-//         
-//         
-//		if (TIMER_CUNTER_INTRUPT == 1) // Comparator A Match CTMAF Interrupt
-//		{
-//
-//			TIMER_CUNTER_INTRUPT = 0;
-//
-//			switch (SEG)
-//			{
-//
-//			case 0: // Select WHAT TO disply
-//
-//				if (PB == 0)
-//				{
-//					disply = adc_GAS;
-//					disply_bat = 0;
-//				}
-//				else
-//				{
-//					disply = BAT_ADC_D;
-//					disply_bat = 1;
-//				}
-//
-//				break;
-//
-//				// Select digit to display
-//
-//			case 1:
-//				if (disply_bat == 0)
-//				{
-//					Digit[3] = disply / 1000;
-//					segmentNumbers(Digit[3]);
-//				}
-//				else
-//				{
-//					Digit[3] = 'b';
-//					segmentNumbers(Digit[3]);
-//				}
-//				COM0 = 1;
-//				COM1 = 0;
-//				COM2 = 0;
-//				COM3 = 0;
-//
-//				break;
-//
-//			case 3:
-//				if ((BAT == 101 || BAT == 3) && disply_bat == 1)
-//				{
-//					Digit[2] = '-';
-//					segmentNumbers(Digit[2]);
-//				}
-//				else if (disply_bat == 0)
-//				{
-//					Digit[2] = disply / 100 - Digit[3] * 10;
-//					segmentNumbers(Digit[2]);
-//				}
-//				else
-//				{
-//					Digit[2] = disply / 100;
-//					segmentNumbers(Digit[2]);
-//				}
-//
-//				COM0 = 0;
-//				COM1 = 1;
-//				COM2 = 0;
-//				COM3 = 0;
-//				break;
-//
-//			case 5:
-//				if (BAT == 3 && disply_bat == 1)
-//				{
-//					Digit[1] = 'l';
-//					segmentNumbers(Digit[1]);
-//				}
-//				else if (BAT == 101 && disply_bat == 1)
-//				{
-//					Digit[1] = 'n';
-//					segmentNumbers(Digit[1]);
-//				}
-//				else if (disply_bat == 0)
-//				{
-//					Digit[1] = disply / 10 - Digit[3] * 100 - Digit[2] * 10;
-//					segmentNumbers(Digit[1]);
-//				}
-//				else
-//				{
-//					Digit[1] = disply / 10 - Digit[2] * 10;
-//					segmentNumbers(Digit[1]);
-//				}
-//
-//				COM0 = 0;
-//				COM1 = 0;
-//				COM2 = 1;
-//				COM3 = 0;
-//				break;
-//
-//			case 7:
-//				if ((BAT == 101 || BAT == 3) && disply_bat == 1)
-//				{
-//					Digit[0] = 'o';
-//					segmentNumbers(Digit[0]);
-//				}
-//				else
-//				{
-//					Digit[0] = disply % 10;
-//					segmentNumbers(Digit[0]);
-//				}
-//
-//				COM0 = 0;
-//				COM1 = 0;
-//				COM2 = 0;
-//				COM3 = 1;
-//			}
-//
-//			SEG++;
-//
-//			if (SEG > 7)
-//				SEG = 0;
-//
-//			t1++;
-//		}
-//
-//		////////////////////////////////////////////////////////////////////////////
-//
-//		// ADC
-//
-//		if (t1 > 50)
-//		{
-//
-//			switch (adc)
-//			{
-//
-//				// Read ADC GAS value
-//			case 0:
-//				_sacs0 = 1; // A/D converter external analog channel 0 selection
-//				_sacs1 = 0;
-//				_sacs2 = 0;
-//				_sacs3 = 0;
-//				break;
-//
-//			case 1:
-//
-//				_sadoh = 0;
-//				_sadol = 0;
-//
-//				_start = 0; // Start ADC conversion
-//				_start = 1;
-//				_start = 0;
-//
-//				while (!_adbz)
-//					; // Wait for conversion to complete
-//
-//				_adbz = 0; // Clear ADC interrupt flag
-//
-//				adc_GAS = (adc_GAS + ((_sadoh << 8) | (_sadol))) / 2; // Get 10-bit ADC value (ADRFS=1)
-//
-//				break;
-//
-//				// Read GAS_ERR value
-//			case 2:
-//				_sacs0 = 0; // A/D converter external analog channel 0 selection
-//				_sacs1 = 1;
-//				_sacs2 = 0;
-//				_sacs3 = 0;
-//				break;
-//
-//			case 3:
-//				_sadoh = 0;
-//				_sadol = 0;
-//
-//				_start = 0; // Start ADC conversion
-//				_start = 1;
-//				_start = 0;
-//
-//				while (!_adbz)
-//					; // Wait for conversion to complete
-//
-//				_adbz = 0; // Clear ADC interrupt flag
-//
-//				GAS_ERR = (GAS_ERR + ((_sadoh << 8) | (_sadol))) / 2; // Get 10-bit ADC value (ADRFS=1)
-//				break;
-//
-//			case 4:
-//				_sacs0 = 0; // A/D converter external analog channel 2 selection
-//				_sacs1 = 0;
-//				_sacs2 = 0;
-//				_sacs3 = 0;
-//				break;
-//
-//			case 5:
-//				_sadoh = 0;
-//				_sadol = 0;
-//
-//				_start = 0; // Start ADC conversion
-//				_start = 1;
-//				_start = 0;
-//
-//				while (!_adbz)
-//					;	   // Wait for conversion to complete
-//				_adbz = 0; // Clear ADC interrupt flag
-//
-//				BAT_ADC = (BAT_ADC + ((_sadoh << 8) | (_sadol))) / 2;
-//
-//				break;
-//			}
-//
-//			adc++;
-//			if (adc > 5)
-//				adc = 0;
-//
-//			t1 = 0;
-//		}
-//	}
-//}
-

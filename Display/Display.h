@@ -14,11 +14,13 @@
 #define SEGE _pc6	 // PC6
 #define SEGF _pd1	 // PD1
 #define SEGG _pc3	 // PC3
-#define SEGH _pc5	 // PC5
+#define DOT  _pc5	 // PC5
 
 void DisplayInit(void);
-void Display(int number, char character,char *clock);
-void segmentNumbers(unsigned char n);
-void segmentCharacters(unsigned char n);
+void segmentNumbers(unsigned char number);
+void segmentCharacters(unsigned char character);
+void Display(int number, unsigned char character,char *clock);
+
 void DisplayLooding(char cunterDigit );
+void DisplayBatteryLOW(char cunterDigit );
 #endif
