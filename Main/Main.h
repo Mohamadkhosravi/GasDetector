@@ -75,8 +75,10 @@ unsigned int i=0;
 #define COEFF_NUM 133 // 0.133 * 1000 as an integer
 #define COEFF_DEN 1000
 #define OFFSET -368481 // -368.481 * 1000 as an integer
-int vdd=0;
+int vdd=5000;
+int vdd1=0;
 float voltage_battery=0;
+float voltage_battery1=0;
 int percent_of_battery=0; 
 int adc_value_7 =0;
 int adc_value_2 = 0;
@@ -92,7 +94,7 @@ typedef union parameter{
 } Parametrs;
 Parametrs Parametr;
 
-char bufferVdd=10;
+char bufferVdd=0;
 //#define minVoltageBattery 590
 //#define maxVoltageBattery 890
 
@@ -103,6 +105,9 @@ char bufferVdd=10;
 //#define batteryPercentage(voltageBattery)((voltageBattery - minVoltageBattery)*100)/(maxVoltageBattery-minVoltageBattery)
 
 /*#define batteryPercentage(voltageBattery)(0.133*voltageBattery-368.481)*/
+
+#define a
+
 #define VDD(ADC_VDD)(4*(1.6*ADC_VDD/1023))
 #define batteryPercentage(ADCVoltageBattery,VDD)(0.133 *((ADCVoltageBattery*VDD)/1023)*1000 -368.481)
 
@@ -124,7 +129,7 @@ typedef struct
 } Cunters;
 Cunters Cunter;
  unsigned short buffer=0;
-float AVDD=0.0;	
+
 char displayClock=0;	
 //	typedef enum
 //	{
