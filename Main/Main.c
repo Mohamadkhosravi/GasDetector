@@ -1,33 +1,11 @@
 #include<Main.h>
-#include <ADC.h>
 
-//	void __attribute((interrupt(0x0))) ISR_tmr0 (void)
-//	{
-//		tick=2;
-//	};
-//	
-__attribute__((interrupt(0x1c)))
-void isr_timer (void)
-{
 
-}
-
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+void buzzerDoull(int *Cunter);	
+		
 void main()
 {
 	
-
-
 	// Oscillators
 
 	_cks0 = 0; //: System clock selection (fH)
@@ -101,9 +79,12 @@ void main()
 
 	while (delay < 15000)
 	{
+		
+		
+		
 		delay++;
-		i++;
-		if(i<1000)
+		Cunter++;
+		if(Cunter<1000)
 		{
 			LED_GREEN_ON;
 			LED_YELLOW_ON;
@@ -115,13 +96,13 @@ void main()
 			LED_YELLOW_OFF;
 			LED_RED_OFF;
 		}
-		if(i>2000)
+		if(Cunter>2000)
 		{
 		
-		i=0;
+		 Cunter=0;
 		 displayClock++;
 		}
-		DisplayLooding(displayClock-8);
+		/*DisplayLooding(displayClock-8);
 		DisplayLooding(displayClock-7);
 		DisplayLooding(displayClock-6);
 		DisplayLooding(displayClock-5);
@@ -129,13 +110,13 @@ void main()
 		DisplayLooding(displayClock-3);
 		DisplayLooding(displayClock-2);
 		DisplayLooding(displayClock-1);
-		DisplayLooding(displayClock);
-		if(displayClock>7){i=0;displayClock=0;}
+		DisplayLooding(displayClock);*/
+		if(displayClock>7){Cunter=0;displayClock=0;}
 		
 
 	}
 	delay = 0;
-	i=0;
+	Cunter=0;
     displayClock=0;
     Mode=NORMAL;
 
@@ -154,6 +135,7 @@ void main()
      
 	while (1)
 	{
+   
 
      #if READ_VDD
      	vdd=VDD(S_READ_ADC(7)*1000);
@@ -161,13 +143,22 @@ void main()
 
        
        
-    	voltage_battery =(vdd/1023.0)*S_READ_ADC(2);
+        
+       
+    	voltage_battery =(AVDD/1023.0)*S_READ_ADC(2);
 
 		
         displayClock++;
 	    if(displayClock>=4)displayClock=0;
 	    
-        Parametr.GasValue=S_READ_ADC(0);	
+        Parametr.GasValue=S_READ_ADC(0);
+        
+        
+       /* if(S_READ_ADC(1)< MINIMUM_CURRENT_SENSOR)
+        {
+          Mode=SENSOR_ERRORE;	
+        }*/
+        	
         if(Parametr.GasValue>TRESHOLD_DETECT_GAS)
         {
         	 Mode=DETECT;
@@ -216,7 +207,7 @@ void main()
             
             	
             }
-            //Parametr.VoltageBattery=S_READ_ADC(1);
+      
             
 			
 	
@@ -237,57 +228,167 @@ void main()
          0    | <limit | Low Battry 
         ----------------------------- 
         */
-        
+        // if voltage battry <1 v batt rorre
+       
      
-       if((POWER_SUPLY_CONNECT)&&(voltage_battery <= MINIMUM_VOLTAGE_VALID))
+      /* if((POWER_SUPLY_CONNECT)&&(voltage_battery <= MINIMUM_VOLTAGE_VALID))
        {
-        	Suply=BATTRY_ERROR;
+        	SuplyStatus=BATTRY_ERROR;
        }
        else if((POWER_SUPLY_DISCONNECT)&&(voltage_battery> VOLTAGE_LOWBATTERY))
        {
-       	    Suply=SUPPLY_ERROR;
+       	    SuplyStatus=SUPPLY_ERROR;
    
        }
        else if((POWER_SUPLY_DISCONNECT)&&(voltage_battery < VOLTAGE_LOWBATTERY))
        {
-       	   Suply=LOW_BATTERY;
+       	   SuplyStatus=LOW_BATTERY;
        }
-		
+		*/
 	  
-		
+	/*	SuplyStatus=LOW_BATTERY;
+		*/
+
+       SuplyStatus=BATTRY_ERROR;
 		switch(Mode)
 		{
 			case NORMAL:
-			    BUZZER_OFF;
-				/*LED_RED_OFF;*/
-				LED_YELLOW_OFF;
-		    	LED_GREEN_ON;
-		    	RELAY_ON;
-		    
-		       if(POWER_SUPLY_CONNECT)
-		       {
-		       		LED_RED_OFF;
-		       }
-		       else
-		       {
-		       		LED_RED_ON;
-		          
-		       }
-		    
-		    
-				/*Display( voltage_battery,'0',&displayClock);*/
-		  	    if(abs((S_READ_ADC(0)-buffer))>=2)
+			   RELAY_OFF;
+			
+				 if(abs((S_READ_ADC(0)-buffer))>=2)
 				{
 			    	buffer=S_READ_ADC(0);	
 				}
 			
-				Display(voltage_battery,'0',&displayClock);
+		
+			//	Display( S_READ_ADC(1),'0',&displayClock);
+		
+				switch(SuplyStatus)
+				{
+					
+					case NORMAL_POWER:
+					
+					    LED_GREEN_ON;
+					    LED_RED_OFF;
+					    LED_YELLOW_OFF;
+						Display( buffer,'0',&displayClock);
+						
+					break;
+				
+					
+					case BATTRY_ERROR:
+					
+						LED_GREEN_OFF;
+						LED_RED_OFF;
+						LED_YELLOW_ON;
+						Cunter++;	
+						if(Cunter<1000)
+						{
+							Display( buffer,'0',&displayClock);
+						}
+						else
+						{  
+							DisplayBatteryLOW(displayClock);
+						}
+						buzzerDoull(Cunter);
+					/*	if((Cunter>1920)&&(Cunter<1950))
+						{
+							BUZZER_ON;	
+						}
+						else if((Cunter>1950)&&(Cunter<1970))	
+						{
+							BUZZER_OFF;		
+						}
+						else if(Cunter>1970)
+						{
+							BUZZER_ON;
+						}
+						else
+						{
+							BUZZER_OFF;		
+						}
+						
+						if(Cunter>2000)Cunter=0;*/
+		
+					break;
+					
+					case SUPPLY_ERROR:
+					
+						LED_GREEN_OFF;
+						LED_RED_OFF;
+						LED_YELLOW_ON;
+						Cunter++;
+						
+						if(Cunter<1000)
+						{
+							Display( buffer,'0',&displayClock);
+						}
+						else
+						{  
+					      DisplaySuplyError(displayClock);
+						}
+						 buzzerDoull(Cunter);
+					/*	if(Cunter>2000)Cunter=0;
+						
+							if((Cunter>1920)&&(Cunter<1950))
+						{
+							BUZZER_ON;	
+						}
+						else if((Cunter>1950)&&(Cunter<1970))	
+						{
+							BUZZER_OFF;		
+						}
+						else if(Cunter>1970)
+						{
+							BUZZER_ON;
+						}
+						else
+						{
+							BUZZER_OFF;		
+						}
+						
+						if(Cunter>2000)Cunter=0;
+					  */
+						
+						
+					break;
+					
+					case LOW_BATTERY:
+					
+						LED_GREEN_OFF;
+						LED_YELLOW_ON;
+						
+						Cunter++;
+						if(Cunter>=300)
+						{
+						  BUZZER_ON;
+						  LED_RED_ON;
+						  Display( buffer,'0',&displayClock);	
+						}
+						else
+						{
+						   LED_RED_OFF;	
+						   BUZZER_OFF;	
+						   DisplayBatteryLOW(displayClock);
+						}
+						if(Cunter>=600)
+						{
+				     	 Cunter=0;
+						}
+					
+					break;
+				
+				}
+			       
+			
+		  	   
+			//Display(voltage_battery,'0',&displayClock);
 			/*	LED_RED_OFF;*/
 			
 			break;
 			
 			case TEST:
-				Cunter.test++;
+				Cunter++;
 				BUZZER_ON;
 				RELAY_ON;
 				LED_RED_ON;
@@ -296,20 +397,16 @@ void main()
 				Display(8888,'0',&displayClock);
 				pushButtonState=0;
 				pushButtonCunter=0;
-				if(Cunter.test>1000)
+				if(Cunter>1000)
 				{
-					Cunter.test=0;
+					Cunter=0;
 					Mode=NORMAL;
 				}
 			break;
 			
 			case CHECK_BATTERY:
 				
-			   	Cunter.checkBattery++;
-			    BUZZER_OFF;
-				LED_RED_OFF;
-				LED_YELLOW_OFF;
-				LED_GREEN_ON;
+			   	Cunter++;
 				if(bufferVdd<=19)
 				{
 				  DisplayBatteryLOW(displayClock);
@@ -321,10 +418,10 @@ void main()
 				
 				pushButtonState=0;
 				pushButtonCunter=0;
-			    if(Cunter.checkBattery>500)
+			    if(Cunter>500)
 				{
 					Mode=NORMAL;
-					Cunter.checkBattery=0;
+					Cunter=0;
 
 				}
 					
@@ -341,49 +438,16 @@ void main()
 		
 			break;
 			
+		
+			case SENSOR_ERRORE:
 			
-				
-		 /* case LOW_BATTERY:
-			
-			    Cunter.lowBattry++;
-			    if(Cunter.lowBattry<30)
-			    {
-			      BUZZER_ON;
-			    }
-			    else if((Cunter.lowBattry>30)&&(Cunter.lowBattry<50))
-			    {
-			      BUZZER_OFF;
-			    }
-			    else if((Cunter.lowBattry>50)&&(Cunter.lowBattry<80))
-			    {
-			     BUZZER_ON;	
-			    }
-			    else
-			    {
-			     BUZZER_OFF;	
-			    }
-			    if(Cunter.lowBattry<1000)
-			    {
-					Parametr.GasValue=S_READ_ADC(0);
-					Display(Parametr.GasValue,'o');
-			    }
-			    else
-			    {
-			    	Parametr.VoltageBattery=S_READ_ADC(1);
-			    	Parametr.VoltageBattery=(char)batteryPercentage(10);
-					Display(Parametr.VoltageBattery,'0');
-					
-			    }
-			    
-			   if(Cunter.lowBattry>2000)Cunter.lowBattry=0;
-				LED_RED_OFF;
+				BUZZER_ON;
+				RELAY_ON;
+				LED_RED_ON;
+				LED_GREEN_ON;
 				LED_YELLOW_ON;
-				LED_GREEN_OFF;
 				
-				
-			
 			break;
-			*/
 			
 			
 			
@@ -391,117 +455,39 @@ void main()
 			
 			
 			
-			
-			
-			
-			
-			
-			
-			
-			
-		/*	default :
-			Mode=NORMAL;
-			break;*/
+		
 			
 		}
 		
 	
+       
 
-
-        /*   unsigned int Avarage( unsigned int value,char numberOfSample,char sampleClock)
-           {
-           	if(sampleClock==numberOfSample)
-           	{
-           	  value=+value;
-           	}
-            
-             
-           }*/
-		
-//		unsigned char BatteryPercentage(unsigned char voltageBattery) {
-//
-//
-//		    unsigned char voltageRange = 0;
-//		    voltageRange=maxVoltageBattery - minVoltageBattery;
-//		    
-//		    float batteryPercentage = 0;
-//		    batteryPercentage=((voltageBattery - minVoltageBattery) / voltageRange) * 100;
-//		/*
-//		    int roundedPercentage = ((int)(batteryPercentage / percentageAccuracy + 0.5)) * percentageAccuracy;
-//		
-//		    if (roundedPercentage > 100) {
-//		        roundedPercentage = 100;
-//		    } else if (roundedPercentage < 0) {
-//		        roundedPercentage = 0;
-//		    }*/
-//
-//    		return batteryPercentage;
-//		}
-//		
-//	
-	
-            
-	/*	unsigned char BatteryPercentage(void) {
-		
-			 VDD=4*(1.6*S_READ_ADC(7)/1023);
-			 VoltageBattery=(S_READ_ADC(2)*VDD/1023);
-		    PersentOfBattery=(0.133 * oltageBattery*1000 -368.481);
-			if(PersentOfBattery>95)
-			{
-			  PersentOfBattery=100;
-			}
-			if(PersentOfBattery<=20)
-			{
-		       PersentOfBattery=0;
-			
-			}
-			return PersentOfBattery;
-		
-		}*/
-	
-    /*
-    	Parametr.VDD=4*(1.6*S_READ_ADC(7)/1023);
-			Parametr.VoltageBattery=(S_READ_ADC(2)*Parametr.VDD/1023);
-			Parametr.PersentOfBattery=(0.133 * Parametr.VoltageBattery*1000 -368.481);
-			if(Parametr.PersentOfBattery>95)
-			{
-			Parametr.PersentOfBattery=100;
-			}
-			if(Parametr.PersentOfBattery<=20)
-			{
-			Parametr.PersentOfBattery=0;
-			
-			}
-    */
-    
-    
-      /*  if((i>1)&&(i<=1000)){*/
-			
-	/*		Parametr.GasValue=S_READ_ADC(0);
-			Display(Parametr.GasValue,'o');
-		*/
-	/*	
-		}
-		if
-		
-        if((i>1000)&&(i<=2000))
-        {
-		   Parametr.VoltageBattery=S_READ_ADC(1);
-	 		Display(Parametr.VoltageBattery,'b');
-	 	
-        }
-		if((i>2000)&&(i<=3000)){
-		Parametr.GasErroreValue=S_READ_ADC(2);
-		Display( Parametr.GasErroreValue,'0');
-		
-		}
-        if(i>3000)i=0;*/
-        
-            
             
             
             
             
 	
 	}
+}
+
+void buzzerDoull(int *Cunter)
+{
+	if((*Cunter>1920)&&(*Cunter<1950))
+	{
+		BUZZER_ON;	
+	}
+	else if((*Cunter>1950)&&(*Cunter<1970))	
+	{
+		BUZZER_OFF;		
+	}
+	else if(*Cunter>1970)
+	{
+		BUZZER_ON;
+	}
+	else
+	{
+		BUZZER_OFF;		
+	}
+	if(*Cunter>2000)*Cunter=0;
+		
 }

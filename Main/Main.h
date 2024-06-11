@@ -1,10 +1,10 @@
 
 #ifndef _MAIN_H_
 #define _MAIN_H_
-#include <ht67f2432.h>
-#include "HT8_it.h"
-#include <Display.h>
 
+#include <ht67f2432.h>
+#include <Display.h>
+#include <ADC.h>
 
 
 
@@ -36,6 +36,7 @@
 #define POWER_SUPLY_CONNECT     _pa6==1 
 #define POWER_SUPLY_DISCONNECT  _pa6==0 
 
+#define MINIMUM_CURRENT_SENSOR 20
 
 
 //
@@ -47,28 +48,30 @@
 
 unsigned long delay = 0;
 unsigned int i=0;
-float vdd=5000;
+//float vdd=5000;
+
+#define AVDD 5000.0
+
 float voltage_battery=0;
 int percent_of_battery=0; 
 char displayClock=0;
 char bufferVdd=0;
 
 typedef union parameter{
- unsigned int VoltageBattery;
+ //unsigned int VoltageBattery;
  unsigned int GasValue;
- unsigned int GasErroreValue;
- unsigned int PersentOfBattery;
- unsigned int VDD
+ //unsigned int GasErroreValue;
+ //unsigned int PersentOfBattery;
+ //unsigned int VDD
  
 } Parametrs;
 Parametrs Parametr;
-
-
-
+#define b 338.421
+#define a 0.105263
 #define VDD(ADC_VDD)(4*(1.6*ADC_VDD/1023))
-#define batteryPercentage(VoltageBattery)(0.105263*VoltageBattery-338.421)
+#define batteryPercentage(VoltageBattery)(a*VoltageBattery-b)
 
-
+/*
 typedef struct
 {
  unsigned int test;
@@ -76,8 +79,10 @@ typedef struct
  unsigned int checkBattery;
  
 } Cunters;
-Cunters Cunter;
- unsigned short buffer=0;
+Cunters Cunter;*/
+
+unsigned int Cunter=0;
+unsigned short buffer=0;
 
 	
 	bit pushButtonState=0;
@@ -89,7 +94,7 @@ Cunters Cunter;
 		CHECK_BATTERY,
 		TEST,
 		DETECT,
-		ERORE
+		SENSOR_ERRORE
 		
 	}mode;
 		mode Mode;
@@ -97,10 +102,11 @@ Cunters Cunter;
 	
 	typedef enum
 	{
-		LOW_BATTERY,
+	    NORMAL_POWER, 
 		BATTRY_ERROR,
-		SUPPLY_ERROR
+		SUPPLY_ERROR,
+		LOW_BATTERY
 		
 	}Suplymode;
-     Suplymode Suply;
+     Suplymode SuplyStatus;
 #endif

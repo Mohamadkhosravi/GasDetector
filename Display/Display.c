@@ -127,6 +127,15 @@ void segmentCharacters(unsigned char character)
 
 	switch (character)
 	{
+		case 'A':
+			SEGA = 0;
+			SEGB = 0;
+			SEGC = 0;
+			SEGD = 1;
+			SEGE = 0;
+			SEGF = 0;
+			SEGG = 0;
+		break;
 
 		case 'b':
 			SEGA = 1;
@@ -148,7 +157,7 @@ void segmentCharacters(unsigned char character)
 			SEGG = 1;
 			break;
 			
-		case 'n':
+		case 'N':
 			SEGA = 1;
 			SEGB = 1;
 			SEGC = 0;
@@ -197,6 +206,27 @@ void segmentCharacters(unsigned char character)
 			SEGF = 0;
 			SEGG = 1;
 		break;	
+		case 'S':
+			SEGA = 0;
+			SEGB = 1;
+			SEGC = 0;
+			SEGD = 0;
+			SEGE = 1;
+			SEGF = 0;
+			SEGG = 0;
+		break;	
+		
+		case 'T':
+       
+			SEGA = 0;
+			SEGB = 0;
+			SEGC = 0;
+			SEGD = 1;
+			SEGE = 1;
+			SEGF = 1;
+			SEGG = 1;
+		break;	
+		
 
 	}
 }	
@@ -345,6 +375,47 @@ void DisplayBatteryLOW(char cunterDigit )
 	switch(cunterDigit) 
 	{			
 		case 0:
+		 segmentCharacters('L');
+			COM0 = 1;
+			COM1 = 0;
+			COM2 = 0;
+			COM3 = 0;
+		
+		break;		
+		case 1:
+	      segmentCharacters('b');
+			COM0 = 0;
+			COM1 = 1;
+			COM2 = 0;
+			COM3 = 0;
+		
+		break;
+		case 2:
+		 segmentCharacters('A');
+			COM0 = 0;
+			COM1 = 0;
+			COM2 = 1;
+			COM3 = 0;
+		
+		break;	
+		case 3:
+		 segmentCharacters('T');
+			COM0 = 0;
+			COM1 = 0;
+			COM2 = 0;
+			COM3 = 1;
+		
+		break;	
+	}
+}
+
+
+
+void DisplayBatteryError(char cunterDigit )
+{
+	switch(cunterDigit) 
+	{			
+		case 0:
 		 segmentCharacters('b');
 			COM0 = 1;
 			COM1 = 0;
@@ -378,3 +449,129 @@ void DisplayBatteryLOW(char cunterDigit )
 		break;	
 	}
 }
+
+
+
+void DisplaySuplyError(char cunterDigit )
+{
+	switch(cunterDigit) 
+	{			
+		case 0:
+		 segmentCharacters('S');
+			COM0 = 1;
+			COM1 = 0;
+			COM2 = 0;
+			COM3 = 0;
+		
+		break;		
+		case 1:
+	      segmentCharacters('E');
+			COM0 = 0;
+			COM1 = 1;
+			COM2 = 0;
+			COM3 = 0;
+		
+		break;
+		case 2:
+		 segmentCharacters('r');
+			COM0 = 0;
+			COM1 = 0;
+			COM2 = 1;
+			COM3 = 0;
+		
+		break;	
+		case 3:
+		 segmentCharacters('r');
+			COM0 = 0;
+			COM1 = 0;
+			COM2 = 0;
+			COM3 = 1;
+		
+		break;	
+	}
+}
+//
+//void DisplayCharecters( unsigned char *stringOfCharacter,char clock )
+//{
+//
+//	switch(clock)
+//	{ 	
+//		case 0:
+//		 segmentCharacters( stringOfCharacter[0]);
+//			COM0 = 1;
+//			COM1 = 0;
+//			COM2 = 0;
+//			COM3 = 0;
+//		
+//		break;	
+//			
+//		case 1:
+//	      segmentCharacters(stringOfCharacter[1]);
+//			COM0 = 0;
+//			COM1 = 1;
+//			COM2 = 0;
+//			COM3 = 0;
+//		
+//		break;
+//		
+//		case 2:
+//		 segmentCharacters(stringOfCharacter[2]);
+//			COM0 = 0;
+//			COM1 = 0;
+//			COM2 = 1;
+//			COM3 = 0;
+//		
+//		break;	
+//		
+//		case 3:
+//		 segmentCharacters(stringOfCharacter[3]);
+//			COM0 = 0;
+//			COM1 = 0;
+//			COM2 = 0;
+//			COM3 = 1;
+//		
+//		break;	
+//	}	
+//}
+
+
+
+//
+//void DisplaySuplyError(char cunterDigit )
+//{
+//		switch(cunterDigit) 
+//	{			
+//		case 0:
+//		 segmentCharacters('E');
+//			COM0 = 1;
+//			COM1 = 0;
+//			COM2 = 0;
+//			COM3 = 0;
+//		
+//		break;		
+//		case 1:
+//	      segmentCharacters('S');
+//			COM0 = 0;
+//			COM1 = 1;
+//			COM2 = 0;
+//			COM3 = 0;
+//		
+//		break;
+//		case 2:
+//		 segmentCharacters('E');
+//			COM0 = 0;
+//			COM1 = 0;
+//			COM2 = 1;
+//			COM3 = 0;
+//		
+//		break;	
+//		case 3:
+//		 segmentCharacters('N');
+//			COM0 = 0;
+//			COM1 = 0;
+//			COM2 = 0;
+//			COM3 = 1;
+//		
+//		break;	
+//	}
+//}
