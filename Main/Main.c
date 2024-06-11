@@ -77,14 +77,14 @@ void main()
 	RELAY_ON; // relay
 	S_ADC_Init();
 
-	while (delay < 15000)
+	while (pushButtonCunter < START_DELAY)
 	{
 		
 		
-		
-		delay++;
+	
+		pushButtonCunter++;
 		Cunter++;
-		if(Cunter<1000)
+		if(Cunter<START_BLINK_ON)
 		{
 			LED_GREEN_ON;
 			LED_YELLOW_ON;
@@ -96,13 +96,13 @@ void main()
 			LED_YELLOW_OFF;
 			LED_RED_OFF;
 		}
-		if(Cunter>2000)
+		if(Cunter>START_BLINK_OFF)
 		{
 		
 		 Cunter=0;
 		 displayClock++;
 		}
-		/*DisplayLooding(displayClock-8);
+		DisplayLooding(displayClock-8);
 		DisplayLooding(displayClock-7);
 		DisplayLooding(displayClock-6);
 		DisplayLooding(displayClock-5);
@@ -110,12 +110,12 @@ void main()
 		DisplayLooding(displayClock-3);
 		DisplayLooding(displayClock-2);
 		DisplayLooding(displayClock-1);
-		DisplayLooding(displayClock);*/
+		DisplayLooding(displayClock);
 		if(displayClock>7){Cunter=0;displayClock=0;}
 		
 
 	}
-	delay = 0;
+	pushButtonCunter = 0;
 	Cunter=0;
     displayClock=0;
     Mode=NORMAL;
@@ -141,29 +141,23 @@ void main()
      	vdd=VDD(S_READ_ADC(7)*1000);
      #endif	
 
-       
-       
-        
-       
-    	voltage_battery =(AVDD/1023.0)*S_READ_ADC(2);
-
-		
+     
+        voltage_battery = COEFFICIENT*S_READ_ADC(2);
         displayClock++;
 	    if(displayClock>=4)displayClock=0;
 	    
         Parametr.GasValue=S_READ_ADC(0);
         
         
-       /* if(S_READ_ADC(1)< MINIMUM_CURRENT_SENSOR)
+        if(S_READ_ADC(1)< MINIMUM_CURRENT_SENSOR)
         {
           Mode=SENSOR_ERRORE;	
-        }*/
-        	
-        if(Parametr.GasValue>TRESHOLD_DETECT_GAS)
-        {
-        	 Mode=DETECT;
         }
-         else
+		else if(Parametr.GasValue>TRESHOLD_DETECT_GAS)
+		{
+			Mode=DETECT;
+		}
+        else
         {
     
             if(PRESEED_PUSHBUTUN)
@@ -231,7 +225,7 @@ void main()
         // if voltage battry <1 v batt rorre
        
      
-      /* if((POWER_SUPLY_CONNECT)&&(voltage_battery <= MINIMUM_VOLTAGE_VALID))
+       if((POWER_SUPLY_CONNECT)&&(voltage_battery <= MINIMUM_VOLTAGE_VALID))
        {
         	SuplyStatus=BATTRY_ERROR;
        }
@@ -244,12 +238,12 @@ void main()
        {
        	   SuplyStatus=LOW_BATTERY;
        }
-		*/
+		
 	  
 	/*	SuplyStatus=LOW_BATTERY;
 		*/
 
-       SuplyStatus=BATTRY_ERROR;
+       SuplyStatus=NORMAL_POWER;
 		switch(Mode)
 		{
 			case NORMAL:
@@ -282,7 +276,7 @@ void main()
 						LED_RED_OFF;
 						LED_YELLOW_ON;
 						Cunter++;	
-						if(Cunter<1000)
+						if(Cunter<BATTRY_ERROR_BLINK_ON)
 						{
 							Display( buffer,'0',&displayClock);
 						}
@@ -290,26 +284,9 @@ void main()
 						{  
 							DisplayBatteryLOW(displayClock);
 						}
-						buzzerDoull(Cunter);
-					/*	if((Cunter>1920)&&(Cunter<1950))
-						{
-							BUZZER_ON;	
-						}
-						else if((Cunter>1950)&&(Cunter<1970))	
-						{
-							BUZZER_OFF;		
-						}
-						else if(Cunter>1970)
-						{
-							BUZZER_ON;
-						}
-						else
-						{
-							BUZZER_OFF;		
-						}
-						
-						if(Cunter>2000)Cunter=0;*/
-		
+						buzzerDoull(&Cunter);
+		                if(Cunter>BATTRY_ERROR_BLINK_OFF)Cunter=0;
+		                
 					break;
 					
 					case SUPPLY_ERROR:
@@ -319,38 +296,17 @@ void main()
 						LED_YELLOW_ON;
 						Cunter++;
 						
-						if(Cunter<1000)
+						if(Cunter<SUPPLY_ERROR_BLINK_ON)
 						{
-							Display( buffer,'0',&displayClock);
+						  Display( buffer,'0',&displayClock);
 						}
 						else
 						{  
 					      DisplaySuplyError(displayClock);
 						}
-						 buzzerDoull(Cunter);
-					/*	if(Cunter>2000)Cunter=0;
 						
-							if((Cunter>1920)&&(Cunter<1950))
-						{
-							BUZZER_ON;	
-						}
-						else if((Cunter>1950)&&(Cunter<1970))	
-						{
-							BUZZER_OFF;		
-						}
-						else if(Cunter>1970)
-						{
-							BUZZER_ON;
-						}
-						else
-						{
-							BUZZER_OFF;		
-						}
-						
-						if(Cunter>2000)Cunter=0;
-					  */
-						
-						
+						buzzerDoull(&Cunter);
+					   if(Cunter>SUPPLY_ERROR_BLINK_OFF)Cunter=0;
 					break;
 					
 					case LOW_BATTERY:
@@ -359,7 +315,8 @@ void main()
 						LED_YELLOW_ON;
 						
 						Cunter++;
-						if(Cunter>=300)
+						
+						if(Cunter>=LOW_BATTERY_BLINK_ON)
 						{
 						  BUZZER_ON;
 						  LED_RED_ON;
@@ -371,7 +328,7 @@ void main()
 						   BUZZER_OFF;	
 						   DisplayBatteryLOW(displayClock);
 						}
-						if(Cunter>=600)
+						if(Cunter>=LOW_BATTERY_BLINK_OFF)
 						{
 				     	 Cunter=0;
 						}
@@ -394,10 +351,12 @@ void main()
 				LED_RED_ON;
 				LED_GREEN_ON;
 				LED_YELLOW_ON;
-				Display(8888,'0',&displayClock);
+
+				Display(TEST_DISPLAY_VIWE,'0',&displayClock);
 				pushButtonState=0;
 				pushButtonCunter=0;
-				if(Cunter>1000)
+		
+				if(Cunter>TEST_TIMEOUT)
 				{
 					Cunter=0;
 					Mode=NORMAL;
@@ -407,9 +366,11 @@ void main()
 			case CHECK_BATTERY:
 				
 			   	Cunter++;
-				if(bufferVdd<=19)
+			   
+			   	 
+				if(bufferVdd<=PERSENTEAGE_LOWBATTRY)
 				{
-				  DisplayBatteryLOW(displayClock);
+				   DisplayBatteryLOW(displayClock);
 				}
 				else
 				{
@@ -418,7 +379,8 @@ void main()
 				
 				pushButtonState=0;
 				pushButtonCunter=0;
-			    if(Cunter>500)
+			
+			    if(Cunter> CHECK_BATTERY_TIMEOUT)
 				{
 					Mode=NORMAL;
 					Cunter=0;
@@ -429,12 +391,13 @@ void main()
 			
 			
 			case DETECT:
+			
 		        BUZZER_ON;
 				RELAY_ON;
 				LED_RED_ON;
 				LED_GREEN_ON;
 				LED_YELLOW_ON;
-				Display(250,'0',&displayClock);
+				Display(DETECT_DISPLAY_VIWE,'0',&displayClock);
 		
 			break;
 			
@@ -448,14 +411,7 @@ void main()
 				LED_YELLOW_ON;
 				
 			break;
-			
-			
-			
-			
-			
-			
-			
-		
+	
 			
 		}
 		
@@ -488,6 +444,6 @@ void buzzerDoull(int *Cunter)
 	{
 		BUZZER_OFF;		
 	}
-	if(*Cunter>2000)*Cunter=0;
+
 		
 }

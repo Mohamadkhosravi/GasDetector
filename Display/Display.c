@@ -490,52 +490,52 @@ void DisplaySuplyError(char cunterDigit )
 		break;	
 	}
 }
-//
-//void DisplayCharecters( unsigned char *stringOfCharacter,char clock )
-//{
-//
-//	switch(clock)
-//	{ 	
-//		case 0:
-//		 segmentCharacters( stringOfCharacter[0]);
-//			COM0 = 1;
-//			COM1 = 0;
-//			COM2 = 0;
-//			COM3 = 0;
-//		
-//		break;	
-//			
-//		case 1:
-//	      segmentCharacters(stringOfCharacter[1]);
-//			COM0 = 0;
-//			COM1 = 1;
-//			COM2 = 0;
-//			COM3 = 0;
-//		
-//		break;
-//		
-//		case 2:
-//		 segmentCharacters(stringOfCharacter[2]);
-//			COM0 = 0;
-//			COM1 = 0;
-//			COM2 = 1;
-//			COM3 = 0;
-//		
-//		break;	
-//		
-//		case 3:
-//		 segmentCharacters(stringOfCharacter[3]);
-//			COM0 = 0;
-//			COM1 = 0;
-//			COM2 = 0;
-//			COM3 = 1;
-//		
-//		break;	
-//	}	
-//}
+/*
+void DisplayCharecters( unsigned char *stringOfCharacter,char clock )
+{
+
+	switch(clock)
+	{ 	
+		case 0:
+		 segmentCharacters( stringOfCharacter[0]);
+			COM0 = 1;
+			COM1 = 0;
+			COM2 = 0;
+			COM3 = 0;
+		
+		break;	
+			
+		case 1:
+	      segmentCharacters(stringOfCharacter[1]);
+			COM0 = 0;
+			COM1 = 1;
+			COM2 = 0;
+			COM3 = 0;
+		
+		break;
+		
+		case 2:
+		 segmentCharacters(stringOfCharacter[2]);
+			COM0 = 0;
+			COM1 = 0;
+			COM2 = 1;
+			COM3 = 0;
+		
+		break;	
+		
+		case 3:
+		 segmentCharacters(stringOfCharacter[3]);
+			COM0 = 0;
+			COM1 = 0;
+			COM2 = 0;
+			COM3 = 1;
+		
+		break;	
+	}	
+}
 
 
-
+*/
 //
 //void DisplaySuplyError(char cunterDigit )
 //{
