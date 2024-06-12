@@ -21,9 +21,9 @@ void segmentNumbers(unsigned char number);
 void segmentCharacters(unsigned char character);
 void Display(int number, unsigned char character,char *clock);
 
-void DisplayLooding(char cunterDigit );
+void DisplayLoading(char cunterDigit );
 void DisplayBatteryLOW(char cunterDigit);
 void DisplayBatteryError(char cunterDigit);
-void DisplaySuplyError(char cunterDigit);
-//void DisplayCharecter( unsigned char *stringOfCharacter,char clock );
+void DisplaySupplyError(char cunterDigit);
+//void DisplayCharacters( unsigned char *stringOfCharacter,char clock );
 #endif

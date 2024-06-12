@@ -289,7 +289,7 @@ void Display(int number, unsigned char character,char *clock)
 }	
 	
 	
-void DisplayLooding(char cunterDigit )
+void DisplayLoading(char cunterDigit )
 {
 	
 	switch(cunterDigit) 
@@ -452,7 +452,7 @@ void DisplayBatteryError(char cunterDigit )
 
 
 
-void DisplaySuplyError(char cunterDigit )
+void DisplaySupplyError(char cunterDigit )
 {
 	switch(cunterDigit) 
 	{			
@@ -537,7 +537,7 @@ void DisplayCharecters( unsigned char *stringOfCharacter,char clock )
 
 */
 //
-//void DisplaySuplyError(char cunterDigit )
+//void DisplaySupplyError(char cunterDigit )
 //{
 //		switch(cunterDigit) 
 //	{			

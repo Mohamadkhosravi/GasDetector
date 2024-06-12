@@ -6,10 +6,6 @@
 #include <Display.h>
 #include <ADC.h>
 
-
-
-
-
 #define	BUZZER_ON       _pa4= 1
 #define	BUZZER_OFF      _pa4= 0	
 #define	LED_GREEN       _pc0
@@ -22,26 +18,27 @@
 #define	RELAY_ON        _pb2= 1
 #define RELAY_OFF   	_pb2= 0	
 
-#define TRESHOLD_DETECT_GAS     250
+#define THRESHOLD_DETECT_GAS     250
 #define MINIMUM_VOLTAGE_VALID   3300
-#define VOLTAGE_LOWBATTERY      3400
-#define PERSENTEAGE_LOWBATTRY   19
-#define TIMER_CUNTER_INTRUPT    _tb0f
-#define PRESEED_PUSHBUTUN       _pb3==0
-#define POWER_SUPLY_CONNECT     _pa6==1 
-#define POWER_SUPLY_DISCONNECT  _pa6==0 
+#define VOLTAGE_LOW_BATTERY      3400
+#define PERCENTAGE_LOW_BATTERY     19
+#define TIMER_COUNTER_INTERRUPT    _tb0f
+#define PRESSED_PUSHBUTTON       _pb3==0
+#define POWER_SUPPLY_CONNECT     _pa6==1 
+#define POWER_SUPPLY_DISCONNECT  _pa6==0 
 #define MINIMUM_CURRENT_SENSOR  5
 #define START_DELAY             15000
 #define START_BLINK_ON          1000
 #define START_BLINK_OFF         2000
-#define BATTRY_ERROR_BLINK_ON   1000
-#define BATTRY_ERROR_BLINK_OFF  2000
+#define BATTERY_ERROR_BLINK_ON   1000
+#define BATTERY_ERROR_BLINK_OFF  2000
 #define SUPPLY_ERROR_BLINK_ON   1000
 #define SUPPLY_ERROR_BLINK_OFF  2000
 #define LOW_BATTERY_BLINK_ON    300
-#define LOW_BATTERY_BLINK_OFF   600						
-#define TEST_DISPLAY_VIWE       8888
-#define DETECT_DISPLAY_VIWE     TRESHOLD_DETECT_GAS 
+#define LOW_BATTERY_BLINK_OFF   600	
+    				
+#define TEST_DISPLAY_VIEW       8888
+#define DETECT_DISPLAY_VIEW     THRESHOLD_DETECT_GAS 
 #define TEST_TIMEOUT            1000
 #define CHECK_BATTERY_TIMEOUT   500
 #define AVDD                    5000.0
@@ -58,10 +55,10 @@ float voltage_battery=0;
 int percent_of_battery=0; 
 char displayClock=0;
 char bufferVdd=0;
-unsigned int Cunter=0;
+unsigned int Counter=0;
 unsigned short buffer=0;
 bit pushButtonState=0;
-unsigned int pushButtonCunter=0;
+unsigned int pushButtonCounter=0;
 
 
 
@@ -72,8 +69,8 @@ typedef union parameter{
  //unsigned int PersentOfBattery;
  //unsigned int VDD
  
-} Parametrs;
-Parametrs Parametr;
+} Parameters;
+Parameters Parameter;
 
 
 
@@ -84,7 +81,7 @@ typedef enum
 	CHECK_BATTERY,
 	TEST,
 	DETECT,
-	SENSOR_ERRORE
+	SENSOR_ERROR
 	
 }mode;
 	mode Mode;
@@ -92,10 +89,10 @@ typedef enum
 typedef enum
 {
     NORMAL_POWER, 
-	BATTRY_ERROR,
+	BATTERY_ERROR,
 	SUPPLY_ERROR,
 	LOW_BATTERY
 	
-}Suplymode;
- Suplymode SuplyStatus;
+}SupplyMode;
+ SupplyMode SupplyStatus;
 #endif
