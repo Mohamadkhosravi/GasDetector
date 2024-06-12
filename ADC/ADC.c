@@ -39,7 +39,7 @@ unsigned int  S_READ_ADC(unsigned char CH)
         case 2:
             _RD_ADC_SET_AN2 // Set ADC channel to AN2.
             break;
-        case 3:
+        /*case 3:
             _RD_ADC_SET_AN3 // Set ADC channel to AN3.
             break;
         case 4:
@@ -50,7 +50,7 @@ unsigned int  S_READ_ADC(unsigned char CH)
             break;
         case 6:
             _RD_ADC_SET_OPA1O // Set ADC channel to OPA1O.
-            break;
+            break;*/
         case 7:
              _vbgen=1;
             _RD_ADC_SET_LINEV // Set ADC channel to LINEV.

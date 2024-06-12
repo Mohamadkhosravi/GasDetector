@@ -1,20 +1,20 @@
 #include "Display.h"
 
-void DisplayInit(void)
-{
-	// Set 7-segment configuration
-	COM0 = 1; // Set initial digit to display
-	COM1 = 1;
-	COM2 = 1;
-	COM3 = 1;
-	SEGA = 0;
-	SEGB = 0;
-	SEGC = 0;
-	SEGD = 0;
-	SEGE = 0;
-	SEGF = 0;
-	SEGG = 0;
-}
+//void DisplayInit(void)
+//{
+//	// Set 7-segment configuration
+//	COM0 = 1; // Set initial digit to display
+//	COM1 = 1;
+//	COM2 = 1;
+//	COM3 = 1;
+//	SEGA = 0;
+//	SEGB = 0;
+//	SEGC = 0;
+//	SEGD = 0;
+//	SEGE = 0;
+//	SEGF = 0;
+//	SEGG = 0;
+//}
 
 void segmentNumbers(unsigned char number)
 {
@@ -490,6 +490,60 @@ void DisplaySupplyError(char cunterDigit )
 		break;	
 	}
 }
+
+
+
+void DisplaySensorError(char cunterDigit )
+{
+	switch(cunterDigit) 
+	{			
+		case 0:
+		 segmentCharacters('S');
+			COM0 = 1;
+			COM1 = 0;
+			COM2 = 0;
+			COM3 = 0;
+		
+		break;		
+		case 1:
+	      segmentCharacters('E');
+			COM0 = 0;
+			COM1 = 1;
+			COM2 = 0;
+			COM3 = 0;
+		
+		break;
+		case 2:
+		 segmentCharacters('n');
+			COM0 = 0;
+			COM1 = 0;
+			COM2 = 1;
+			COM3 = 0;
+		
+		break;	
+		case 3:
+		 segmentCharacters('E');
+			COM0 = 0;
+			COM1 = 0;
+			COM2 = 0;
+			COM3 = 1;
+		
+		break;	
+	}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
 /*
 void DisplayCharecters( unsigned char *stringOfCharacter,char clock )
 {

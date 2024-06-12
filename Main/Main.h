@@ -18,20 +18,25 @@
 #define	RELAY_ON        _pb2= 1
 #define RELAY_OFF   	_pb2= 0	
 
-#define THRESHOLD_DETECT_GAS     250
-#define MINIMUM_VOLTAGE_VALID   3300
-#define VOLTAGE_LOW_BATTERY      3400
-#define PERCENTAGE_LOW_BATTERY     19
+
 #define TIMER_COUNTER_INTERRUPT    _tb0f
-#define PRESSED_PUSHBUTTON       _pb3==0
-#define POWER_SUPPLY_CONNECT     _pa6==1 
-#define POWER_SUPPLY_DISCONNECT  _pa6==0 
+#define PRESSED_PUSHBUTTON         _pb3==0
+//#define POWER_SUPPLY_CONNECT     _pa6==1 
+//#define POWER_SUPPLY_DISCONNECT  _pa6==0 
+#define POWER_SUPPLY_CONNECT     1
+#define POWER_SUPPLY_DISCONNECT  0
+
+
+#define MINIMUM_VOLTAGE_VALID   3300
+#define THRESHOLD_DETECT_GAS    250
+#define VOLTAGE_LOW_BATTERY     3400
+#define PERCENTAGE_LOW_BATTERY  19
 #define MINIMUM_CURRENT_SENSOR  5
 #define START_DELAY             15000
 #define START_BLINK_ON          1000
 #define START_BLINK_OFF         2000
-#define BATTERY_ERROR_BLINK_ON   1000
-#define BATTERY_ERROR_BLINK_OFF  2000
+#define BATTERY_ERROR_BLINK_ON  1000
+#define BATTERY_ERROR_BLINK_OFF 2000
 #define SUPPLY_ERROR_BLINK_ON   1000
 #define SUPPLY_ERROR_BLINK_OFF  2000
 #define LOW_BATTERY_BLINK_ON    300
@@ -45,35 +50,23 @@
 #define COEFFICIENT             4.8875855327 //(AVDD/1023.0)
 #define b                       338.421
 #define a                       0.105263
-#define VDD(ADC_VDD)(4*(1.6*ADC_VDD/1023))
-#define batteryPercentage(VoltageBattery)(a*VoltageBattery-b)
+/*#define VDD(ADC_VDD)(4*(1.6*ADC_VDD/1023))*/
+#define BATTERY_PERSENTAGE(VoltageBattery)(a*VoltageBattery-b)
 
 
 
 
 float voltage_battery=0;
-int percent_of_battery=0; 
 char displayClock=0;
 char bufferVdd=0;
-unsigned int Counter=0;
-unsigned short buffer=0;
+unsigned short GasValue=0;
 bit pushButtonState=0;
 unsigned int pushButtonCounter=0;
 
-
-
 typedef union parameter{
- //unsigned int VoltageBattery;
- unsigned int GasValue;
- //unsigned int GasErroreValue;
- //unsigned int PersentOfBattery;
- //unsigned int VDD
- 
+ unsigned int Counter;
 } Parameters;
 Parameters Parameter;
-
-
-
 
 typedef enum
 {
@@ -84,7 +77,7 @@ typedef enum
 	SENSOR_ERROR
 	
 }mode;
-	mode Mode;
+ mode Mode;
 
 typedef enum
 {
@@ -95,4 +88,35 @@ typedef enum
 	
 }SupplyMode;
  SupplyMode SupplyStatus;
+ 
+ 
+ 
+ 
+ 
+void buzzerDull(short *Counter);
+void initializeSystem();
+void initializePorts();
+void handleTestMode();
+void handleCheckBatteryMode();
+void handleDetectMode();
+void handleSensorErrorMode();
+void normalPowerHandler(void);
+void batteryErrorHandler(void);
+void supplyErrorHandler(void);
+void lowBatteryHandler(void);
+char batteryPercentage(char percentOfBattery);
+/*void initializeTimers();*/
+//SupplyMode handleSupplyStatus();
+/*void PowerSuplyManagemante( SupplyMode *SupplyStatus,int *displayClock);*/
+/*char batteryPercentage(float *voltage_battery);*/
+//typedef void (*SupplyManage[4])(void);
+//SupplyManage supplyHandlers = {normalPowerHandler, batteryErrorHandler, supplyErrorHandler, lowBatteryHandler};
+
+
+
+ 
+ 
+ 
+ 
+ 
 #endif
