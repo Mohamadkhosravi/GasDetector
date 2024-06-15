@@ -45,18 +45,18 @@ Input Library File: C:\Program Files\Holtek MCU Development Tools\HT-IDE3000V8.x
      00h     055dh     058fh    0033h      CODE               _supplyErrorHandler (c:\users\tech\desktop\gasdetector\output\MAIN.OBJ)
      00h     0590h     0599h    000ah      CODE               _initializeSystem (c:\users\tech\desktop\gasdetector\output\MAIN.OBJ)
      00h     059ah     05b4h    001bh      CODE               _initializePorts (c:\users\tech\desktop\gasdetector\output\MAIN.OBJ)
-     00h     05b5h     077ch    01c8h      CODE               _main (c:\users\tech\desktop\gasdetector\output\MAIN.OBJ)
-     00h     077dh     0789h    000dh      CODE               @ROMDATA_BASE (c:\users\tech\desktop\gasdetector\output\STARTUP1_L.OBJ)
-     00h     078ah     0793h    000ah      CODE               __DELAYX (C:\Program Files\Holtek MCU Development Tools\HT-IDE3000V8.x\LIB\LIBHOLTEKGCC.LIB)
-     00h     0794h     07cah    0037h      CODE               _builtin_holtek_divmodhi4_isr00 (C:\Program Files\Holtek MCU Development Tools\HT-IDE3000V8.x\LIB\LIBHOLTEKGCC.LIB)
-     00h     07cbh     07d9h    000fh      CODE               _abs (C:\Program Files\Holtek MCU Development Tools\HT-IDE3000V8.x\LIB\v3_tabrd_mrsc.lib)
-     00h     07dah     07deh    0005h      CODE               _CROM2PROM (CROM2PROM)
+     00h     05b5h     0776h    01c2h      CODE               _main (c:\users\tech\desktop\gasdetector\output\MAIN.OBJ)
+     00h     0777h     0783h    000dh      CODE               @ROMDATA_BASE (c:\users\tech\desktop\gasdetector\output\STARTUP1_L.OBJ)
+     00h     0784h     078dh    000ah      CODE               __DELAYX (C:\Program Files\Holtek MCU Development Tools\HT-IDE3000V8.x\LIB\LIBHOLTEKGCC.LIB)
+     00h     078eh     07c4h    0037h      CODE               _builtin_holtek_divmodhi4_isr00 (C:\Program Files\Holtek MCU Development Tools\HT-IDE3000V8.x\LIB\LIBHOLTEKGCC.LIB)
+     00h     07c5h     07d3h    000fh      CODE               _abs (C:\Program Files\Holtek MCU Development Tools\HT-IDE3000V8.x\LIB\v3_tabrd_mrsc.lib)
+     00h     07d4h     07d8h    0005h      CODE               _CROM2PROM (CROM2PROM)
      00h     0080h     0093h    0014h      DATA     4.8       @HCCINIT (c:\users\tech\desktop\gasdetector\output\MAIN.OBJ)
      00h     0094h     0099h    0006h      DATA     7.6667    @HCCINIT0 (c:\users\tech\desktop\gasdetector\output\MAIN.OBJ)
      00h     009ah     009ah    0001h      DATA     0         @BITDATASEC (c:\users\tech\desktop\gasdetector\output\STARTUP1_L.OBJ)
      00h     009bh     009bh    0001h      DATA     82        @data_ra (C:\Program Files\Holtek MCU Development Tools\HT-IDE3000V8.x\LIB\LIBHOLTEKGCC.LIB)
-     00h     009ch     009ch    0001h      DATA     57        @data_rb (C:\Program Files\Holtek MCU Development Tools\HT-IDE3000V8.x\LIB\LIBHOLTEKGCC.LIB)
-     00h     009dh     009dh    0001h      DATA     49        @data_rc (C:\Program Files\Holtek MCU Development Tools\HT-IDE3000V8.x\LIB\LIBHOLTEKGCC.LIB)
+     00h     009ch     009ch    0001h      DATA     54        @data_rb (C:\Program Files\Holtek MCU Development Tools\HT-IDE3000V8.x\LIB\LIBHOLTEKGCC.LIB)
+     00h     009dh     009dh    0001h      DATA     46        @data_rc (C:\Program Files\Holtek MCU Development Tools\HT-IDE3000V8.x\LIB\LIBHOLTEKGCC.LIB)
      00h     009eh     009eh    0001h      DATA     24        @data_rd (C:\Program Files\Holtek MCU Development Tools\HT-IDE3000V8.x\LIB\LIBHOLTEKGCC.LIB)
      00h     009fh     009fh    0001h      DATA     22        @data_re (C:\Program Files\Holtek MCU Development Tools\HT-IDE3000V8.x\LIB\LIBHOLTEKGCC.LIB)
      00h     00a0h     00a0h    0001h      DATA     13        @data_rf (C:\Program Files\Holtek MCU Development Tools\HT-IDE3000V8.x\LIB\LIBHOLTEKGCC.LIB)
@@ -114,8 +114,8 @@ Input Library File: C:\Program Files\Holtek MCU Development Tools\HT-IDE3000V8.x
 
      Public Symbols Information
      Address            Public by Name
-     07dbh              _Crom2Prom
-     07dah              _Crom2PromNext
+     07d5h              _Crom2Prom
+     07d4h              _Crom2PromNext
      02beh              _Display
      03b0h              _DisplayBatteryError
      0386h              _DisplayBatteryLOW
@@ -129,18 +129,18 @@ Input Library File: C:\Program Files\Holtek MCU Development Tools\HT-IDE3000V8.x
      01a2h              _S_ADC_Init
      01a8h              _S_READ_ADC
      0094h              _SupplyStatus
-     0790h              __DELAYX0
-     078fh              __DELAYX1
-     078eh              __DELAYX2
-     078dh              __DELAYX3
-     078ch              __DELAYX4
-     078bh              __DELAYX5
-     078ah              __DELAYX6
-     07cbh              _abs
+     078ah              __DELAYX0
+     0789h              __DELAYX1
+     0788h              __DELAYX2
+     0787h              __DELAYX3
+     0786h              __DELAYX4
+     0785h              __DELAYX5
+     0784h              __DELAYX6
+     07c5h              _abs
      052ah              _batteryErrorHandler
      049bh              _batteryPercentage
      008fh              _bufferVdd
-     0794h              _builtin_holtek_divmodhi4_isr00
+     078eh              _builtin_holtek_divmodhi4_isr00
      0069h              _builtin_holtek_dtadd
      0143h              _builtin_holtek_dtdecode1
      0138h              _builtin_holtek_dtdecode2
@@ -167,7 +167,7 @@ Input Library File: C:\Program Files\Holtek MCU Development Tools\HT-IDE3000V8.x
      00abh              _builtin_holtek_mant2
      00afh              _builtin_holtek_prod
      00a6h              _builtin_holtek_signs
-     07a6h              _builtin_holtek_udivmodhi4_isr00
+     07a0h              _builtin_holtek_udivmodhi4_isr00
      00b5h              _builtin_holtek_udivmodhi4_isr00_2
      0022h              _builtin_holtek_uitod
      04feh              _buzzerDull
@@ -195,7 +195,7 @@ Input Library File: C:\Program Files\Holtek MCU Development Tools\HT-IDE3000V8.x
      009fh              re
      00a0h              rf
      00a1h              rg
-     077ch              startup_value_1
+     0776h              startup_value_1
 
      Address            Public by Value
      0022h              _builtin_holtek_uitod
@@ -267,24 +267,24 @@ Input Library File: C:\Program Files\Holtek MCU Development Tools\HT-IDE3000V8.x
      0590h              _initializeSystem
      059ah              _initializePorts
      05b5h              _main
-     077ch              startup_value_1
-     078ah              __DELAYX6
-     078bh              __DELAYX5
-     078ch              __DELAYX4
-     078dh              __DELAYX3
-     078eh              __DELAYX2
-     078fh              __DELAYX1
-     0790h              __DELAYX0
-     0794h              _builtin_holtek_divmodhi4_isr00
-     07a6h              _builtin_holtek_udivmodhi4_isr00
-     07cbh              _abs
-     07dah              _Crom2PromNext
-     07dbh              _Crom2Prom
+     0776h              startup_value_1
+     0784h              __DELAYX6
+     0785h              __DELAYX5
+     0786h              __DELAYX4
+     0787h              __DELAYX3
+     0788h              __DELAYX2
+     0789h              __DELAYX1
+     078ah              __DELAYX0
+     078eh              _builtin_holtek_divmodhi4_isr00
+     07a0h              _builtin_holtek_udivmodhi4_isr00
+     07c5h              _abs
+     07d4h              _Crom2PromNext
+     07d5h              _Crom2Prom
 
 
 ROM Usage Statistics
      Size      Used     Percentage
-     0800h     07dfh    98%
+     0800h     07d9h    98%
 
 RAM Usage Statistics
     Bank      Size      Used     Percentage

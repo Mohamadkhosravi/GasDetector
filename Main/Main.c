@@ -6,15 +6,15 @@ void main()
 	initializeSystem();
 	initializePorts();
 	S_ADC_Init();
-
 	BUZZER_OFF;
 	LED_GREEN_OFF;
 	LED_RED_OFF;
 	LED_YELLOW_OFF;
 	RELAY_ON;
-	while (pushButtonCounter < START_DELAY)
-	{
-		pushButtonCounter++;
+	pushButtonCounter = START_DELAY;
+	
+	do{
+		--pushButtonCounter;
 		Parameter.Counter++;
 		if (Parameter.Counter < START_BLINK_ON)
 		{
@@ -48,7 +48,10 @@ void main()
 			Parameter.Counter = 0;
 			displayClock = 0;
 		}
-	}
+		
+		
+	}while(pushButtonCounter);
+
 	pushButtonCounter = 0;
 	Parameter.Counter = 0;
 	displayClock = 0;
@@ -76,7 +79,6 @@ void main()
 
 			if (PRESSED_PUSHBUTTON)
 			{
-
 				pushButtonState = 1;
 				pushButtonCounter++;
 			}
@@ -100,7 +102,7 @@ void main()
 	{
 		SupplyStatus= NORMAL_POWER;
 	}
-	if ((POWER_SUPPLY_CONNECT) && (voltage_battery <= MINIMUM_VOLTAGE_VALID))
+	else if ((POWER_SUPPLY_CONNECT) && (voltage_battery <= MINIMUM_VOLTAGE_VALID))
 	{
 		SupplyStatus=  BATTERY_ERROR;
 	}
@@ -125,21 +127,19 @@ void main()
 				{
 					GasValue = S_READ_ADC(0);
 				}
-		    
 			//	switch(handleSupplyStatus(&voltage_battery))
 			    switch(SupplyStatus)
 				{
 					case NORMAL_POWER:
-					
 						normalPowerHandler();
 					break;
-				
+					
 					case BATTERY_ERROR:
 						batteryErrorHandler();
 					break;
 					
 					case SUPPLY_ERROR:
-						supplyErrorHandler();
+						 supplyErrorHandler();
 					break;
 				
 					case LOW_BATTERY:
@@ -154,15 +154,15 @@ void main()
 	
 	        case CHECK_BATTERY:
 	            handleCheckBatteryMode(&bufferVdd);
-	            break;
+	        break;
 	
 	        case DETECT:
 	            handleDetectMode();
-	            break;
+	        break;
 	
 	        case SENSOR_ERROR:
 	            handleSensorErrorMode();
-	            break;
+	        break;
 	        }
 	}
 }
@@ -244,7 +244,7 @@ char batteryPercentage(char percentOfBattery)
 		percentOfBattery = 0;
 	}
 		buffer = percentOfBattery;
-	if (abs(percentOfBattery - buffer) >= 3)
+	if (abs(percentOfBattery - buffer) >= 10)
 	{
 		buffer = percentOfBattery;
 	}
@@ -386,7 +386,7 @@ void initializePorts()
 	_pds0 = 0b00000000;
 	_pbpu3 = 1;
 }
-*
+/*
 SupplyMode handleSupplyStatus( int *voltage_battery) {
 
 //	Display(handleSupplyStatus(*voltage_battery,'0', &displayClock);
