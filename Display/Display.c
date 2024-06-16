@@ -457,7 +457,7 @@ void DisplaySupplyError(char cunterDigit )
 	switch(cunterDigit) 
 	{			
 		case 0:
-		 segmentCharacters('S');
+		 segmentCharacters('p');
 			COM0 = 1;
 			COM1 = 0;
 			COM2 = 0;
