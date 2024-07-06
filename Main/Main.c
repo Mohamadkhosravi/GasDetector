@@ -2,6 +2,8 @@
 
 // Main function
 void main() {
+	_bp=100;
+	 	_bp=000;
     // Initialize system and ports
     initializeSystem();
     initializePorts();
@@ -16,8 +18,6 @@ void main() {
     RELAY_ON;           // Turn on the relay
 	parameter.PushButtonCounter=0;
 	parameter.DisplayClock=0;
-
- 
     Mode = NORMAL;           // Set mode to normal
     SupplyStatus=NORMAL_POWER;
     // Main loop
@@ -105,29 +105,29 @@ void main() {
                 switch (SupplyStatus){
                 	
                     case NORMAL_POWER:
-                        normalPowerHandler();  // Handle normal power mode
+                       normalPowerHandler();  // Handle normal power mode
                         break;
 
                     case BATTERY_ERROR:
-                        batteryErrorHandler(); // Handle battery error mode
+                       batteryErrorHandler(); // Handle battery error mode
                         break;
 
                     case SUPPLY_ERROR:
-                        supplyErrorHandler();  // Handle supply error mode
+                       supplyErrorHandler();  // Handle supply error mode
                         break;
 
                     case LOW_BATTERY:
-                        lowBatteryHandler();   // Handle low battery mode
+                       lowBatteryHandler();   // Handle low battery mode
                         break;
                 }
                 break;
 
             case TEST:
-                handleTestMode();  // Handle test mode
+              handleTestMode();  // Handle test mode
                 break;
 
             case CHECK_BATTERY:
-                handleCheckBatteryMode(&parameter.BatteryPercentage); // Handle check battery mode
+              handleCheckBatteryMode(&parameter.BatteryPercentage); // Handle check battery mode
                 break;
 
             case DETECT:
@@ -360,7 +360,7 @@ void initializeSystem() {
 void initializePorts()
 {
 	_lvpu = 0;
-	_pac &= 0b01101001;
+	_pac &= 0b01001001;
 	_pac |= 0b00000110;
 	_pbc &= 0b00000000;
 	_pbc |= 0b00001011;

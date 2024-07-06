@@ -327,7 +327,7 @@ void DisplayLoading(char cunterDigit )
 			COM3 = 1;
 	
 		break;	
-		
+	
 		case 4:
 		  
 		   segmentCharacters('O');
