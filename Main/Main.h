@@ -55,7 +55,8 @@
 //==========================================================
 //           Power Supply Connection States
 //==========================================================
-#define POWER_SUPPLY_CONNECT  _pa6 // Power supply is connected
+#define POWER_SUPPLY_CONNECT       _pa6==1 // Power supply is connected
+//#define POWER_SUPPLY_CONNECT  1 // Power supply is connected
 //#define POWER_SUPPLY_DISCONNECT  0      // Power supply is disconnected
 
 //==========================================================
@@ -175,7 +176,7 @@ SupplyMode handleSupplyStatus();
 //SupplyManage supplyHandlers = {normalPowerHandler, batteryErrorHandler, supplyErrorHandler, lowBatteryHandler};
  
  
- 
+
  
  
 #endif

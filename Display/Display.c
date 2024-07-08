@@ -127,7 +127,7 @@ void segmentCharacters(unsigned char character)
 
 	switch (character)
 	{
-		case 'A':
+	/*	case 'A':
 			SEGA = 0;
 			SEGB = 0;
 			SEGC = 0;
@@ -135,7 +135,7 @@ void segmentCharacters(unsigned char character)
 			SEGE = 0;
 			SEGF = 0;
 			SEGG = 0;
-		break;
+		break;*/
 
 		case 'b':
 			SEGA = 1;
@@ -157,7 +157,7 @@ void segmentCharacters(unsigned char character)
 			SEGG = 1;
 			break;
 			
-		case 'N':
+		/*case 'N':
 			SEGA = 1;
 			SEGB = 1;
 			SEGC = 0;
@@ -165,7 +165,7 @@ void segmentCharacters(unsigned char character)
 			SEGE = 0;
 			SEGF = 1;
 			SEGG = 0;
-			break;
+			break;*/
 			
 		case 'o':
 			SEGA = 1;
@@ -205,7 +205,8 @@ void segmentCharacters(unsigned char character)
 			SEGE = 0;
 			SEGF = 0;
 			SEGG = 1;
-		break;	
+		break;
+			
 		case 'S':
 			SEGA = 0;
 			SEGB = 1;
@@ -216,15 +217,15 @@ void segmentCharacters(unsigned char character)
 			SEGG = 0;
 		break;	
 		
-		case 'T':
+		case 'P':
        
 			SEGA = 0;
 			SEGB = 0;
-			SEGC = 0;
+			SEGC = 1;
 			SEGD = 1;
-			SEGE = 1;
-			SEGF = 1;
-			SEGG = 1;
+			SEGE = 0;
+			SEGF = 0;
+			SEGG = 0;
 		break;	
 		
 
@@ -238,12 +239,10 @@ void Display(int number, unsigned char character,char *clock)
 		
 			if(character!='0')
 			{
-			
 				segmentCharacters(character);
 	     	}
 			else 
 			{
-			
 				segmentNumbers((number/1000)%10);
 			}
 			
@@ -369,7 +368,50 @@ void DisplayLoading(char cunterDigit )
 	};	
 }
 		
-	
+
+
+void DisplayError(char typeOfError,char cunterDigit )
+{
+    switch(cunterDigit) 
+	{			
+		case 0:
+		 segmentCharacters(typeOfError);
+			COM0 = 1;
+			COM1 = 0;
+			COM2 = 0;
+			COM3 = 0;
+		
+		break;		
+		case 1:
+	      segmentCharacters('E');
+			COM0 = 0;
+			COM1 = 1;
+			COM2 = 0;
+			COM3 = 0;
+		
+		break;
+		case 2:
+		 segmentCharacters('r');
+			COM0 = 0;
+			COM1 = 0;
+			COM2 = 1;
+			COM3 = 0;
+		
+		break;	
+		case 3:
+		 segmentCharacters('r');
+			COM0 = 0;
+			COM1 = 0;
+			COM2 = 0;
+			COM3 = 1;
+		
+		break;	
+	}	
+}
+
+
+
+/*	
 void DisplayBatteryLOW(char cunterDigit )
 {
 	switch(cunterDigit) 
@@ -408,9 +450,9 @@ void DisplayBatteryLOW(char cunterDigit )
 		break;	
 	}
 }
+*/
 
-
-
+/*
 void DisplayBatteryError(char cunterDigit )
 {
 	switch(cunterDigit) 
@@ -449,9 +491,9 @@ void DisplayBatteryError(char cunterDigit )
 		break;	
 	}
 }
+*/
 
-
-
+/*
 void DisplaySupplyError(char cunterDigit )
 {
 	switch(cunterDigit) 
@@ -490,8 +532,8 @@ void DisplaySupplyError(char cunterDigit )
 		break;	
 	}
 }
-
-
+*/
+/*
 
 void DisplaySensorError(char cunterDigit )
 {
@@ -534,7 +576,7 @@ void DisplaySensorError(char cunterDigit )
 
 
 
-
+*/
 
 
 

@@ -26,40 +26,40 @@ Input Library File: C:\Program Files\Holtek MCU Development Tools\HT-IDE3000V8.x
      00h     01a2h     01a7h    0006h      CODE               _S_ADC_Init (c:\users\tech\desktop\gasdetector\output\ADC.OBJ)
      00h     01a8h     01fch    0055h      CODE               _S_READ_ADC (c:\users\tech\desktop\gasdetector\output\ADC.OBJ)
      00h     01fdh     025ah    005eh      CODE               _segmentNumbers (c:\users\tech\desktop\gasdetector\output\DISPLAY.OBJ)
-     00h     025bh     02bdh    0063h      CODE               _segmentCharacters (c:\users\tech\desktop\gasdetector\output\DISPLAY.OBJ)
-     00h     02beh     034fh    0092h      CODE               _Display (c:\users\tech\desktop\gasdetector\output\DISPLAY.OBJ)
-     00h     0350h     0385h    0036h      CODE               _DisplayLoading (c:\users\tech\desktop\gasdetector\output\DISPLAY.OBJ)
-     00h     0386h     03afh    002ah      CODE               _DisplayBatteryLOW (c:\users\tech\desktop\gasdetector\output\DISPLAY.OBJ)
-     00h     03b0h     03d9h    002ah      CODE               _DisplayBatteryError (c:\users\tech\desktop\gasdetector\output\DISPLAY.OBJ)
-     00h     03dah     0403h    002ah      CODE               _DisplaySupplyError (c:\users\tech\desktop\gasdetector\output\DISPLAY.OBJ)
-     00h     0404h     042dh    002ah      CODE               _DisplaySensorError (c:\users\tech\desktop\gasdetector\output\DISPLAY.OBJ)
-     00h     042eh     0454h    0027h      CODE               _handleTestMode (c:\users\tech\desktop\gasdetector\output\MAIN.OBJ)
-     00h     0455h     0482h    002eh      CODE               _handleCheckBatteryMode (c:\users\tech\desktop\gasdetector\output\MAIN.OBJ)
-     00h     0483h     04c2h    0040h      CODE               _startLooading (c:\users\tech\desktop\gasdetector\output\MAIN.OBJ)
-     00h     04c3h     04d2h    0010h      CODE               _handleDetectMode (c:\users\tech\desktop\gasdetector\output\MAIN.OBJ)
-     00h     04d3h     04dah    0008h      CODE               _handleSensorErrorMode (c:\users\tech\desktop\gasdetector\output\MAIN.OBJ)
-     00h     04dbh     04fdh    0023h      CODE               _batteryPercentage (c:\users\tech\desktop\gasdetector\output\MAIN.OBJ)
-     00h     04feh     050ch    000fh      CODE               _normalPowerHandler (c:\users\tech\desktop\gasdetector\output\MAIN.OBJ)
-     00h     050dh     053dh    0031h      CODE               _lowBatteryHandler (c:\users\tech\desktop\gasdetector\output\MAIN.OBJ)
-     00h     053eh     0569h    002ch      CODE               _buzzerDull (c:\users\tech\desktop\gasdetector\output\MAIN.OBJ)
-     00h     056ah     059ch    0033h      CODE               _batteryErrorHandler (c:\users\tech\desktop\gasdetector\output\MAIN.OBJ)
-     00h     059dh     05cfh    0033h      CODE               _supplyErrorHandler (c:\users\tech\desktop\gasdetector\output\MAIN.OBJ)
-     00h     05d0h     05d9h    000ah      CODE               _initializeSystem (c:\users\tech\desktop\gasdetector\output\MAIN.OBJ)
-     00h     05dah     05f4h    001bh      CODE               _initializePorts (c:\users\tech\desktop\gasdetector\output\MAIN.OBJ)
-     00h     05f5h     07c0h    01cch      CODE               _main (c:\users\tech\desktop\gasdetector\output\MAIN.OBJ)
-     00h     07c1h     07cch    000ch      CODE               @ROMDATA_BASE (c:\users\tech\desktop\gasdetector\output\STARTUP1_L.OBJ)
-     00h     07cdh     07d6h    000ah      CODE               __DELAYX (C:\Program Files\Holtek MCU Development Tools\HT-IDE3000V8.x\LIB\LIBHOLTEKGCC.LIB)
+     00h     025bh     02aah    0050h      CODE               _segmentCharacters (c:\users\tech\desktop\gasdetector\output\DISPLAY.OBJ)
+     00h     02abh     033ch    0092h      CODE               _Display (c:\users\tech\desktop\gasdetector\output\DISPLAY.OBJ)
+     00h     033dh     0372h    0036h      CODE               _DisplayLoading (c:\users\tech\desktop\gasdetector\output\DISPLAY.OBJ)
+     00h     0373h     039bh    0029h      CODE               _DisplayError (c:\users\tech\desktop\gasdetector\output\DISPLAY.OBJ)
+     00h     039ch     03c2h    0027h      CODE               _handleTestMode (c:\users\tech\desktop\gasdetector\output\MAIN.OBJ)
+     00h     03c3h     03f2h    0030h      CODE               _handleCheckBatteryMode (c:\users\tech\desktop\gasdetector\output\MAIN.OBJ)
+     00h     03f3h     0432h    0040h      CODE               _startLooading (c:\users\tech\desktop\gasdetector\output\MAIN.OBJ)
+     00h     0433h     0442h    0010h      CODE               _handleDetectMode (c:\users\tech\desktop\gasdetector\output\MAIN.OBJ)
+     00h     0443h     044ch    000ah      CODE               _handleSensorErrorMode (c:\users\tech\desktop\gasdetector\output\MAIN.OBJ)
+     00h     044dh     046fh    0023h      CODE               _batteryPercentage (c:\users\tech\desktop\gasdetector\output\MAIN.OBJ)
+     00h     0470h     047fh    0010h      CODE               _normalPowerHandler (c:\users\tech\desktop\gasdetector\output\MAIN.OBJ)
+     00h     0480h     04b2h    0033h      CODE               _lowBatteryHandler (c:\users\tech\desktop\gasdetector\output\MAIN.OBJ)
+     00h     04b3h     04deh    002ch      CODE               _buzzerDull (c:\users\tech\desktop\gasdetector\output\MAIN.OBJ)
+     00h     04dfh     0513h    0035h      CODE               _batteryErrorHandler (c:\users\tech\desktop\gasdetector\output\MAIN.OBJ)
+     00h     0514h     0548h    0035h      CODE               _supplyErrorHandler (c:\users\tech\desktop\gasdetector\output\MAIN.OBJ)
+     00h     0549h     0552h    000ah      CODE               _initializeSystem (c:\users\tech\desktop\gasdetector\output\MAIN.OBJ)
+     00h     0553h     056dh    001bh      CODE               _initializePorts (c:\users\tech\desktop\gasdetector\output\MAIN.OBJ)
+     00h     056eh     0731h    01c4h      CODE               _main (c:\users\tech\desktop\gasdetector\output\MAIN.OBJ)
+     00h     0732h     073dh    000ch      CODE               @ROMDATA_BASE (c:\users\tech\desktop\gasdetector\output\STARTUP1_L.OBJ)
+     00h     073eh     0747h    000ah      CODE               __DELAYX (C:\Program Files\Holtek MCU Development Tools\HT-IDE3000V8.x\LIB\LIBHOLTEKGCC.LIB)
+     00h     0748h     077eh    0037h      CODE               _builtin_holtek_divmodhi4_isr00 (C:\Program Files\Holtek MCU Development Tools\HT-IDE3000V8.x\LIB\LIBHOLTEKGCC.LIB)
+     00h     077fh     078dh    000fh      CODE               _abs (C:\Program Files\Holtek MCU Development Tools\HT-IDE3000V8.x\LIB\v3_tabrd_mrsc.lib)
+     00h     078eh     0792h    0005h      CODE               _CROM2PROM (CROM2PROM)
      00h     0080h     0090h    0011h      DATA     4.0588    @HCCINIT (c:\users\tech\desktop\gasdetector\output\MAIN.OBJ)
      00h     0091h     009dh    000dh      DATA     7.9231    @HCCINIT0 (c:\users\tech\desktop\gasdetector\output\MAIN.OBJ)
      00h     009eh     009eh    0001h      DATA     0         @BITDATASEC (c:\users\tech\desktop\gasdetector\output\STARTUP1_L.OBJ)
-     00h     009fh     009fh    0001h      DATA     73        @data_ra (C:\Program Files\Holtek MCU Development Tools\HT-IDE3000V8.x\LIB\LIBHOLTEKGCC.LIB)
+     00h     009fh     009fh    0001h      DATA     56        @data_ra (C:\Program Files\Holtek MCU Development Tools\HT-IDE3000V8.x\LIB\LIBHOLTEKGCC.LIB)
      00h     00a0h     00a0h    0001h      DATA     57        @data_rb (C:\Program Files\Holtek MCU Development Tools\HT-IDE3000V8.x\LIB\LIBHOLTEKGCC.LIB)
      00h     00a1h     00a1h    0001h      DATA     46        @data_rc (C:\Program Files\Holtek MCU Development Tools\HT-IDE3000V8.x\LIB\LIBHOLTEKGCC.LIB)
      00h     00a2h     00a2h    0001h      DATA     21        @data_rd (C:\Program Files\Holtek MCU Development Tools\HT-IDE3000V8.x\LIB\LIBHOLTEKGCC.LIB)
      00h     00a3h     00a3h    0001h      DATA     19        @data_re (C:\Program Files\Holtek MCU Development Tools\HT-IDE3000V8.x\LIB\LIBHOLTEKGCC.LIB)
      00h     00a4h     00a4h    0001h      DATA     13        @data_rf (C:\Program Files\Holtek MCU Development Tools\HT-IDE3000V8.x\LIB\LIBHOLTEKGCC.LIB)
      00h     00a5h     00a5h    0001h      DATA     13        @data_rg (C:\Program Files\Holtek MCU Development Tools\HT-IDE3000V8.x\LIB\LIBHOLTEKGCC.LIB)
-     00h     00a6h     00abh    0006h      DATA     34.667    ftdata1 (C:\Program Files\Holtek MCU Development Tools\HT-IDE3000V8.x\LIB\LIBHOLTEKGCC.LIB)
+     00h     00a6h     00abh    0006h      DATA     34.167    ftdata1 (C:\Program Files\Holtek MCU Development Tools\HT-IDE3000V8.x\LIB\LIBHOLTEKGCC.LIB)
      00h     00ach     00aeh    0003h      DATA     17        dtdata (C:\Program Files\Holtek MCU Development Tools\HT-IDE3000V8.x\LIB\LIBHOLTEKGCC.LIB)
      00h     00afh     00b5h    0007h      DATA     12.429    ftdata2 (C:\Program Files\Holtek MCU Development Tools\HT-IDE3000V8.x\LIB\LIBHOLTEKGCC.LIB)
 
@@ -85,20 +85,17 @@ Input Library File: C:\Program Files\Holtek MCU Development Tools\HT-IDE3000V8.x
      00h     00b6h     00b7h    0002h      LOCAL    3         _abs (C:\Program Files\Holtek MCU Development Tools\HT-IDE3000V8.x\LIB\v3_tabrd_mrsc.lib)
      00h     00b6h     00b6h    0000h      LOCAL    0         _builtin_holtek_ftsubadd (C:\Program Files\Holtek MCU Development Tools\HT-IDE3000V8.x\LIB\LIBHOLTEKGCC.LIB)
      00h     00b6h     00b6h    0000h      LOCAL    0         _builtin_holtek_ftdecode (C:\Program Files\Holtek MCU Development Tools\HT-IDE3000V8.x\LIB\LIBHOLTEKGCC.LIB)
-     00h     00b8h     00b8h    0000h      LOCAL    0         _handleSensorErrorMode (c:\users\tech\desktop\gasdetector\output\MAIN.OBJ)
-     00h     00b7h     00b7h    0001h      LOCAL    1         _DisplaySensorError (c:\users\tech\desktop\gasdetector\output\DISPLAY.OBJ)
+     00h     00b9h     00b9h    0000h      LOCAL    0         _handleSensorErrorMode (c:\users\tech\desktop\gasdetector\output\MAIN.OBJ)
+     00h     00b7h     00b8h    0002h      LOCAL    5         _DisplayError (c:\users\tech\desktop\gasdetector\output\DISPLAY.OBJ)
      00h     00c4h     00c4h    0000h      LOCAL    0         _lowBatteryHandler (c:\users\tech\desktop\gasdetector\output\MAIN.OBJ)
      00h     00beh     00c3h    0006h      LOCAL    8.6667    _Display (c:\users\tech\desktop\gasdetector\output\DISPLAY.OBJ)
      00h     00b6h     00b6h    0000h      LOCAL    0         _Crom2Prom (CROM2PROM)
      00h     00b6h     00bdh    0008h      LOCAL    10.375    _builtin_holtek_divmodhi4_isr00 (C:\Program Files\Holtek MCU Development Tools\HT-IDE3000V8.x\LIB\LIBHOLTEKGCC.LIB)
      00h     00b6h     00b6h    0001h      LOCAL    1         _segmentNumbers (c:\users\tech\desktop\gasdetector\output\DISPLAY.OBJ)
-     00h     00b7h     00b7h    0001h      LOCAL    1         _DisplayBatteryLOW (c:\users\tech\desktop\gasdetector\output\DISPLAY.OBJ)
      00h     00c4h     00c4h    0000h      LOCAL    0         _normalPowerHandler (c:\users\tech\desktop\gasdetector\output\MAIN.OBJ)
      00h     00c4h     00c4h    0000h      LOCAL    0         _batteryErrorHandler (c:\users\tech\desktop\gasdetector\output\MAIN.OBJ)
-     00h     00b7h     00b7h    0001h      LOCAL    1         _DisplayBatteryError (c:\users\tech\desktop\gasdetector\output\DISPLAY.OBJ)
      00h     00b6h     00b7h    0002h      LOCAL    3         _buzzerDull (c:\users\tech\desktop\gasdetector\output\MAIN.OBJ)
      00h     00c4h     00c4h    0000h      LOCAL    0         _supplyErrorHandler (c:\users\tech\desktop\gasdetector\output\MAIN.OBJ)
-     00h     00b7h     00b7h    0001h      LOCAL    1         _DisplaySupplyError (c:\users\tech\desktop\gasdetector\output\DISPLAY.OBJ)
      00h     00c4h     00c4h    0000h      LOCAL    0         _handleTestMode (c:\users\tech\desktop\gasdetector\output\MAIN.OBJ)
      00h     00c4h     00c5h    0002h      LOCAL    2         _handleCheckBatteryMode (c:\users\tech\desktop\gasdetector\output\MAIN.OBJ)
      00h     00c4h     00c4h    0000h      LOCAL    0         _handleDetectMode (c:\users\tech\desktop\gasdetector\output\MAIN.OBJ)
@@ -111,35 +108,30 @@ Input Library File: C:\Program Files\Holtek MCU Development Tools\HT-IDE3000V8.x
      00h     00b6h     00b6h    0000h      ILOCAL   0         _builtin_holtek_dtinf (C:\Program Files\Holtek MCU Development Tools\HT-IDE3000V8.x\LIB\LIBHOLTEKGCC.LIB)
      00h     00b6h     00b6h    0000h      ILOCAL   0         _builtin_holtek_ftinf (C:\Program Files\Holtek MCU Development Tools\HT-IDE3000V8.x\LIB\LIBHOLTEKGCC.LIB)
 
-     Unallocated Sections
-
-     Bank    Start     End      Length     Class    AvgIns    Name
-     8000h     0000h     006dh    006eh      CODE               _builtin_holtek_divmodhi4_isr00 (C:\Program Files\Holtek MCU Development Tools\HT-IDE3000V8.x\LIB\LIBHOLTEKGCC.LIB)
-     8000h     0000h     001dh    001eh      CODE               _abs (C:\Program Files\Holtek MCU Development Tools\HT-IDE3000V8.x\LIB\v3_tabrd_mrsc.lib)
-     8000h     0000h     0009h    000ah      CODE               _CROM2PROM (CROM2PROM)
-
      Public Symbols Information
      Address            Public by Name
-     02beh              _Display
-     03b0h              _DisplayBatteryError
-     0386h              _DisplayBatteryLOW
-     0350h              _DisplayLoading
-     0404h              _DisplaySensorError
-     03dah              _DisplaySupplyError
+     078fh              _Crom2Prom
+     078eh              _Crom2PromNext
+     02abh              _Display
+     0373h              _DisplayError
+     00b8h              _DisplayError_2
+     033dh              _DisplayLoading
      00beh              _Display_2
      0093h              _Mode
      01a2h              _S_ADC_Init
      01a8h              _S_READ_ADC
      0091h              _SupplyStatus
-     07d3h              __DELAYX0
-     07d2h              __DELAYX1
-     07d1h              __DELAYX2
-     07d0h              __DELAYX3
-     07cfh              __DELAYX4
-     07ceh              __DELAYX5
-     07cdh              __DELAYX6
-     056ah              _batteryErrorHandler
-     04dbh              _batteryPercentage
+     0744h              __DELAYX0
+     0743h              __DELAYX1
+     0742h              __DELAYX2
+     0741h              __DELAYX3
+     0740h              __DELAYX4
+     073fh              __DELAYX5
+     073eh              __DELAYX6
+     077fh              _abs
+     04dfh              _batteryErrorHandler
+     044dh              _batteryPercentage
+     0748h              _builtin_holtek_divmodhi4_isr00
      0069h              _builtin_holtek_dtadd
      0143h              _builtin_holtek_dtdecode1
      0138h              _builtin_holtek_dtdecode2
@@ -166,26 +158,27 @@ Input Library File: C:\Program Files\Holtek MCU Development Tools\HT-IDE3000V8.x
      00afh              _builtin_holtek_mant2
      00b3h              _builtin_holtek_prod
      00aah              _builtin_holtek_signs
+     075ah              _builtin_holtek_udivmodhi4_isr00
      00b9h              _builtin_holtek_udivmodhi4_isr00_2
      0022h              _builtin_holtek_uitod
-     053eh              _buzzerDull
+     04b3h              _buzzerDull
      008fh              _cunter
-     0455h              _handleCheckBatteryMode
+     03c3h              _handleCheckBatteryMode
      00c4h              _handleCheckBatteryMode_2
-     04c3h              _handleDetectMode
-     04d3h              _handleSensorErrorMode
-     042eh              _handleTestMode
-     05dah              _initializePorts
-     05d0h              _initializeSystem
-     050dh              _lowBatteryHandler
-     05f5h              _main
-     04feh              _normalPowerHandler
+     0433h              _handleDetectMode
+     0443h              _handleSensorErrorMode
+     039ch              _handleTestMode
+     0553h              _initializePorts
+     0549h              _initializeSystem
+     0480h              _lowBatteryHandler
+     056eh              _main
+     0470h              _normalPowerHandler
      0095h              _parameter
      009eh[0]           _pushButtonState
      025bh              _segmentCharacters
      01fdh              _segmentNumbers
-     0483h              _startLooading
-     059dh              _supplyErrorHandler
+     03f3h              _startLooading
+     0514h              _supplyErrorHandler
      009fh              ra
      00a0h              rb
      00a1h              rc
@@ -193,7 +186,7 @@ Input Library File: C:\Program Files\Holtek MCU Development Tools\HT-IDE3000V8.x
      00a3h              re
      00a4h              rf
      00a5h              rg
-     07c0h              startup_value_1
+     0731h              startup_value_1
 
      Address            Public by Value
      0022h              _builtin_holtek_uitod
@@ -220,6 +213,7 @@ Input Library File: C:\Program Files\Holtek MCU Development Tools\HT-IDE3000V8.x
      00afh              _builtin_holtek_mant2
      00b2h              _builtin_holtek_exp2
      00b3h              _builtin_holtek_prod
+     00b8h              _DisplayError_2
      00b9h              _builtin_holtek_udivmodhi4_isr00_2
      00beh              _Display_2
      00c4h              _handleCheckBatteryMode_2
@@ -241,40 +235,42 @@ Input Library File: C:\Program Files\Holtek MCU Development Tools\HT-IDE3000V8.x
      01a8h              _S_READ_ADC
      01fdh              _segmentNumbers
      025bh              _segmentCharacters
-     02beh              _Display
-     0350h              _DisplayLoading
-     0386h              _DisplayBatteryLOW
-     03b0h              _DisplayBatteryError
-     03dah              _DisplaySupplyError
-     0404h              _DisplaySensorError
-     042eh              _handleTestMode
-     0455h              _handleCheckBatteryMode
-     0483h              _startLooading
-     04c3h              _handleDetectMode
-     04d3h              _handleSensorErrorMode
-     04dbh              _batteryPercentage
+     02abh              _Display
+     033dh              _DisplayLoading
+     0373h              _DisplayError
+     039ch              _handleTestMode
+     03c3h              _handleCheckBatteryMode
+     03f3h              _startLooading
+     0433h              _handleDetectMode
+     0443h              _handleSensorErrorMode
+     044dh              _batteryPercentage
+     0470h              _normalPowerHandler
+     0480h              _lowBatteryHandler
+     04b3h              _buzzerDull
+     04dfh              _batteryErrorHandler
      009eh[0]           _pushButtonState
-     04feh              _normalPowerHandler
-     050dh              _lowBatteryHandler
-     053eh              _buzzerDull
-     056ah              _batteryErrorHandler
-     059dh              _supplyErrorHandler
-     05d0h              _initializeSystem
-     05dah              _initializePorts
-     05f5h              _main
-     07c0h              startup_value_1
-     07cdh              __DELAYX6
-     07ceh              __DELAYX5
-     07cfh              __DELAYX4
-     07d0h              __DELAYX3
-     07d1h              __DELAYX2
-     07d2h              __DELAYX1
-     07d3h              __DELAYX0
+     0514h              _supplyErrorHandler
+     0549h              _initializeSystem
+     0553h              _initializePorts
+     056eh              _main
+     0731h              startup_value_1
+     073eh              __DELAYX6
+     073fh              __DELAYX5
+     0740h              __DELAYX4
+     0741h              __DELAYX3
+     0742h              __DELAYX2
+     0743h              __DELAYX1
+     0744h              __DELAYX0
+     0748h              _builtin_holtek_divmodhi4_isr00
+     075ah              _builtin_holtek_udivmodhi4_isr00
+     077fh              _abs
+     078eh              _Crom2PromNext
+     078fh              _Crom2Prom
 
 
 ROM Usage Statistics
      Size      Used     Percentage
-     0800h     07d7h    97%
+     0800h     0793h    94%
 
 RAM Usage Statistics
     Bank      Size      Used     Percentage
@@ -307,7 +303,7 @@ Call Tree
             _builtin_holtek_ftsubadd (1)
                 _builtin_holtek_ftdecode (2)
             _handleSensorErrorMode (1)
-                _DisplaySensorError (2)
+                _DisplayError (2)
                     _segmentCharacters (3)
             _abs (1)
             _lowBatteryHandler (1)
@@ -316,7 +312,7 @@ Call Tree
                     _builtin_holtek_divmodhi4_isr00 (3)
                     _segmentNumbers (3)
                     _segmentCharacters (3)
-                _DisplayBatteryLOW (2)
+                _DisplayError (2)
                     _segmentCharacters (3)
             _normalPowerHandler (1)
                 _Display (2)
@@ -330,7 +326,7 @@ Call Tree
                     _builtin_holtek_divmodhi4_isr00 (3)
                     _segmentNumbers (3)
                     _segmentCharacters (3)
-                _DisplayBatteryError (2)
+                _DisplayError (2)
                     _segmentCharacters (3)
                 _buzzerDull (2)
                     _Crom2Prom (3)
@@ -341,7 +337,7 @@ Call Tree
                     _builtin_holtek_divmodhi4_isr00 (3)
                     _segmentNumbers (3)
                     _segmentCharacters (3)
-                _DisplaySupplyError (2)
+                _DisplayError (2)
                     _segmentCharacters (3)
                 _buzzerDull (2)
                     _Crom2Prom (3)
@@ -354,7 +350,7 @@ Call Tree
                     _segmentCharacters (3)
             _handleCheckBatteryMode (1)
                 _Crom2Prom (2)
-                _DisplayBatteryLOW (2)
+                _DisplayError (2)
                     _segmentCharacters (3)
                 _Display (2)
                     _Crom2Prom (3)
@@ -367,6 +363,7 @@ Call Tree
                     _builtin_holtek_divmodhi4_isr00 (3)
                     _segmentNumbers (3)
                     _segmentCharacters (3)
-Error(L1038) : ROM bank overflow (max size 029H), memory allocation fails for section '_builtin_holtek_divmodhi4_isr00' (size 037H) in the file 'C:\Program Files\Holtek MCU Development Tools\HT-IDE3000V8.x\LIB\LIBHOLTEKGCC.LIB'
 
-Total 1 error(s), Total 0 Warning(s)
+HLINK: Program entry point at section '@code' (address 0) of file 'c:\users\tech\desktop\gasdetector\output\MAIN.OBJ'
+
+Total 0 error(s), Total 0 Warning(s)

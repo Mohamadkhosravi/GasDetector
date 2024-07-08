@@ -22,9 +22,11 @@ void segmentCharacters(unsigned char character);
 void Display(int number, unsigned char character,char *clock);
 
 void DisplayLoading(char cunterDigit );
+void DisplayError(char typeOfError,char cunterDigit );
+/*
 void DisplayBatteryLOW(char cunterDigit);
 void DisplayBatteryError(char cunterDigit);
 void DisplaySupplyError(char cunterDigit);
-void DisplaySensorError(char cunterDigit );
+void DisplaySensorError(char cunterDigit );*/
 //void DisplayCharacters( unsigned char *stringOfCharacter,char clock );
 #endif

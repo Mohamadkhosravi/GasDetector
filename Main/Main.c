@@ -1,9 +1,8 @@
 #include <Main.h>
+//00H to 13H
 
 // Main function
 void main() {
-	_bp=100;
-	 	_bp=000;
     // Initialize system and ports
     initializeSystem();
     initializePorts();
@@ -21,8 +20,8 @@ void main() {
     Mode = NORMAL;           // Set mode to normal
     SupplyStatus=NORMAL_POWER;
     // Main loop
-    while (1) {
-    
+    while (1) 
+    {
         // Read battery voltage
         parameter.VoltageBattery = COEFFICIENT * S_READ_ADC(2); // Read ADC value for battery voltage and apply coefficient
         parameter.DisplayClock++;       // Increment display clock
@@ -30,9 +29,8 @@ void main() {
 
         // Check sensor values
         if (S_READ_ADC(1) < MINIMUM_CURRENT_SENSOR) 
-        {
-            
-           Mode = SENSOR_ERROR; // Set mode to sensor error if current sensor value is below minimum
+        { 
+            Mode = SENSOR_ERROR; // Set mode to sensor error if current sensor value is below minimum
         } 
         else if (S_READ_ADC(0) > THRESHOLD_DETECT_GAS) 
         {
@@ -61,12 +59,11 @@ void main() {
         }
 
 
-	
 	    if (POWER_SUPPLY_CONNECT) 
 		{
-		    
-		    SupplyStatus = (parameter.VoltageBattery > MINIMUM_VOLTAGE_VALID) ? NORMAL_POWER : BATTERY_ERROR;
-		} 
+		 
+		    SupplyStatus = (parameter.VoltageBattery >= MINIMUM_VOLTAGE_VALID) ? NORMAL_POWER : BATTERY_ERROR;
+		}
 		else 
 		{
 			if((SupplyStatus==NORMAL_POWER)||(SupplyStatus==BATTERY_ERROR))
@@ -87,8 +84,6 @@ void main() {
 			}
 		}
 
-
-
 	
         // Mode handling
         switch (Mode) {
@@ -96,15 +91,14 @@ void main() {
                 // Update gas value if significant change
                 if (abs((S_READ_ADC(0) - parameter.GasValue)) >= 2)
                 {
-                    parameter.GasValue = S_READ_ADC(0); // Update gas value
-                    
+                    parameter.GasValue = S_READ_ADC(0); // Update gas value 
                 }
-
                 // Handle power supply status
                 //switch (handleSupplyStatus()){
                 switch (SupplyStatus){
                 	
                     case NORMAL_POWER:
+                    
                        normalPowerHandler();  // Handle normal power mode
                         break;
 
@@ -143,7 +137,7 @@ void main() {
 
 // Function to handle test mode
 void handleTestMode(void) {
-    static int counter = 0;
+   static int counter = 0;
     counter++;
     BUZZER_ON;             // Turn on the buzzer
     RELAY_ON;              // Turn on the relay
@@ -166,11 +160,11 @@ void handleTestMode(void) {
 
 // Function to handle check battery mode
 void handleCheckBatteryMode(char *persentageBattery) {
-    static int counter = 0;
+  static int counter = 0;
     counter++;
-
     if (*persentageBattery <= PERCENTAGE_LOW_BATTERY) {
-        DisplayBatteryLOW(parameter.DisplayClock); // Display low battery if percentage is below threshold
+        //DisplayBatteryLOW(parameter.DisplayClock); // Display low battery if percentage is below threshold
+          DisplayError('L',parameter.DisplayClock);
     } else {
         Display(*persentageBattery, 'b', &parameter.DisplayClock); // Display battery percentage
     }
@@ -249,7 +243,8 @@ void handleSensorErrorMode(void) {
     LED_RED_ON;            // Turn on the red LED
     LED_GREEN_ON;          // Turn on the green LED
     LED_YELLOW_ON;         // Turn on the yellow LED
-    DisplaySensorError(parameter.DisplayClock); // Display sensor error
+   // DisplaySensorError(parameter.DisplayClock); // Display sensor error
+    DisplayError('S',parameter.DisplayClock);
 }
 
 // Function to calculate battery percentage
@@ -269,10 +264,12 @@ char batteryPercentage(char percentOfBattery) {
 
 // Function to handle normal power mode
 void normalPowerHandler(void) {
+	 BUZZER_OFF;
     LED_GREEN_ON;          // Turn on the green LED
     LED_RED_OFF;           // Turn off the red LED
     LED_YELLOW_OFF;        // Turn off the yellow LED
     Display(parameter.GasValue, '0', &parameter.DisplayClock); // Display gas value
+   // Display(parameter.VoltageBattery, '0', &parameter.DisplayClock); // Display gas value
 }
 
 // Function to handle battery error mode
@@ -282,12 +279,13 @@ void batteryErrorHandler(void) {
     LED_RED_OFF;           // Turn off the red LED
     LED_YELLOW_ON;         // Turn on the yellow LED
     ++Counter;
-
     if (Counter < BATTERY_ERROR_BLINK_ON) {
+    	
         Display(parameter.GasValue, '0', &parameter.DisplayClock); // Display gas value
     } else 
     {
-        DisplayBatteryError(parameter.DisplayClock);// Display low battery 
+       // DisplayBatteryError(parameter.DisplayClock);// Display low battery 
+          DisplayError('b',parameter.DisplayClock);
     }
     buzzerDull(&Counter); // Handle buzzer dull
     if (Counter > BATTERY_ERROR_BLINK_OFF)
@@ -301,11 +299,11 @@ void supplyErrorHandler(void) {
     LED_RED_OFF;           // Turn off the red LED
     LED_YELLOW_ON;         // Turn on the yellow LED
     ++Counter;
-
     if (Counter < SUPPLY_ERROR_BLINK_ON) {
         Display(parameter.GasValue, '0', &parameter.DisplayClock); // Display gas value
     } else {
-        DisplaySupplyError(parameter.DisplayClock); // Display supply error
+       // DisplaySupplyError(parameter.DisplayClock); // Display supply error
+         DisplayError('P',parameter.DisplayClock);
     }
 
     buzzerDull(&Counter); // Handle buzzer dull
@@ -326,7 +324,8 @@ void lowBatteryHandler(void) {
     } else {
         LED_RED_OFF;       // Turn off the red LED
         BUZZER_OFF;        // Turn off the buzzer
-        DisplayBatteryLOW(parameter.DisplayClock); // Display low battery
+        //DisplayBatteryLOW(parameter.DisplayClock); // Display low battery
+          DisplayError('L',parameter.DisplayClock);
     }
     if (Counter >= LOW_BATTERY_BLINK_OFF) {
         Counter = 0;       // Reset counter
@@ -378,6 +377,17 @@ void initializePorts()
 	_pbpu3 = 1;
 }
 /*
+
+unsigned char useBank4(unsigned char address , unsigned char data) {
+
+_bp = 0b00000100;
+_mp1 = address; 
+_iar1 = data; 
+return _iar1;
+    
+}
+
+
 SupplyMode handleSupplyStatus( void) 
 {
 
