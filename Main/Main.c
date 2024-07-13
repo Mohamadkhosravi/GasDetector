@@ -1,14 +1,12 @@
 #include <Main.h>
-//00H to 13H
-
 // Main function
 void main() {
     // Initialize system and ports
     initializeSystem();
     initializePorts();
-    S_ADC_Init();   // Initialize ADC
+    S_ADC_Init();       // Initialize ADC
     BUZZER_OFF;         // Turn off the buzzer     
-    startLooading();
+    startLoading();
     // Initial states
     BUZZER_OFF;         // Turn off the buzzer
     LED_GREEN_OFF;      // Turn off the green LED
@@ -58,7 +56,7 @@ void main() {
             }
         }
 
-
+        //Power Supply Management
 	    if (POWER_SUPPLY_CONNECT) 
 		{
 		 
@@ -71,16 +69,17 @@ void main() {
 
 			if(SupplyStatus==LOW_BATTERY)
 			{
-				
-			  if(parameter.VoltageBattery >= HYSTERESIS_THRESHOLD_UPPER)--cunter;
-			  else cunter =HYSTERESIS_THRESHOLD_CUNTER;
-			  if(!cunter) SupplyStatus=SUPPLY_ERROR,cunter =HYSTERESIS_THRESHOLD_CUNTER;
+				// Apply hysteresis for mode low battery
+			  if(parameter.VoltageBattery >= HYSTERESIS_THRESHOLD_UPPER)--counter;
+			  else counter = HYSTERESIS_THRESHOLD_COUNTER;
+			  if(!counter) SupplyStatus=SUPPLY_ERROR,counter = HYSTERESIS_THRESHOLD_COUNTER;
 			}
 			if(SupplyStatus==SUPPLY_ERROR)
 			{
-			 if(parameter.VoltageBattery <= HYSTERESIS_THRESHOLD_LOWER)--cunter;
-			 else cunter = HYSTERESIS_THRESHOLD_CUNTER;
-			 if(!cunter) SupplyStatus=LOW_BATTERY,cunter =HYSTERESIS_THRESHOLD_CUNTER;
+            // Apply hysteresis for mode Supply Error
+			 if(parameter.VoltageBattery <= HYSTERESIS_THRESHOLD_LOWER)--counter;
+			 else counter = HYSTERESIS_THRESHOLD_COUNTER;
+			 if(!counter) SupplyStatus=LOW_BATTERY,counter = HYSTERESIS_THRESHOLD_COUNTER;
 			}
 		}
 
@@ -125,11 +124,11 @@ void main() {
                 break;
 
             case DETECT:
-                handleDetectMode(); // Handle detect mode
+             handleDetectMode(); // Handle detect mode
                 break;
 
             case SENSOR_ERROR:
-                handleSensorErrorMode(); // Handle sensor error mode
+             handleSensorErrorMode(); // Handle sensor error mode
                 break;
         }
     }
@@ -159,14 +158,14 @@ void handleTestMode(void) {
 }
 
 // Function to handle check battery mode
-void handleCheckBatteryMode(char *persentageBattery) {
+void handleCheckBatteryMode(char *percentageBattery) {
   static int counter = 0;
     counter++;
-    if (*persentageBattery <= PERCENTAGE_LOW_BATTERY) {
+    if (*percentageBattery <= PERCENTAGE_LOW_BATTERY) {
         //DisplayBatteryLOW(parameter.DisplayClock); // Display low battery if percentage is below threshold
           DisplayError('L',parameter.DisplayClock);
     } else {
-        Display(*persentageBattery, 'b', &parameter.DisplayClock); // Display battery percentage
+        Display(*percentageBattery, 'b', &parameter.DisplayClock); // Display battery percentage
     }
 
     pushButtonState = 0;   // Reset push button state
@@ -179,7 +178,7 @@ void handleCheckBatteryMode(char *persentageBattery) {
 }
 
 
-void startLooading(void)
+void startLoading(void)
 {
   static unsigned int  DelayCounter = START_DELAY; // Set push button counter to start delay
   static unsigned int  Counter=0;

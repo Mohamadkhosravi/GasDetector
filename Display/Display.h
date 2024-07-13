@@ -21,12 +21,12 @@ void segmentNumbers(unsigned char number);
 void segmentCharacters(unsigned char character);
 void Display(int number, unsigned char character,char *clock);
 
-void DisplayLoading(char cunterDigit );
-void DisplayError(char typeOfError,char cunterDigit );
+void DisplayLoading(char counterDigit );
+void DisplayError(char typeOfError,char counterDigit );
 /*
-void DisplayBatteryLOW(char cunterDigit);
-void DisplayBatteryError(char cunterDigit);
-void DisplaySupplyError(char cunterDigit);
-void DisplaySensorError(char cunterDigit );*/
+void DisplayBatteryLOW(char counterDigit);
+void DisplayBatteryError(char counterDigit);
+void DisplaySupplyError(char counterDigit);
+void DisplaySensorError(char counterDigit );*/
 //void DisplayCharacters( unsigned char *stringOfCharacter,char clock );
 #endif

@@ -66,8 +66,8 @@
 #define VOLTAGE_LOW_BATTERY     3400  // Voltage indicating low battery (in mV)
 #define HYSTERESIS_THRESHOLD_UPPER (VOLTAGE_LOW_BATTERY + 100) // Example: 3500 mV
 #define HYSTERESIS_THRESHOLD_LOWER (MINIMUM_VOLTAGE_VALID - 100) // Example: 3200 mV
-#define HYSTERESIS_THRESHOLD_CUNTER 1000
-unsigned short cunter = 1000;
+#define HYSTERESIS_THRESHOLD_COUNTER 1000
+unsigned short counter = HYSTERESIS_THRESHOLD_COUNTER;
 
 #define THRESHOLD_DETECT_GAS    250   // Threshold for gas detection
 #define PERCENTAGE_LOW_BATTERY  19    // Battery percentage indicating low battery
@@ -155,12 +155,12 @@ SupplyMode SupplyStatus;
 //==========================================================
 //                 Function Prototypes
 //==========================================================
-void startLooading(void);
+void startLoading(void);
 void buzzerDull(short *Counter);                      // Function to control the buzzer
 void initializeSystem(void);                          // Function to initialize the system
 void initializePorts(void);                           // Function to initialize ports
 void handleTestMode(void);                            // Function to handle test mode
-void handleCheckBatteryMode(char *persentageBattery); // Function to handle check battery mode
+void handleCheckBatteryMode(char *percentageBattery); // Function to handle check battery mode
 void handleDetectMode(void);                              // Function to handle detect mode
 void handleSensorErrorMode(void);                         // Function to handle sensor error mode
 void normalPowerHandler(void);                        // Handler for normal power mode

@@ -288,10 +288,10 @@ void Display(int number, unsigned char character,char *clock)
 }	
 	
 	
-void DisplayLoading(char cunterDigit )
+void DisplayLoading(char counterDigit )
 {
 	
-	switch(cunterDigit) 
+	switch(counterDigit) 
 	{			
 		case 0:
 		 segmentCharacters('o');
@@ -370,9 +370,9 @@ void DisplayLoading(char cunterDigit )
 		
 
 
-void DisplayError(char typeOfError,char cunterDigit )
+void DisplayError(char typeOfError,char counterDigit )
 {
-    switch(cunterDigit) 
+    switch(counterDigit) 
 	{			
 		case 0:
 		 segmentCharacters(typeOfError);
@@ -412,9 +412,9 @@ void DisplayError(char typeOfError,char cunterDigit )
 
 
 /*	
-void DisplayBatteryLOW(char cunterDigit )
+void DisplayBatteryLOW(char counterDigit )
 {
-	switch(cunterDigit) 
+	switch(counterDigit) 
 	{			
 		case 0:
 		 segmentCharacters('L');
@@ -453,9 +453,9 @@ void DisplayBatteryLOW(char cunterDigit )
 */
 
 /*
-void DisplayBatteryError(char cunterDigit )
+void DisplayBatteryError(char counterDigit )
 {
-	switch(cunterDigit) 
+	switch(counterDigit) 
 	{			
 		case 0:
 		 segmentCharacters('b');
@@ -494,9 +494,9 @@ void DisplayBatteryError(char cunterDigit )
 */
 
 /*
-void DisplaySupplyError(char cunterDigit )
+void DisplaySupplyError(char counterDigit )
 {
-	switch(cunterDigit) 
+	switch(counterDigit) 
 	{			
 		case 0:
 		 segmentCharacters('p');
@@ -535,9 +535,9 @@ void DisplaySupplyError(char cunterDigit )
 */
 /*
 
-void DisplaySensorError(char cunterDigit )
+void DisplaySensorError(char counterDigit )
 {
-	switch(cunterDigit) 
+	switch(counterDigit) 
 	{			
 		case 0:
 		 segmentCharacters('S');
@@ -633,9 +633,9 @@ void DisplayCharecters( unsigned char *stringOfCharacter,char clock )
 
 */
 //
-//void DisplaySupplyError(char cunterDigit )
+//void DisplaySupplyError(char counterDigit )
 //{
-//		switch(cunterDigit) 
+//		switch(counterDigit) 
 //	{			
 //		case 0:
 //		 segmentCharacters('E');
