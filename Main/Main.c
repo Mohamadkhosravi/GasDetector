@@ -3,12 +3,14 @@
 
 // Main function
 void main() {
+	
+  
     // Initialize system and ports
     initializeSystem();
     initializePorts();
     S_ADC_Init();   // Initialize ADC
     BUZZER_OFF;         // Turn off the buzzer     
-    startLooading();
+    startLoading();
     // Initial states
     BUZZER_OFF;         // Turn off the buzzer
     LED_GREEN_OFF;      // Turn off the green LED
@@ -23,16 +25,15 @@ void main() {
     while (1) 
     {
         // Read battery voltage
-        parameter.VoltageBattery = COEFFICIENT * S_READ_ADC(2); // Read ADC value for battery voltage and apply coefficient
+        parameter.VoltageBattery = COEFFICIENT *S_READ_ADC(ADC_CHANNEL_BATTERY); // Read ADC value for battery voltage and apply coefficient
         parameter.DisplayClock++;       // Increment display clock
-        if (parameter.DisplayClock >= 4) parameter.DisplayClock = 0; // Reset display clock if it exceeds 4
-
+        if (parameter.DisplayClock >= DISPLAY_DIGIT) parameter.DisplayClock = 0; // Reset display clock if it exceeds 4
         // Check sensor values
-        if (S_READ_ADC(1) < MINIMUM_CURRENT_SENSOR) 
+        if (S_READ_ADC(ADC_CHANNEL_SENSOR) < MINIMUM_CURRENT_SENSOR) 
         { 
             Mode = SENSOR_ERROR; // Set mode to sensor error if current sensor value is below minimum
         } 
-        else if (S_READ_ADC(0) > THRESHOLD_DETECT_GAS) 
+        else if (S_READ_ADC(ADC_CHANNEL_GAS) > THRESHOLD_DETECT_GAS) 
         {
              Mode = DETECT;       // Set mode to detect if gas value exceeds threshold
         } 
@@ -46,22 +47,22 @@ void main() {
             } 
             else 
             {
-                if ((pushButtonState == 1) && (parameter.PushButtonCounter > 500)) 
+                if ((pushButtonState == 1) && (parameter.PushButtonCounter > LONG_PERRESS)) 
                 {
                     Mode = TEST;  // Set mode to test if push button was pressed for more than 500 counts
                 }
-                else if ((pushButtonState == 1) && (parameter.PushButtonCounter < 500) && (parameter.PushButtonCounter > 10)) 
+                else if ((pushButtonState == 1) && (parameter.PushButtonCounter < LONG_PERRESS) && (parameter.PushButtonCounter > MINIMUM_PREESS_VALID)) 
                 {
                     Mode = CHECK_BATTERY; // Set mode to check battery if push button was pressed for less than 500 counts but more than 10
                     parameter.BatteryPercentage = batteryPercentage(BATTERY_PERCENTAGE(parameter.VoltageBattery)); // Calculate battery percentage
                 }
             }
         }
-
-
+       
+  
+        if(parameter.VoltageBattery>=VOLTAGE_INVALID_BATTERY)parameter.VoltageBattery=0;
 	    if (POWER_SUPPLY_CONNECT) 
 		{
-		 
 		    SupplyStatus = (parameter.VoltageBattery >= MINIMUM_VOLTAGE_VALID) ? NORMAL_POWER : BATTERY_ERROR;
 		}
 		else 
@@ -72,15 +73,15 @@ void main() {
 			if(SupplyStatus==LOW_BATTERY)
 			{
 				
-			  if(parameter.VoltageBattery >= HYSTERESIS_THRESHOLD_UPPER)--cunter;
-			  else cunter =HYSTERESIS_THRESHOLD_CUNTER;
-			  if(!cunter) SupplyStatus=SUPPLY_ERROR,cunter =HYSTERESIS_THRESHOLD_CUNTER;
+			  if(parameter.VoltageBattery >= HYSTERESIS_THRESHOLD_UPPER)--counter;
+			  else counter =HYSTERESIS_THRESHOLD_COUNTER;
+			  if(!counter) SupplyStatus=SUPPLY_ERROR,counter =HYSTERESIS_THRESHOLD_COUNTER;
 			}
 			if(SupplyStatus==SUPPLY_ERROR)
 			{
-			 if(parameter.VoltageBattery <= HYSTERESIS_THRESHOLD_LOWER)--cunter;
-			 else cunter = HYSTERESIS_THRESHOLD_CUNTER;
-			 if(!cunter) SupplyStatus=LOW_BATTERY,cunter =HYSTERESIS_THRESHOLD_CUNTER;
+			 if(parameter.VoltageBattery <= HYSTERESIS_THRESHOLD_LOWER)--counter;
+			 else counter = HYSTERESIS_THRESHOLD_COUNTER;
+			 if(!counter) SupplyStatus=LOW_BATTERY,counter =HYSTERESIS_THRESHOLD_COUNTER;
 			}
 		}
 
@@ -89,48 +90,47 @@ void main() {
         switch (Mode) {
             case NORMAL:
                 // Update gas value if significant change
-                if (abs((S_READ_ADC(0) - parameter.GasValue)) >= 2)
+                if (abs((S_READ_ADC(ADC_CHANNEL_GAS) - parameter.GasValue)) >= 2)
                 {
-                    parameter.GasValue = S_READ_ADC(0); // Update gas value 
+                    parameter.GasValue = S_READ_ADC(ADC_CHANNEL_GAS); // Update gas value 
                 }
                 // Handle power supply status
                 //switch (handleSupplyStatus()){
                 switch (SupplyStatus){
                 	
-                    case NORMAL_POWER:
-                    
-                       normalPowerHandler();  // Handle normal power mode
-                        break;
-
-                    case BATTERY_ERROR:
-                       batteryErrorHandler(); // Handle battery error mode
-                        break;
-
-                    case SUPPLY_ERROR:
-                       supplyErrorHandler();  // Handle supply error mode
-                        break;
-
-                    case LOW_BATTERY:
-                       lowBatteryHandler();   // Handle low battery mode
-                        break;
+	                case NORMAL_POWER:
+	                	normalPowerHandler();  // Handle normal power mode
+	                break;
+	
+	                case BATTERY_ERROR:
+	                	batteryErrorHandler(); // Handle battery error mode
+	                break;
+	
+	                case SUPPLY_ERROR:
+	                	supplyErrorHandler();  // Handle supply error mode
+	                break;
+	
+	                case LOW_BATTERY:
+	                	lowBatteryHandler();   // Handle low battery mode
+	                break;
                 }
-                break;
+            break;
 
             case TEST:
               handleTestMode();  // Handle test mode
-                break;
+            break;
 
             case CHECK_BATTERY:
               handleCheckBatteryMode(&parameter.BatteryPercentage); // Handle check battery mode
-                break;
+            break;
 
             case DETECT:
                 handleDetectMode(); // Handle detect mode
-                break;
+            break;
 
             case SENSOR_ERROR:
                 handleSensorErrorMode(); // Handle sensor error mode
-                break;
+            break;
         }
     }
 }
@@ -179,7 +179,7 @@ void handleCheckBatteryMode(char *persentageBattery) {
 }
 
 
-void startLooading(void)
+void startLoading(void)
 {
   static unsigned int  DelayCounter = START_DELAY; // Set push button counter to start delay
   static unsigned int  Counter=0;
@@ -264,12 +264,13 @@ char batteryPercentage(char percentOfBattery) {
 
 // Function to handle normal power mode
 void normalPowerHandler(void) {
-	 BUZZER_OFF;
+    static int Counter=0; 
+	BUZZER_OFF;
     LED_GREEN_ON;          // Turn on the green LED
     LED_RED_OFF;           // Turn off the red LED
     LED_YELLOW_OFF;        // Turn off the yellow LED
     Display(parameter.GasValue, '0', &parameter.DisplayClock); // Display gas value
-   // Display(parameter.VoltageBattery, '0', &parameter.DisplayClock); // Display gas value
+   // Display(parameter.VoltageBattery, '0', &parameter.DisplayClock); // Display VoltageBattery value
 }
 
 // Function to handle battery error mode
@@ -359,7 +360,7 @@ void initializeSystem() {
 void initializePorts()
 {
 	_lvpu = 0;
-	_pac &= 0b01001001;
+	_pac &= 0b01000001;
 	_pac |= 0b00000110;
 	_pbc &= 0b00000000;
 	_pbc |= 0b00001011;
@@ -375,6 +376,7 @@ void initializePorts()
 	_pcs0 = 0b00000000;
 	_pds0 = 0b00000000;
 	_pbpu3 = 1;
+//	_papu3=0;
 }
 /*
 

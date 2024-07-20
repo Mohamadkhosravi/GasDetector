@@ -40,6 +40,14 @@
 #define RELAY_ON        _pb2= 1    // Turn the relay on (set port B, pin 2 high)
 #define RELAY_OFF       _pb2= 0    // Turn the relay off (set port B, pin 2 low)
 
+
+
+//==========================================================
+//                Control Charge Battery
+//==========================================================
+#define CHARGE_BATTERY_CONTROL       _pa3
+
+
 //==========================================================
 //                Timer Interrupt Flag
 //==========================================================
@@ -47,27 +55,34 @@
 
 
 //==========================================================
-//                 Pushbutton State
+//                 Pushbutton State and values
 //==========================================================
-#define PRESSED_PUSHBUTTON         _pb3==0  // Check if the pushbutton is pressed (active low)
+#define PRESSED_PUSHBUTTON       _pb3==0  // Check if the pushbutton is pressed (active low)
+#define MINIMUM_PREESS_VALID    10 //Acceptable counter repetition value for pressing the button
+#define LONG_PERRESS            500 //Acceptable value of repetition counter for long press mode
 
-
+//==========================================================
+//                ADC Channels
+//==========================================================
+#define ADC_CHANNEL_GAS           0    
+#define ADC_CHANNEL_SENSOR        1
+#define ADC_CHANNEL_BATTERY       2
 //==========================================================
 //           Power Supply Connection States
 //==========================================================
-#define POWER_SUPPLY_CONNECT       _pa6==1 // Power supply is connected
-//#define POWER_SUPPLY_CONNECT  1 // Power supply is connected
-//#define POWER_SUPPLY_DISCONNECT  0      // Power supply is disconnected
+#define POWER_SUPPLY_CONNECT       _pa6==1  // Power supply is connected
+//#define POWER_SUPPLY_DISCONNECT   _pa6==0 // Power supply is disconnected
 
 //==========================================================
 //          Voltage and Sensor Thresholds
 //==========================================================
+#define VOLTAGE_INVALID_BATTERY 4350
 #define MINIMUM_VOLTAGE_VALID   3300  // Minimum valid voltage (in mV)
 #define VOLTAGE_LOW_BATTERY     3400  // Voltage indicating low battery (in mV)
 #define HYSTERESIS_THRESHOLD_UPPER (VOLTAGE_LOW_BATTERY + 100) // Example: 3500 mV
 #define HYSTERESIS_THRESHOLD_LOWER (MINIMUM_VOLTAGE_VALID - 100) // Example: 3200 mV
-#define HYSTERESIS_THRESHOLD_CUNTER 1000
-unsigned short cunter = 1000;
+#define HYSTERESIS_THRESHOLD_COUNTER 1000 
+unsigned short counter = 1000;
 
 #define THRESHOLD_DETECT_GAS    250   // Threshold for gas detection
 #define PERCENTAGE_LOW_BATTERY  19    // Battery percentage indicating low battery
@@ -76,7 +91,7 @@ unsigned short cunter = 1000;
 //==========================================================
 //                    Timing Constants
 //==========================================================
-#define START_DELAY             15000  // Start delay (in ms)
+#define START_DELAY             33000  // Start delay (in ms)
 #define START_BLINK_ON          1000   // Start blink on duration (in ms)
 #define START_BLINK_OFF         2000   // Start blink off duration (in ms)
 #define BATTERY_ERROR_BLINK_ON  1000   // Battery error blink on duration (in ms)
@@ -90,6 +105,7 @@ unsigned short cunter = 1000;
 //==========================================================
 //                    Display Values
 //==========================================================
+#define DISPLAY_DIGIT           4     // Number of Segment Digit
 #define TEST_DISPLAY_VIEW       8888  // Display value for testing
 #define DETECT_DISPLAY_VIEW     THRESHOLD_DETECT_GAS  // Display value for gas detection
 
@@ -103,12 +119,14 @@ unsigned short cunter = 1000;
 //==========================================================
 //               ADC and Battery Calculation Constants
 //==========================================================
-#define AVDD                    5000.0            // Analog supply voltage (in mV)
-#define COEFFICIENT             4.8875855327      // Coefficient for ADC conversion (AVDD/1023.0)
+//#define VDD(ADC_VDD)(4*(1.6*ADC_VDD/1023))
+//#define AVDD                    4350.0            // Analog supply voltage (in mV)
+//#define COEFFICIENT             4.8875855327      // Coefficient for ADC conversion (AVDD/1023.0)
+#define COEFFICIENT             4.2521994135
 #define b                       338.421           // Constant for battery percentage calculation
 #define a                       0.105263          // Slope for battery percentage calculation
 #define BATTERY_PERCENTAGE(VoltageBattery)(a*VoltageBattery-b)  // Macro to calculate battery percentage
-
+unsigned int vdd;
 
 //==========================================================
 //               Variable Declarations  
@@ -155,12 +173,12 @@ SupplyMode SupplyStatus;
 //==========================================================
 //                 Function Prototypes
 //==========================================================
-void startLooading(void);
+void startLoading(void);
 void buzzerDull(short *Counter);                      // Function to control the buzzer
 void initializeSystem(void);                          // Function to initialize the system
 void initializePorts(void);                           // Function to initialize ports
 void handleTestMode(void);                            // Function to handle test mode
-void handleCheckBatteryMode(char *persentageBattery); // Function to handle check battery mode
+void handleCheckBatteryMode(char *percentageBattery); // Function to handle check battery mode
 void handleDetectMode(void);                              // Function to handle detect mode
 void handleSensorErrorMode(void);                         // Function to handle sensor error mode
 void normalPowerHandler(void);                        // Handler for normal power mode
