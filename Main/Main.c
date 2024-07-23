@@ -26,8 +26,11 @@ void main() {
     {
         // Read battery voltage
         parameter.VoltageBattery = COEFFICIENT *S_READ_ADC(ADC_CHANNEL_BATTERY); // Read ADC value for battery voltage and apply coefficient
+        if(parameter.VoltageBattery>=VOLTAGE_INVALID_BATTERY)parameter.VoltageBattery=0;//when battery is disconnect VoltageBattery is max(~4.3v)
+        
         parameter.DisplayClock++;       // Increment display clock
         if (parameter.DisplayClock >= DISPLAY_DIGIT) parameter.DisplayClock = 0; // Reset display clock if it exceeds 4
+        
         // Check sensor values
         if (S_READ_ADC(ADC_CHANNEL_SENSOR) < MINIMUM_CURRENT_SENSOR) 
         { 
@@ -60,7 +63,7 @@ void main() {
         }
        
   
-        if(parameter.VoltageBattery>=VOLTAGE_INVALID_BATTERY)parameter.VoltageBattery=0;
+       
 	    if (POWER_SUPPLY_CONNECT) 
 		{
 		    SupplyStatus = (parameter.VoltageBattery >= MINIMUM_VOLTAGE_VALID) ? NORMAL_POWER : BATTERY_ERROR;
