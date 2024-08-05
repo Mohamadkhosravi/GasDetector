@@ -9,8 +9,10 @@ void main() {
     initializeSystem();
     initializePorts();
     S_ADC_Init();   // Initialize ADC
-    BUZZER_OFF;         // Turn off the buzzer     
-    startLoading();
+    BUZZER_OFF; // Turn off the buzzer     
+    #if START_LOADING
+    	startLoading();
+    #endif
     // Initial states
     BUZZER_OFF;         // Turn off the buzzer
     LED_GREEN_OFF;      // Turn off the green LED
@@ -24,14 +26,14 @@ void main() {
     // Main loop
     while (1) 
     {
-        // Read battery voltage
-        parameter.VoltageBattery = COEFFICIENT *S_READ_ADC(ADC_CHANNEL_BATTERY); // Read ADC value for battery voltage and apply coefficient
-        if(parameter.VoltageBattery>=VOLTAGE_INVALID_BATTERY)parameter.VoltageBattery=0;//when battery is disconnect VoltageBattery is max(~4.3v)
-        
-        parameter.DisplayClock++;       // Increment display clock
-        if (parameter.DisplayClock >= DISPLAY_DIGIT) parameter.DisplayClock = 0; // Reset display clock if it exceeds 4
-        
-        // Check sensor values
+    	
+       // Read battery voltage
+       // vdd=VDD(S_READ_ADC(ADC_CHANNEL_VDD));
+		parameter.VoltageBattery =  COEFFICIENT*(S_READ_ADC(ADC_CHANNEL_BATTERY)); // Read ADC value for battery voltage and apply coefficient
+		if(parameter.VoltageBattery>=VOLTAGE_INVALID_BATTERY)parameter.VoltageBattery=0; //when battery is disconnect VoltageBattery is max(~4.3v)
+		parameter.DisplayClock++; // Increment display clock
+		if (parameter.DisplayClock >= DISPLAY_DIGIT) parameter.DisplayClock = 0; // Reset display clock if it exceeds 4
+	   // Check sensor values
         if (S_READ_ADC(ADC_CHANNEL_SENSOR) < MINIMUM_CURRENT_SENSOR) 
         { 
             Mode = SENSOR_ERROR; // Set mode to sensor error if current sensor value is below minimum
@@ -63,10 +65,35 @@ void main() {
         }
        
   
-       
+            
 	    if (POWER_SUPPLY_CONNECT) 
 		{
-		    SupplyStatus = (parameter.VoltageBattery >= MINIMUM_VOLTAGE_VALID) ? NORMAL_POWER : BATTERY_ERROR;
+		     // Calculate battery percentage
+			if (parameter.VoltageBattery >= MINIMUM_VOLTAGE_VALID) {
+		       
+		        if (SupplyStatus == BATTERY_ERROR && parameter.VoltageBattery >= HYSTERESIS_THRESHOLD_UPPER) 
+		        {
+		            --counter;
+		            if (!counter)
+		            {
+		                SupplyStatus = NORMAL_POWER;
+		                counter = HYSTERESIS_THRESHOLD_COUNTER;
+		            }
+		        } 
+	            else 
+	            {
+	            	SupplyStatus = NORMAL_POWER;
+	            	counter = HYSTERESIS_THRESHOLD_COUNTER;
+	            }
+			} 
+			else 
+			{
+			        SupplyStatus = BATTERY_ERROR;
+			}		    
+		    
+		    
+		    
+		    
 		}
 		else 
 		{
@@ -165,10 +192,10 @@ void handleTestMode(void) {
 void handleCheckBatteryMode(char *persentageBattery) {
   static int counter = 0;
     counter++;
-    if (*persentageBattery <= PERCENTAGE_LOW_BATTERY) {
-        //DisplayBatteryLOW(parameter.DisplayClock); // Display low battery if percentage is below threshold
-          DisplayError('L',parameter.DisplayClock);
-    } else {
+     if(*persentageBattery <= PERCENTAGE_LOW_BATTERY) {
+        DisplayError('L',parameter.DisplayClock);// Display low battery if percentage is below threshold
+     }
+     else {
         Display(*persentageBattery, 'b', &parameter.DisplayClock); // Display battery percentage
     }
 
@@ -181,7 +208,7 @@ void handleCheckBatteryMode(char *persentageBattery) {
     }
 }
 
-
+#if START_LOADING
 void startLoading(void)
 {
   static unsigned int  DelayCounter = START_DELAY; // Set push button counter to start delay
@@ -228,6 +255,8 @@ void startLoading(void)
 	
 
 }
+#endif
+
 
 // Function to handle gas detection mode
 void handleDetectMode(void) {
@@ -261,7 +290,7 @@ char batteryPercentage(char percentOfBattery) {
     buffer = percentOfBattery;
     if (abs(percentOfBattery - buffer) >= 10) {
         buffer = percentOfBattery; // Update buffer if significant change
-    }
+     }
     return buffer;
 }
 
@@ -272,8 +301,8 @@ void normalPowerHandler(void) {
     LED_GREEN_ON;          // Turn on the green LED
     LED_RED_OFF;           // Turn off the red LED
     LED_YELLOW_OFF;        // Turn off the yellow LED
-    Display(parameter.GasValue, '0', &parameter.DisplayClock); // Display gas value
-   // Display(parameter.VoltageBattery, '0', &parameter.DisplayClock); // Display VoltageBattery value
+	Display(DISPLAY_SELECTION, '0', &parameter.DisplayClock);  // SELECTED Display gas value
+	
 }
 
 // Function to handle battery error mode
@@ -283,13 +312,12 @@ void batteryErrorHandler(void) {
     LED_RED_OFF;           // Turn off the red LED
     LED_YELLOW_ON;         // Turn on the yellow LED
     ++Counter;
-    if (Counter < BATTERY_ERROR_BLINK_ON) {
-    	
-        Display(parameter.GasValue, '0', &parameter.DisplayClock); // Display gas value
+    if (Counter < BATTERY_ERROR_BLINK_ON) {	
+      Display(DISPLAY_SELECTION, '0', &parameter.DisplayClock);  // SELECTED Display gas value
     } else 
     {
-       // DisplayBatteryError(parameter.DisplayClock);// Display low battery 
-          DisplayError('b',parameter.DisplayClock);
+        DisplayError('b',parameter.DisplayClock);// Display low battery Error
+         
     }
     buzzerDull(&Counter); // Handle buzzer dull
     if (Counter > BATTERY_ERROR_BLINK_OFF)
@@ -303,11 +331,12 @@ void supplyErrorHandler(void) {
     LED_RED_OFF;           // Turn off the red LED
     LED_YELLOW_ON;         // Turn on the yellow LED
     ++Counter;
-    if (Counter < SUPPLY_ERROR_BLINK_ON) {
-        Display(parameter.GasValue, '0', &parameter.DisplayClock); // Display gas value
+    if (Counter < SUPPLY_ERROR_BLINK_ON) {	
+    	
+      Display(DISPLAY_SELECTION, '0', &parameter.DisplayClock);  // SELECTED Display gas value  
     } else {
-       // DisplaySupplyError(parameter.DisplayClock); // Display supply error
-         DisplayError('P',parameter.DisplayClock);
+    	
+         DisplayError('P',parameter.DisplayClock);// Display Power supply error
     }
 
     buzzerDull(&Counter); // Handle buzzer dull
@@ -324,12 +353,11 @@ void lowBatteryHandler(void) {
     if (Counter >= LOW_BATTERY_BLINK_ON) {
         BUZZER_ON;         // Turn on the buzzer
         LED_RED_ON;        // Turn on the red LED
-        Display(parameter.GasValue, '0', &parameter.DisplayClock); // Display gas value
+        Display(DISPLAY_SELECTION, '0', &parameter.DisplayClock);  // SELECTED Display gas value
     } else {
         LED_RED_OFF;       // Turn off the red LED
         BUZZER_OFF;        // Turn off the buzzer
-        //DisplayBatteryLOW(parameter.DisplayClock); // Display low battery
-          DisplayError('L',parameter.DisplayClock);
+        DisplayError('L',parameter.DisplayClock); // Display low battery Error
     }
     if (Counter >= LOW_BATTERY_BLINK_OFF) {
         Counter = 0;       // Reset counter

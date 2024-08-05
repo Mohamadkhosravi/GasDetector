@@ -57,7 +57,7 @@
 //==========================================================
 //                 Pushbutton State and values
 //==========================================================
-#define PRESSED_PUSHBUTTON       _pb3==0  // Check if the pushbutton is pressed (active low)
+#define PRESSED_PUSHBUTTON      _pb3==0  // Check if the pushbutton is pressed (active low)
 #define MINIMUM_PREESS_VALID    10 //Acceptable counter repetition value for pressing the button
 #define LONG_PERRESS            500 //Acceptable value of repetition counter for long press mode
 
@@ -67,6 +67,7 @@
 #define ADC_CHANNEL_GAS           0    
 #define ADC_CHANNEL_SENSOR        1
 #define ADC_CHANNEL_BATTERY       2
+#define ADC_CHANNEL_VDD           7
 //==========================================================
 //           Power Supply Connection States
 //==========================================================
@@ -81,8 +82,8 @@
 #define VOLTAGE_LOW_BATTERY     3400  // Voltage indicating low battery (in mV)
 #define HYSTERESIS_THRESHOLD_UPPER (VOLTAGE_LOW_BATTERY + 100) // Example: 3500 mV
 #define HYSTERESIS_THRESHOLD_LOWER (MINIMUM_VOLTAGE_VALID - 100) // Example: 3200 mV
-#define HYSTERESIS_THRESHOLD_COUNTER 1000 
-unsigned short counter = 1000;
+#define HYSTERESIS_THRESHOLD_COUNTER 5000 
+unsigned int counter = HYSTERESIS_THRESHOLD_COUNTER;
 
 #define THRESHOLD_DETECT_GAS    250   // Threshold for gas detection
 #define PERCENTAGE_LOW_BATTERY  19    // Battery percentage indicating low battery
@@ -105,8 +106,14 @@ unsigned short counter = 1000;
 //==========================================================
 //                    Display Values
 //==========================================================
+#define OFF 0
+#define ON  1
+#define START_LOADING           ON
 #define DISPLAY_DIGIT           4     // Number of Segment Digit
 #define TEST_DISPLAY_VIEW       8888  // Display value for testing
+#define SHOW_VOLTAGE_BATTERY    parameter.VoltageBattery
+#define SHOW_GAS_VALUE          parameter.GasValue
+#define DISPLAY_SELECTION       SHOW_GAS_VALUE
 #define DETECT_DISPLAY_VIEW     THRESHOLD_DETECT_GAS  // Display value for gas detection
 
 
@@ -121,8 +128,9 @@ unsigned short counter = 1000;
 //==========================================================
 //#define VDD(ADC_VDD)(4*(1.6*ADC_VDD/1023))
 //#define AVDD                    4350.0            // Analog supply voltage (in mV)
-//#define COEFFICIENT             4.8875855327      // Coefficient for ADC conversion (AVDD/1023.0)
-#define COEFFICIENT             4.2521994135
+//#define COEFFICIENT            4.8875855327      // Coefficient for ADC conversion (AVDD= 4350.0 )=> (AVDD/1023.0)
+#define COEFFICIENT        4.2521994135      // Coefficient for ADC conversion (AVDD= 4350.0 )=>  (AVDD/1023.0)
+
 #define b                       338.421           // Constant for battery percentage calculation
 #define a                       0.105263          // Slope for battery percentage calculation
 #define BATTERY_PERCENTAGE(VoltageBattery)(a*VoltageBattery-b)  // Macro to calculate battery percentage
@@ -134,6 +142,7 @@ unsigned int vdd;
 bit pushButtonState = 0; 
 typedef struct Parameters
 {
+    
     float VoltageBattery;   
 	unsigned char  BatteryPercentage;
 	unsigned short GasValue; 

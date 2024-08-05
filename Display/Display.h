@@ -20,7 +20,6 @@
 void segmentNumbers(unsigned char number);
 void segmentCharacters(unsigned char character);
 void Display(int number, unsigned char character,char *clock);
-
 void DisplayLoading(char cunterDigit );
 void DisplayError(char typeOfError,char cunterDigit );
 /*
