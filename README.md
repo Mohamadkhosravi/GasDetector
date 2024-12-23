@@ -2,25 +2,25 @@
 # Project Documentation: Gas Detector System with Battery and Supply Management
 
 ## Table of Contents
-1. **Project Overview**
-2. **Hardware Components**
+1. [**Project Overview**](#overview)
+2. [**Hardware Components**](#hardware-components)
     - MQ9 Gas Sensor
     - Buzzer (PA4)
     - LEDs (Green, Red, Yellow)
     - Relay (PB2)
     - Pushbutton (PB3)
     - ADC Channels
-3. **Key Macros and Constants**
+3. [**Key Macros and Constants**](#key-macros-and-constants)
     - Control Macros for Hardware Components
     - Power Supply Connection
     - Voltage and Threshold Constants
     - Timing Constants
     - ADC Channels
-4. **Struct Definitions**
+4. [**Struct Definitions**](#struct-definitions)
     - Parameters Struct
-5. **Modes of Operation**
+5. [**Modes of Operation**](#modes-of-operation)
     - System Modes
-6. **Functions**
+6. [**Functions**](#functions)
     - startLoading()
     - buzzerDull()
     - initializeSystem()
@@ -33,26 +33,22 @@
     - batteryErrorHandler()
     - supplyErrorHandler()
     - lowBatteryHandler()
-7. **Power and Battery Management**
+7. [**Power and Battery Management**](#power-and-battery-management)
     - Battery Percentage Calculation
     - Supply Mode
-8. **Interfacing with the MQ9 Gas Sensor**
+8. [**Interfacing with the MQ9 Gas Sensor**](#interfacing-with-the-mq9-gas-sensor)
     - Sensor Initialization
     - Reading Sensor Value
     - Gas Detection Threshold
-9. **Modes of Operation - Detailed Flow**
+9. [**Modes of Operation - Detailed Flow**](#modes-of-operation---detailed-flow)
     - Normal Mode
     - Battery Check Mode
     - Test Mode
     - Gas Detection Mode
-10. **Error Handling**
+10. [**Error Handling**](#error-handling)
     - Sensor Error Detection
     - Power Supply Error
-11. **Interrupt Handling and Delays**
-    - Timer Interrupt for ADC Sampling
-    - Button Press Interrupt
-12. **Code Organization and Modularity**
-13. **Future Improvements**
+
 
 ## Overview
 
